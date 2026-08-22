@@ -1,0 +1,246 @@
+@import "tailwindcss";
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Chaska — design tokens.
+
+   Extracted from the Claude Design artboards in `design-source/`, which carry
+   the real design language. The `styles.css` under `design-source/_ds` is an
+   unused starter kit — Archivo + vermilion — and is deliberately NOT ported.
+
+   The default Tailwind colour and font palettes are cleared so that only the
+   restaurant's own tokens are reachable: `text-blue-500` is a build-visible
+   mistake, not a silent one.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  --color-*: initial;
+  --font-*: initial;
+
+  /* ── Ground & ink ─────────────────────────────────────────────────────── */
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  /* Newsprint cream. Every other colour is measured against this. */
+  --color-paper: #f7f3ea;
+  /* 16.14:1 on paper — body copy, rules, solid buttons. */
+  --color-ink: #1a1712;
+  /* 10.51:1 — card and intro body copy. */
+  --color-ink-secondary: #3d382f;
+  /*  6.65:1 — captions and dish descriptions. AA, just under AAA. */
+  --color-ink-muted: #5c554a;
+  /*  8.24:1 — kickers, Gurmukhi, active nav, hover, accent button. */
+  --color-oxblood: #8b1e1e;
+
+  /* Non-text, decorative only. */
+  --color-rule: #c9c0af;
+  --color-leader: #a89e8c;
+
+  /* ── Families ─────────────────────────────────────────────────────────── */
+  /* The `--font-*-src` variables are injected by next/font in the root layout. */
+  --font-display:
+    var(--font-caslon-display-src), "Libre Caslon Display", Georgia, "Times New Roman",
+    serif;
+  --font-body:
+    var(--font-caslon-text-src), "Libre Caslon Text", Georgia, "Times New Roman", serif;
+  --font-ui:
+    var(--font-franklin-src), "Libre Franklin", ui-sans-serif, system-ui, sans-serif;
+  --font-gurmukhi: var(--font-gurmukhi-src), "Noto Serif Gurmukhi", serif;
+
+  /* ── Fluid display sizes ──────────────────────────────────────────────── */
+  /* `normal` below is deliberate: the artboards set no line-height on these,
+     and forcing one (e.g. 1.2 on a 12px kicker) made every kicker block 3-6px
+     taller than designed. Elements that genuinely need a fixed leading — the
+     ruled figcaption, the 44px nav and button targets — declare it themselves. */
+  --text-masthead: clamp(56px, 9vw, 112px);
+  --text-masthead--line-height: 1;
+  --text-masthead-sm: clamp(40px, 6vw, 68px);
+  --text-masthead-sm--line-height: 1;
+  --text-mark: clamp(20px, 2.4vw, 30px);
+  --text-mark--line-height: normal;
+
+  --text-lead: clamp(34px, 4.2vw, 54px);
+  --text-lead--line-height: 1.12;
+  --text-title: clamp(36px, 5vw, 58px);
+  --text-title--line-height: 1.1;
+  --text-title-about: clamp(34px, 4.6vw, 54px);
+  --text-title-about--line-height: 1.12;
+  --text-section: clamp(24px, 2.6vw, 34px);
+  --text-section--line-height: normal;
+  --text-feature: clamp(26px, 3vw, 38px);
+  --text-feature--line-height: 1.15;
+  --text-catering: clamp(28px, 3.4vw, 40px);
+  --text-catering--line-height: normal;
+  --text-quote: clamp(24px, 3vw, 36px);
+  --text-quote--line-height: 1.35;
+
+  /* ── Fixed display sizes ──────────────────────────────────────────────── */
+  --text-course: 30px;
+  --text-course--line-height: normal;
+  --text-course-sm: 28px;
+  --text-course-sm--line-height: normal;
+  --text-notice: 26px;
+  --text-notice--line-height: 1.2;
+  --text-dish: 24px;
+  --text-dish--line-height: 1.2;
+  --text-row: 20px;
+  --text-row--line-height: normal;
+  --text-row-sm: 18px;
+  --text-row-sm--line-height: normal;
+
+  /* ── Prose ────────────────────────────────────────────────────────────── */
+  --text-lede: 16px;
+  --text-lede--line-height: 28px;
+  --text-prose: 15.5px;
+  --text-prose--line-height: 27px;
+  --text-intro: 15px;
+  --text-intro--line-height: 26px;
+  --text-card: 14.5px;
+  --text-card--line-height: 25px;
+  --text-note: 14px;
+  --text-note--line-height: 23px;
+
+  /* ── UI (Libre Franklin) ──────────────────────────────────────────────── */
+  --text-price: 15px;
+  --text-price--line-height: normal;
+  --text-price-sm: 14px;
+  --text-price-sm--line-height: normal;
+  --text-nav: 13px;
+  --text-nav--line-height: normal;
+  --text-label: 12px;
+  --text-label--line-height: normal;
+  --text-micro: 11px;
+  --text-micro--line-height: normal;
+
+  /* ── Tracking ─────────────────────────────────────────────────────────── */
+  --tracking-mark: 0.04em;
+  --tracking-footnav: 0.12em;
+  --tracking-ui: 0.14em;
+  --tracking-meta: 0.16em;
+  --tracking-kicker: 0.18em;
+  --tracking-tagline: 0.22em;
+
+  /* ── Measure ──────────────────────────────────────────────────────────── */
+  --container-page: 1240px;
+  --container-menu-intro: 720px;
+  --container-about-intro: 760px;
+  --container-catering-intro: 680px;
+  --container-quote: 30ch;
+
+  /* ── Rhythm — the artboards' clamp() ladder, named ────────────────────── */
+  --spacing-gutter: clamp(16px, 4vw, 48px);
+  --spacing-sec-xs: clamp(24px, 3vw, 36px);
+  --spacing-sec-sm: clamp(28px, 4vw, 44px);
+  --spacing-sec-md: clamp(32px, 4vw, 48px);
+  --spacing-sec-lg: clamp(36px, 5vw, 56px);
+  --spacing-sec-xl: clamp(40px, 6vw, 72px);
+  --spacing-sec-head: clamp(28px, 4vw, 40px);
+  --spacing-gap-dish: clamp(24px, 3vw, 40px);
+  --spacing-gap-notice: clamp(24px, 3vw, 48px);
+  --spacing-gap-split: clamp(28px, 4vw, 56px);
+  --spacing-gap-menu: clamp(32px, 4vw, 64px);
+  --spacing-gap-nav: clamp(20px, 4vw, 48px);
+  --spacing-dish-rule: clamp(0px, 2vw, 32px);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Utilities — the handful of declarations Tailwind has no primitive for.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* The photographic treatment used on every filled image slot. Applied in CSS,
+   never baked into the file — the vendored Commons originals stay unmodified
+   so no ShareAlike obligation is triggered. */
+@utility newsprint {
+  filter: sepia(0.14) contrast(1.02);
+}
+
+/* Major section break. `border-double` alone cannot express 3px double. */
+@utility rule-double {
+  border-top: 3px double var(--color-ink);
+}
+
+/* `repeat(auto-fit, minmax(…, 1fr))` at exactly the breakpoints the artboards
+   use. The `-min` variants clamp to 100% so a card never overflows a phone. */
+@utility auto-grid-250 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+@utility auto-grid-260 {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+@utility auto-grid-260-min {
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+}
+@utility auto-grid-280 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+@utility auto-grid-300 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+@utility auto-grid-320-min {
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Base layer
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    text-wrap: pretty;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Headings are display-face and regular weight throughout the design —
+     there is no bold Caslon anywhere in the artboards. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+  }
+
+  /* Links inherit ink and go oxblood on hover, exactly as in the source. */
+  a {
+    color: inherit;
+  }
+  @media (hover: hover) {
+    a:hover {
+      color: var(--color-oxblood);
+    }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-oxblood);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: color-mix(in srgb, var(--color-oxblood) 22%, transparent);
+  }
+
+  /* The anchor nav target (/menu#catering) must not hide under the masthead. */
+  :target {
+    scroll-margin-top: 24px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

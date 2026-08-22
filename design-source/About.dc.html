@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&family=Noto+Serif+Gurmukhi:wght@500;600&display=swap" rel="stylesheet">
+  <script src="image-slot.js"></script>
+  <style>
+    body { margin: 0; background: #f7f3ea; color: #1a1712; font-family: 'Libre Caslon Text', serif; text-wrap: pretty; }
+    a { color: #1a1712; }
+    a:hover { color: #8b1e1e; }
+  </style>
+</helmet>
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px);">
+
+  <header>
+    <div style="display: flex; justify-content: space-between; gap: 16px; font-family: 'Libre Franklin', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 0 10px; border-bottom: 1px solid #1a1712;">
+      <span>Dallas, Texas</span>
+      <span style="text-align: center;">A Punjabi family restaurant</span>
+      <span>Three generations of cooking</span>
+    </div>
+    <div style="text-align: center; padding: 28px 0 20px;">
+      <a href="Home.dc.html" style="text-decoration: none; color: inherit; display: inline-block;">
+        <span style="display: block; font-family: 'Noto Serif Gurmukhi', serif; font-weight: 600; font-size: 20px; color: #8b1e1e; margin-bottom: 4px;">ਚਸਕਾ</span>
+        <span style="display: block; font-family: 'Libre Caslon Display', serif; font-size: clamp(40px, 6vw, 68px); line-height: 1; letter-spacing: 0.04em;">CHASKA</span>
+      </a>
+    </div>
+    <div style="border-top: 3px double #1a1712; border-bottom: 1px solid #1a1712;">
+      <nav style="display: flex; justify-content: center; align-items: center; gap: clamp(20px, 4vw, 48px); flex-wrap: wrap; padding: 12px 0; font-family: 'Libre Franklin', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;">
+        <a href="Home.dc.html" style="text-decoration: none;">Home</a>
+        <a href="Menu.dc.html" style="text-decoration: none;">Menu</a>
+        <a href="About.dc.html" aria-current="page" style="text-decoration: none; color: #8b1e1e;">About</a>
+        <a href="Menu.dc.html#catering" style="text-decoration: none;">Catering</a>
+        <a href="tel:+12140000000" style="text-decoration: none;">Reserve · (214) 000 0000</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <header style="text-align: center; padding: clamp(36px, 5vw, 56px) 0 clamp(28px, 4vw, 40px); max-width: 760px; margin: 0 auto;">
+      <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 0 0 14px;">About Chaska</p>
+      <h1 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(34px, 4.6vw, 54px); line-height: 1.12; margin: 0;">A family kitchen, first and always</h1>
+      <p style="font-size: 15.5px; line-height: 27px; margin: 20px 0 0; color: #3d382f;">Chaska means the taste you keep coming back for. The name was chosen because that is what this food has meant to our family for three generations, and what we hope it becomes for yours.</p>
+    </header>
+
+    <section style="border-top: 3px double #1a1712; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 32px clamp(28px, 4vw, 56px); padding: clamp(32px, 4vw, 48px) 0; align-items: start;">
+      <figure style="margin: 0;">
+        <div style="position: relative; width: 100%; aspect-ratio: 4 / 5;"><image-slot id="about-ronika" shape="rect" style="position: absolute; inset: 0; width: 100%; height: 100%;" role="img" aria-label="Ronika Singh" placeholder="Photo of Ronika Singh"></image-slot></div>
+        <figcaption style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; line-height: 20px; color: #5c554a; border-bottom: 1px solid #c9c0af; padding: 10px 2px 12px;">Ronika Singh, owner.</figcaption>
+      </figure>
+      <article>
+        <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 0 0 14px;">The Owner</p>
+        <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(26px, 3vw, 38px); line-height: 1.15; margin: 0;">Ronika Singh</h2>
+        <p style="font-size: 15.5px; line-height: 27px; margin: 20px 0 0;">Ronika grew up in a kitchen where recipes were never written down. They were watched, tasted and corrected until you got them right. The dal makhani on our menu is her grandmother's. The chhole are her mother's. Her rule for every dish is the same: cook it the way it was taught, or leave it off the menu.</p>
+        <p style="font-size: 15.5px; line-height: 27px; margin: 14px 0 0;">She opened Chaska in Dallas to serve that food the way it is served at home. Dishes arrive at the middle of the table, meant to be shared, with fresh rotis throughout the meal.</p>
+      </article>
+    </section>
+
+    <section style="border-top: 1px solid #1a1712; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 32px clamp(28px, 4vw, 56px); padding: clamp(32px, 4vw, 48px) 0; align-items: start;">
+      <article>
+        <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 0 0 14px;">The Family</p>
+        <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(26px, 3vw, 38px); line-height: 1.15; margin: 0;">Snoopy, our sous chef</h2>
+        <p style="font-size: 15.5px; line-height: 27px; margin: 20px 0 0;">Chaska is a family restaurant in the plainest sense: the whole family is here, including Snoopy, our shih tzu and honorary sous chef. He is not permitted in the kitchen, but he takes his supervisory duties near the dining room seriously, and regular guests know to expect a greeting.</p>
+        <p style="font-size: 15.5px; line-height: 27px; margin: 14px 0 0;">If you visit the patio, you will likely meet him.</p>
+      </article>
+      <figure style="margin: 0;">
+        <div style="position: relative; width: 100%; aspect-ratio: 4 / 5;"><image-slot id="about-snoopy" shape="rect" src="https://commons.wikimedia.org/wiki/Special:FilePath/Shih%20Tzu%20portrait%20show%20dog.jpg?width=1200" style="position: absolute; inset: 0; width: 100%; height: 100%; filter: sepia(0.14) contrast(1.02);" role="img" aria-label="Snoopy the shih tzu"></image-slot></div>
+        <figcaption style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; line-height: 20px; color: #5c554a; border-bottom: 1px solid #c9c0af; padding: 10px 2px 12px;">Snoopy, sous chef.</figcaption>
+      </figure>
+    </section>
+
+    <section style="border-top: 3px double #1a1712; text-align: center; padding: clamp(40px, 6vw, 72px) 0;">
+      <blockquote style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(24px, 3vw, 36px); line-height: 1.35; max-width: 30ch; margin: 0 auto;">"If it doesn't taste like home, it doesn't leave my kitchen."</blockquote>
+      <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 24px 0 0;">Ronika Singh</p>
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 36px;">
+        <a href="Menu.dc.html" style="text-decoration: none; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #f7f3ea; background: #1a1712; padding: 12px 22px;">View the menu</a>
+        <a href="Menu.dc.html#catering" style="text-decoration: none; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #1a1712; border: 1px solid #1a1712; padding: 12px 22px;">Catering</a>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top: 3px double #1a1712; text-align: center; padding: 28px 0 40px;">
+    <p style="font-family: 'Noto Serif Gurmukhi', serif; font-weight: 600; font-size: 18px; color: #8b1e1e; margin: 0;">ਚਸਕਾ</p>
+    <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #5c554a; margin: 10px 0 0;">Chaska · A Punjabi family restaurant · Dallas, Texas</p>
+    <nav style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 16px; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">
+      <a href="Home.dc.html" style="text-decoration: none;">Home</a>
+      <a href="Menu.dc.html" style="text-decoration: none;">Menu</a>
+      <a href="About.dc.html" style="text-decoration: none;">About</a>
+      <a href="Menu.dc.html#catering" style="text-decoration: none;">Catering</a>
+    </nav>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>

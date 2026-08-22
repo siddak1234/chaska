@@ -1,0 +1,208 @@
+{
+  "kicker": "Sample menu · Full menu to follow",
+  "title": "The Menu",
+  "titleGurmukhi": "ਮੀਨੂ",
+  "intro": "Dishes are served in generous portions meant for the table. Please tell your server how spicy you would like your food prepared.",
+  "courses": [
+    {
+      "id": "shuruaat",
+      "name": "Shuruaat",
+      "englishName": "Appetizers",
+      "layout": "grid",
+      "items": [
+        {
+          "id": "samosa-te-chole",
+          "name": "Samosa te Chole",
+          "price": {
+            "amount": 8,
+            "currency": "USD"
+          },
+          "description": "Crisp samosas over spiced chickpeas with tamarind and mint chutneys."
+        },
+        {
+          "id": "paneer-tikka",
+          "name": "Paneer Tikka",
+          "price": {
+            "amount": 12,
+            "currency": "USD"
+          },
+          "description": "Cottage cheese marinated with ajwain and yogurt, roasted in the tandoor with peppers and onion."
+        },
+        {
+          "id": "amritsari-machhi",
+          "name": "Amritsari Machhi",
+          "price": {
+            "amount": 13,
+            "currency": "USD"
+          },
+          "description": "Fish fried in a light besan batter with carom seed and lemon, in the Amritsar style."
+        },
+        {
+          "id": "dahi-bhalle",
+          "name": "Dahi Bhalle",
+          "price": {
+            "amount": 9,
+            "currency": "USD"
+          },
+          "description": "Soft lentil dumplings in chilled yogurt with tamarind and roasted cumin."
+        }
+      ]
+    },
+    {
+      "id": "ghar-di-rasoi",
+      "name": "Ghar di Rasoi",
+      "englishName": "Main courses · From the home kitchen",
+      "layout": "grid",
+      "items": [
+        {
+          "id": "dal-makhani",
+          "name": "Dal Makhani",
+          "price": {
+            "amount": 15,
+            "currency": "USD"
+          },
+          "description": "Black lentils simmered overnight on a low flame, finished with butter and cream."
+        },
+        {
+          "id": "sarson-da-saag",
+          "name": "Sarson da Saag te Makki di Roti",
+          "price": {
+            "amount": 16,
+            "currency": "USD"
+          },
+          "description": "Mustard greens cooked slowly with ginger and garlic, served with corn flatbread and white butter."
+        },
+        {
+          "id": "murgh-makhani",
+          "name": "Murgh Makhani",
+          "price": {
+            "amount": 17,
+            "currency": "USD"
+          },
+          "description": "Butter chicken made to our family recipe, with tandoori chicken in a tomato and cream gravy."
+        },
+        {
+          "id": "rajma-chawal",
+          "name": "Rajma Chawal",
+          "price": {
+            "amount": 14,
+            "currency": "USD"
+          },
+          "description": "Kidney beans in a slow cooked onion and tomato gravy, served over basmati rice."
+        },
+        {
+          "id": "pind-de-chhole",
+          "name": "Pind de Chhole",
+          "price": {
+            "amount": 14,
+            "currency": "USD"
+          },
+          "description": "Dark chickpeas soured with pomegranate seed, served with bhature or kulcha."
+        },
+        {
+          "id": "tandoori-murgh",
+          "name": "Tandoori Murgh",
+          "price": {
+            "amount": 18,
+            "currency": "USD"
+          },
+          "description": "Half chicken marinated in yogurt and Kashmiri chili, roasted in the clay tandoor."
+        }
+      ]
+    },
+    {
+      "id": "rotiyan",
+      "name": "Rotiyan",
+      "englishName": "Breads",
+      "layout": "stack",
+      "items": [
+        {
+          "id": "tandoori-roti",
+          "name": "Tandoori Roti",
+          "price": {
+            "amount": 3,
+            "currency": "USD"
+          }
+        },
+        {
+          "id": "lachha-parantha",
+          "name": "Lachha Parantha",
+          "price": {
+            "amount": 4,
+            "currency": "USD"
+          }
+        },
+        {
+          "id": "garlic-naan",
+          "name": "Garlic Naan",
+          "price": {
+            "amount": 4,
+            "currency": "USD"
+          }
+        },
+        {
+          "id": "amritsari-kulcha",
+          "name": "Amritsari Kulcha",
+          "price": {
+            "amount": 5,
+            "currency": "USD"
+          }
+        }
+      ]
+    },
+    {
+      "id": "mitha-te-thanda",
+      "name": "Mitha te Thanda",
+      "englishName": "Desserts & drinks",
+      "layout": "stack",
+      "items": [
+        {
+          "id": "gajar-da-halwa",
+          "name": "Gajar da Halwa",
+          "price": {
+            "amount": 7,
+            "currency": "USD"
+          }
+        },
+        {
+          "id": "phirni",
+          "name": "Phirni",
+          "price": {
+            "amount": 6,
+            "currency": "USD"
+          }
+        },
+        {
+          "id": "sweet-lassi",
+          "name": "Sweet Lassi",
+          "price": {
+            "amount": 5,
+            "currency": "USD"
+          }
+        },
+        {
+          "id": "masala-chai",
+          "name": "Masala Chai",
+          "price": {
+            "amount": 3,
+            "currency": "USD"
+          }
+        }
+      ]
+    }
+  ],
+  "photoStrip": [
+    {
+      "imageId": "menu-tandoori",
+      "caption": "Tandoori murgh, from the clay tandoor."
+    },
+    {
+      "imageId": "menu-saag",
+      "caption": "Sarson da saag te makki di roti, with white butter."
+    },
+    {
+      "imageId": "menu-table",
+      "caption": "The table, served family style."
+    }
+  ]
+}

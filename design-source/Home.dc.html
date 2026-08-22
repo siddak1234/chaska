@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&family=Noto+Serif+Gurmukhi:wght@500;600&display=swap" rel="stylesheet">
+  <script src="image-slot.js"></script>
+  <style>
+    body { margin: 0; background: #f7f3ea; color: #1a1712; font-family: 'Libre Caslon Text', serif; text-wrap: pretty; }
+    a { color: #1a1712; }
+    a:hover { color: #8b1e1e; }
+  </style>
+</helmet>
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px);">
+
+  <header>
+    <div style="display: flex; justify-content: space-between; gap: 16px; font-family: 'Libre Franklin', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 0 10px; border-bottom: 1px solid #1a1712;">
+      <span>Dallas, Texas</span>
+      <span style="text-align: center;">A Punjabi family restaurant</span>
+      <span>Three generations of cooking</span>
+    </div>
+    <div style="text-align: center; padding: 36px 0 24px;">
+      <a href="Home.dc.html" style="text-decoration: none; color: inherit; display: inline-block;">
+        <span style="display: block; font-family: 'Noto Serif Gurmukhi', serif; font-weight: 600; font-size: clamp(20px, 2.4vw, 30px); color: #8b1e1e; margin-bottom: 6px;">ਚਸਕਾ</span>
+        <span style="display: block; font-family: 'Libre Caslon Display', serif; font-size: clamp(56px, 9vw, 112px); line-height: 1; letter-spacing: 0.04em;">CHASKA</span>
+      </a>
+      <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; margin: 18px 0 0;">The taste you keep coming back for</p>
+    </div>
+    <div style="border-top: 3px double #1a1712; border-bottom: 1px solid #1a1712;">
+      <nav style="display: flex; justify-content: center; align-items: center; gap: clamp(20px, 4vw, 48px); flex-wrap: wrap; padding: 12px 0; font-family: 'Libre Franklin', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;">
+        <a href="Home.dc.html" aria-current="page" style="text-decoration: none; color: #8b1e1e;">Home</a>
+        <a href="Menu.dc.html" style="text-decoration: none;">Menu</a>
+        <a href="About.dc.html" style="text-decoration: none;">About</a>
+        <a href="Menu.dc.html#catering" style="text-decoration: none;">Catering</a>
+        <a href="tel:+12140000000" style="text-decoration: none;">Reserve · (214) 000 0000</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 32px clamp(28px, 4vw, 56px); padding: clamp(36px, 5vw, 56px) 0; align-items: start;">
+      <div>
+        <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 0 0 14px;">The Lead</p>
+        <h1 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(34px, 4.2vw, 54px); line-height: 1.12; margin: 0;">Three generations at one stove, now cooking in Dallas</h1>
+        <p style="font-size: 16px; line-height: 28px; margin: 22px 0 0;">Chaska serves desi food with a Punjabi tadka, cooked from family recipes that were never written down. They were watched, tasted and corrected across three generations, and they arrive at your table unchanged: dal simmered overnight, saag stirred through the afternoon, rotis off the tawa when you sit down.</p>
+        <p style="font-size: 16px; line-height: 28px; margin: 16px 0 0;">Everything is served family style, in the middle of the table, meant to be passed and shared.</p>
+        <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px;">
+          <a href="Menu.dc.html" style="text-decoration: none; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #f7f3ea; background: #1a1712; padding: 12px 22px;">View the menu</a>
+          <a href="About.dc.html" style="text-decoration: none; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #1a1712; border: 1px solid #1a1712; padding: 12px 22px;">Our story</a>
+        </div>
+      </div>
+      <figure style="margin: 0;">
+        <div style="position: relative; width: 100%; aspect-ratio: 3 / 2;"><image-slot id="home-hero" shape="rect" src="https://commons.wikimedia.org/wiki/Special:FilePath/Naan%20baked%20in%20Tandoor.jpg?width=1600" style="position: absolute; inset: 0; width: 100%; height: 100%; filter: sepia(0.14) contrast(1.02);" role="img" aria-label="Naan baking in the clay tandoor"></image-slot></div>
+        <figcaption style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; line-height: 20px; color: #5c554a; border-bottom: 1px solid #c9c0af; padding: 10px 2px 12px;">Naan on the wall of the clay tandoor, baked to order through service.</figcaption>
+      </figure>
+    </section>
+
+    <section style="border-top: 3px double #1a1712; padding: clamp(32px, 4vw, 48px) 0;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 28px;">
+        <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(24px, 2.6vw, 34px); margin: 0;">From the Kitchen</h2>
+        <a href="Menu.dc.html" style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none;">Full menu →</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px clamp(24px, 3vw, 40px);">
+        <article style="border-right: 1px solid #c9c0af; padding-right: clamp(0px, 2vw, 32px);">
+          <div style="position: relative; width: 100%; aspect-ratio: 4 / 3;"><image-slot id="home-dal" shape="rect" src="https://commons.wikimedia.org/wiki/Special:FilePath/Dal%20Makhni.JPG?width=1000" style="position: absolute; inset: 0; width: 100%; height: 100%; filter: sepia(0.14) contrast(1.02);" role="img" aria-label="Dal makhani"></image-slot></div>
+          <h3 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 24px; line-height: 1.2; margin: 16px 0 0;">Dal Makhani</h3>
+          <p style="font-size: 14.5px; line-height: 25px; color: #3d382f; margin: 10px 0 0;">Black lentils put on the flame the night before, finished with butter. The recipe is Ronika's grandmother's, and it is not negotiable.</p>
+        </article>
+        <article style="border-right: 1px solid #c9c0af; padding-right: clamp(0px, 2vw, 32px);">
+          <div style="position: relative; width: 100%; aspect-ratio: 4 / 3;"><image-slot id="home-tandoori" shape="rect" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tandoori%20chicken%20Indian.jpg?width=1000" style="position: absolute; inset: 0; width: 100%; height: 100%; filter: sepia(0.14) contrast(1.02);" role="img" aria-label="Tandoori murgh"></image-slot></div>
+          <h3 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 24px; line-height: 1.2; margin: 16px 0 0;">Tandoori Murgh</h3>
+          <p style="font-size: 14.5px; line-height: 25px; color: #3d382f; margin: 10px 0 0;">Chicken marinated in yogurt and Kashmiri chili, roasted in the clay tandoor that is lit every morning.</p>
+        </article>
+        <article>
+          <div style="position: relative; width: 100%; aspect-ratio: 4 / 3;"><image-slot id="home-saag" shape="rect" src="https://commons.wikimedia.org/wiki/Special:FilePath/Makka%20di%20roti%20sarso%20ka%20saag%20with%20makkhan.jpg?width=1000" style="position: absolute; inset: 0; width: 100%; height: 100%; filter: sepia(0.14) contrast(1.02);" role="img" aria-label="Sarson da saag with makki di roti"></image-slot></div>
+          <h3 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 24px; line-height: 1.2; margin: 16px 0 0;">Sarson da Saag</h3>
+          <p style="font-size: 14.5px; line-height: 25px; color: #3d382f; margin: 10px 0 0;">Mustard greens cooked slowly with ginger and garlic, served with makki di roti and white butter, the way winter demands.</p>
+        </article>
+      </div>
+    </section>
+
+    <section style="border-top: 1px solid #1a1712; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 32px clamp(28px, 4vw, 56px); padding: clamp(32px, 4vw, 48px) 0; align-items: start;">
+      <article>
+        <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 0 0 14px;">The Family</p>
+        <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(26px, 3vw, 38px); line-height: 1.15; margin: 0;">Recipes taught by hand, kept by memory</h2>
+        <p style="font-size: 15.5px; line-height: 27px; margin: 18px 0 0;">Owner Ronika Singh learned every dish on this menu in her family's kitchen, measured in handfuls and pinches. The chhole are her mother's. The butter chicken is the house recipe her family has argued over and perfected for decades. Her rule is simple: cook it the way it was taught, or leave it off the menu.</p>
+        <p style="font-size: 15.5px; line-height: 27px; margin: 14px 0 0;">The family is all here, including Snoopy, the house shih tzu and honorary sous chef, who supervises the dining room and greets regulars by the door.</p>
+        <div style="margin-top: 24px;"><a href="About.dc.html" style="text-decoration: none; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid #1a1712; padding: 11px 20px; display: inline-block;">Read our story</a></div>
+      </article>
+      <figure style="margin: 0;">
+        <div style="position: relative; width: 100%; aspect-ratio: 4 / 3;"><image-slot id="home-table" shape="rect" src="https://commons.wikimedia.org/wiki/Special:FilePath/Urad%20daal%20with%20assorted%20indian%20bread%20and%20salad.jpg?width=1200" style="position: absolute; inset: 0; width: 100%; height: 100%; filter: sepia(0.14) contrast(1.02);" role="img" aria-label="Dishes and breads shared at the table"></image-slot></div>
+        <figcaption style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; line-height: 20px; color: #5c554a; border-bottom: 1px solid #c9c0af; padding: 10px 2px 12px;">The table, mid dinner. Dishes land in the middle and get passed.</figcaption>
+      </figure>
+    </section>
+
+    <section style="border-top: 3px double #1a1712; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px clamp(24px, 3vw, 48px); padding: clamp(32px, 4vw, 48px) 0;">
+      <div style="border: 1px solid #1a1712; padding: 28px;">
+        <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 0 0 12px;">Notice · Catering</p>
+        <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 26px; line-height: 1.2; margin: 0;">The same food, for your gathering</h2>
+        <p style="font-size: 14.5px; line-height: 25px; color: #3d382f; margin: 14px 0 0;">From family dinners to weddings, we cater the menu we serve in the restaurant, prepared for your guests and delivered ready to serve.</p>
+        <div style="margin-top: 20px;"><a href="Menu.dc.html#catering" style="text-decoration: none; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #f7f3ea; background: #8b1e1e; padding: 11px 20px; display: inline-block;">Catering options</a></div>
+      </div>
+      <div style="padding: 28px 0;">
+        <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 0 0 12px;">Visiting</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px 24px; font-size: 14.5px; line-height: 25px;">
+          <div><p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 6px;">Hours</p>Tuesday to Sunday<br />11:00 am to 10:00 pm<br />Closed Monday</div>
+          <div><p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 6px;">Contact</p>Dallas, Texas<br /><a href="tel:+12140000000" style="text-decoration: none;">(214) 000 0000</a><br /><a href="mailto:hello@chaskadallas.com" style="text-decoration: none;">hello@chaskadallas.com</a></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top: 3px double #1a1712; text-align: center; padding: 28px 0 40px;">
+    <p style="font-family: 'Noto Serif Gurmukhi', serif; font-weight: 600; font-size: 18px; color: #8b1e1e; margin: 0;">ਚਸਕਾ</p>
+    <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #5c554a; margin: 10px 0 0;">Chaska · A Punjabi family restaurant · Dallas, Texas</p>
+    <nav style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 16px; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">
+      <a href="Home.dc.html" style="text-decoration: none;">Home</a>
+      <a href="Menu.dc.html" style="text-decoration: none;">Menu</a>
+      <a href="About.dc.html" style="text-decoration: none;">About</a>
+      <a href="Menu.dc.html#catering" style="text-decoration: none;">Catering</a>
+    </nav>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>

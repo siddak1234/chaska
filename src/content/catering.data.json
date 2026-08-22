@@ -1,0 +1,29 @@
+{
+  "kicker": "Notices · Private events",
+  "title": "Catering",
+  "intro": "We cater the same menu we serve in the restaurant, prepared for your gathering and delivered ready to serve. Breads, rice, raita and achaar are included with every package.",
+  "packages": [
+    {
+      "id": "family-gatherings",
+      "guests": "10 to 25 guests",
+      "name": "Family Gatherings",
+      "description": "Two appetizers, three mains, breads, rice and one dessert. Suited to birthdays, pujas and dinners at home.",
+      "pricing": "From $22 per guest"
+    },
+    {
+      "id": "larger-events",
+      "guests": "25 to 75 guests",
+      "name": "Larger Events",
+      "description": "Three appetizers, four mains and two desserts, with a live roti station available on request.",
+      "pricing": "From $28 per guest"
+    },
+    {
+      "id": "weddings-celebrations",
+      "guests": "75 guests and above",
+      "name": "Weddings & Celebrations",
+      "description": "A menu planned with you dish by dish, with on site tandoor service available.",
+      "pricing": "Enquire for pricing"
+    }
+  ],
+  "ctaLabel": "Enquire about catering"
+}

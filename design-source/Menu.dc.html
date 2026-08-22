@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&family=Noto+Serif+Gurmukhi:wght@500;600&display=swap" rel="stylesheet">
+  <script src="image-slot.js"></script>
+  <style>
+    body { margin: 0; background: #f7f3ea; color: #1a1712; font-family: 'Libre Caslon Text', serif; text-wrap: pretty; }
+    a { color: #1a1712; }
+    a:hover { color: #8b1e1e; }
+  </style>
+</helmet>
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px);">
+
+  <header>
+    <div style="display: flex; justify-content: space-between; gap: 16px; font-family: 'Libre Franklin', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 0 10px; border-bottom: 1px solid #1a1712;">
+      <span>Dallas, Texas</span>
+      <span style="text-align: center;">A Punjabi family restaurant</span>
+      <span>Three generations of cooking</span>
+    </div>
+    <div style="text-align: center; padding: 28px 0 20px;">
+      <a href="Home.dc.html" style="text-decoration: none; color: inherit; display: inline-block;">
+        <span style="display: block; font-family: 'Noto Serif Gurmukhi', serif; font-weight: 600; font-size: 20px; color: #8b1e1e; margin-bottom: 4px;">ਚਸਕਾ</span>
+        <span style="display: block; font-family: 'Libre Caslon Display', serif; font-size: clamp(40px, 6vw, 68px); line-height: 1; letter-spacing: 0.04em;">CHASKA</span>
+      </a>
+    </div>
+    <div style="border-top: 3px double #1a1712; border-bottom: 1px solid #1a1712;">
+      <nav style="display: flex; justify-content: center; align-items: center; gap: clamp(20px, 4vw, 48px); flex-wrap: wrap; padding: 12px 0; font-family: 'Libre Franklin', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;">
+        <a href="Home.dc.html" style="text-decoration: none;">Home</a>
+        <a href="Menu.dc.html" aria-current="page" style="text-decoration: none; color: #8b1e1e;">Menu</a>
+        <a href="About.dc.html" style="text-decoration: none;">About</a>
+        <a href="#catering" style="text-decoration: none;">Catering</a>
+        <a href="tel:+12140000000" style="text-decoration: none;">Reserve · (214) 000 0000</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <header style="text-align: center; padding: clamp(36px, 5vw, 56px) 0 clamp(28px, 4vw, 40px); max-width: 720px; margin: 0 auto;">
+      <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 0 0 14px;">Sample menu · Full menu to follow</p>
+      <h1 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(36px, 5vw, 58px); line-height: 1.1; margin: 0;">The Menu <span style="font-family: 'Noto Serif Gurmukhi', serif; font-size: 0.62em; color: #8b1e1e;">ਮੀਨੂ</span></h1>
+      <p style="font-size: 15.5px; line-height: 27px; margin: 20px 0 0; color: #3d382f;">Dishes are served in generous portions meant for the table. Please tell your server how spicy you would like your food prepared.</p>
+    </header>
+
+    <section style="border-top: 3px double #1a1712; padding: clamp(28px, 4vw, 44px) 0;">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 30px; margin: 0;">Shuruaat</h2>
+        <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 8px 0 0;">Appetizers</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px clamp(32px, 4vw, 64px);">
+        <div>
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 20px;">Samosa te Chole</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 15px;">8</span></div>
+          <p style="margin: 6px 0 0; font-size: 14px; line-height: 23px; color: #5c554a;">Crisp samosas over spiced chickpeas with tamarind and mint chutneys.</p>
+        </div>
+        <div>
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 20px;">Paneer Tikka</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 15px;">12</span></div>
+          <p style="margin: 6px 0 0; font-size: 14px; line-height: 23px; color: #5c554a;">Cottage cheese marinated with ajwain and yogurt, roasted in the tandoor with peppers and onion.</p>
+        </div>
+        <div>
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 20px;">Amritsari Machhi</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 15px;">13</span></div>
+          <p style="margin: 6px 0 0; font-size: 14px; line-height: 23px; color: #5c554a;">Fish fried in a light besan batter with carom seed and lemon, in the Amritsar style.</p>
+        </div>
+        <div>
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 20px;">Dahi Bhalle</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 15px;">9</span></div>
+          <p style="margin: 6px 0 0; font-size: 14px; line-height: 23px; color: #5c554a;">Soft lentil dumplings in chilled yogurt with tamarind and roasted cumin.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="border-top: 1px solid #1a1712; padding: clamp(24px, 3vw, 36px) 0;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 20px;">
+        <figure style="margin: 0;">
+          <div style="position: relative; width: 100%; aspect-ratio: 4 / 3;"><image-slot id="menu-tandoori" shape="rect" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tandoori%20chicken%20Indian.jpg?width=1000" style="position: absolute; inset: 0; width: 100%; height: 100%; filter: sepia(0.14) contrast(1.02);" role="img" aria-label="Tandoori murgh"></image-slot></div>
+          <figcaption style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; line-height: 20px; color: #5c554a; border-bottom: 1px solid #c9c0af; padding: 10px 2px 12px;">Tandoori murgh, from the clay tandoor.</figcaption>
+        </figure>
+        <figure style="margin: 0;">
+          <div style="position: relative; width: 100%; aspect-ratio: 4 / 3;"><image-slot id="menu-saag" shape="rect" src="https://commons.wikimedia.org/wiki/Special:FilePath/Makka%20di%20roti%20sarso%20ka%20saag%20with%20makkhan.jpg?width=1000" style="position: absolute; inset: 0; width: 100%; height: 100%; filter: sepia(0.14) contrast(1.02);" role="img" aria-label="Sarson da saag with makki di roti"></image-slot></div>
+          <figcaption style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; line-height: 20px; color: #5c554a; border-bottom: 1px solid #c9c0af; padding: 10px 2px 12px;">Sarson da saag te makki di roti, with white butter.</figcaption>
+        </figure>
+        <figure style="margin: 0;">
+          <div style="position: relative; width: 100%; aspect-ratio: 4 / 3;"><image-slot id="menu-table" shape="rect" src="https://commons.wikimedia.org/wiki/Special:FilePath/Urad%20daal%20with%20assorted%20indian%20bread%20and%20salad.jpg?width=1200" style="position: absolute; inset: 0; width: 100%; height: 100%; filter: sepia(0.14) contrast(1.02);" role="img" aria-label="Dal and breads on the table"></image-slot></div>
+          <figcaption style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; line-height: 20px; color: #5c554a; border-bottom: 1px solid #c9c0af; padding: 10px 2px 12px;">The table, served family style.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section style="border-top: 1px solid #1a1712; padding: clamp(28px, 4vw, 44px) 0;">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 30px; margin: 0;">Ghar di Rasoi</h2>
+        <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 8px 0 0;">Main courses · From the home kitchen</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 26px clamp(32px, 4vw, 64px);">
+        <div>
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 20px;">Dal Makhani</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 15px;">15</span></div>
+          <p style="margin: 6px 0 0; font-size: 14px; line-height: 23px; color: #5c554a;">Black lentils simmered overnight on a low flame, finished with butter and cream.</p>
+        </div>
+        <div>
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 20px;">Sarson da Saag te Makki di Roti</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 15px;">16</span></div>
+          <p style="margin: 6px 0 0; font-size: 14px; line-height: 23px; color: #5c554a;">Mustard greens cooked slowly with ginger and garlic, served with corn flatbread and white butter.</p>
+        </div>
+        <div>
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 20px;">Murgh Makhani</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 15px;">17</span></div>
+          <p style="margin: 6px 0 0; font-size: 14px; line-height: 23px; color: #5c554a;">Butter chicken made to our family recipe, with tandoori chicken in a tomato and cream gravy.</p>
+        </div>
+        <div>
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 20px;">Rajma Chawal</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 15px;">14</span></div>
+          <p style="margin: 6px 0 0; font-size: 14px; line-height: 23px; color: #5c554a;">Kidney beans in a slow cooked onion and tomato gravy, served over basmati rice.</p>
+        </div>
+        <div>
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 20px;">Pind de Chhole</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 15px;">14</span></div>
+          <p style="margin: 6px 0 0; font-size: 14px; line-height: 23px; color: #5c554a;">Dark chickpeas soured with pomegranate seed, served with bhature or kulcha.</p>
+        </div>
+        <div>
+          <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 20px;">Tandoori Murgh</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 15px;">18</span></div>
+          <p style="margin: 6px 0 0; font-size: 14px; line-height: 23px; color: #5c554a;">Half chicken marinated in yogurt and Kashmiri chili, roasted in the clay tandoor.</p>
+        </div>
+      </div>
+    </section>
+
+    <section style="border-top: 1px solid #1a1712; padding: clamp(28px, 4vw, 44px) 0;">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px clamp(32px, 4vw, 64px);">
+        <div>
+          <div style="text-align: center; margin-bottom: 28px;">
+            <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 28px; margin: 0;">Rotiyan</h2>
+            <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 8px 0 0;">Breads</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 18px;">Tandoori Roti</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 14px;">3</span></div>
+            <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 18px;">Lachha Parantha</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 14px;">4</span></div>
+            <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 18px;">Garlic Naan</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 14px;">4</span></div>
+            <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 18px;">Amritsari Kulcha</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 14px;">5</span></div>
+          </div>
+        </div>
+        <div>
+          <div style="text-align: center; margin-bottom: 28px;">
+            <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 28px; margin: 0;">Mitha te Thanda</h2>
+            <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 8px 0 0;">Desserts &amp; drinks</p>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 18px;">Gajar da Halwa</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 14px;">7</span></div>
+            <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 18px;">Phirni</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 14px;">6</span></div>
+            <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 18px;">Sweet Lassi</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 14px;">5</span></div>
+            <div style="display: flex; align-items: baseline; gap: 10px;"><span style="font-family: 'Libre Caslon Display', serif; font-size: 18px;">Masala Chai</span><span style="flex: 1; border-bottom: 1px dotted #a89e8c; transform: translateY(-4px);"></span><span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600; font-size: 14px;">3</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="catering" style="border-top: 3px double #1a1712; padding: clamp(32px, 4vw, 48px) 0 clamp(36px, 5vw, 56px);">
+      <div style="text-align: center; margin-bottom: 36px; max-width: 680px; margin-left: auto; margin-right: auto;">
+        <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 0 0 12px;">Notices · Private events</p>
+        <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(28px, 3.4vw, 40px); margin: 0;">Catering</h2>
+        <p style="font-size: 15px; line-height: 26px; color: #3d382f; margin: 16px 0 0;">We cater the same menu we serve in the restaurant, prepared for your gathering and delivered ready to serve. Breads, rice, raita and achaar are included with every package.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px;">
+        <div style="border: 1px solid #1a1712; padding: 26px;">
+          <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8b1e1e; margin: 0;">10 to 25 guests</p>
+          <h3 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 24px; margin: 10px 0 0;">Family Gatherings</h3>
+          <p style="font-size: 14px; line-height: 24px; color: #3d382f; margin: 12px 0 0;">Two appetizers, three mains, breads, rice and one dessert. Suited to birthdays, pujas and dinners at home.</p>
+          <p style="font-family: 'Libre Franklin', sans-serif; font-size: 13px; font-weight: 600; margin: 16px 0 0;">From $22 per guest</p>
+        </div>
+        <div style="border: 1px solid #1a1712; padding: 26px;">
+          <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8b1e1e; margin: 0;">25 to 75 guests</p>
+          <h3 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 24px; margin: 10px 0 0;">Larger Events</h3>
+          <p style="font-size: 14px; line-height: 24px; color: #3d382f; margin: 12px 0 0;">Three appetizers, four mains and two desserts, with a live roti station available on request.</p>
+          <p style="font-family: 'Libre Franklin', sans-serif; font-size: 13px; font-weight: 600; margin: 16px 0 0;">From $28 per guest</p>
+        </div>
+        <div style="border: 1px solid #1a1712; padding: 26px;">
+          <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8b1e1e; margin: 0;">75 guests and above</p>
+          <h3 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 24px; margin: 10px 0 0;">Weddings &amp; Celebrations</h3>
+          <p style="font-size: 14px; line-height: 24px; color: #3d382f; margin: 12px 0 0;">A menu planned with you dish by dish, with on site tandoor service available.</p>
+          <p style="font-family: 'Libre Franklin', sans-serif; font-size: 13px; font-weight: 600; margin: 16px 0 0;">Enquire for pricing</p>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 36px;">
+        <a href="mailto:catering@chaskadallas.com" style="text-decoration: none; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #f7f3ea; background: #1a1712; padding: 13px 26px; display: inline-block;">Enquire about catering</a>
+      </div>
+    </section>
+  </main>
+
+  <footer style="border-top: 3px double #1a1712; text-align: center; padding: 28px 0 40px;">
+    <p style="font-family: 'Noto Serif Gurmukhi', serif; font-weight: 600; font-size: 18px; color: #8b1e1e; margin: 0;">ਚਸਕਾ</p>
+    <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #5c554a; margin: 10px 0 0;">Chaska · A Punjabi family restaurant · Dallas, Texas</p>
+    <nav style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 16px; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">
+      <a href="Home.dc.html" style="text-decoration: none;">Home</a>
+      <a href="Menu.dc.html" style="text-decoration: none;">Menu</a>
+      <a href="About.dc.html" style="text-decoration: none;">About</a>
+      <a href="Menu.dc.html#catering" style="text-decoration: none;">Catering</a>
+    </nav>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>
