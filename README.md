@@ -1,6 +1,7 @@
 # Chaska
 
-The website for Chaska — a Punjabi family restaurant in Dallas, Texas.
+The website for Chaska — a Punjabi family restaurant at 14355 Francis Lane,
+Frisco, Texas, serving the Dallas–Fort Worth area.
 
 Built from the Claude Design project **Chaska Restaurant Web Design**
 (`7391c903-8037-4740-b3a3-a1c0a1906a52`). The three source artboards are kept
@@ -21,15 +22,41 @@ Node's type stripping). Developed on Node 24.13.
 
 ## Before this goes live
 
-`npm run build` warns about these. `NEXT_PUBLIC_SITE_ENV=production npm run build`
-**fails** until each is resolved — see `scripts/check-placeholders.ts`.
+`npm run build` warns about anything outstanding.
+`NEXT_PUBLIC_SITE_ENV=production npm run build` **fails** until it is resolved —
+see `scripts/check-placeholders.ts`.
 
-| Field in `src/content/site.data.json` | What is needed                                                                                |
-| ------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `url`                                 | The production domain                                                                         |
-| `contact.phone`                       | A real number — `(214) 000 0000` is from the artboard                                         |
-| `contact.email`                       | Confirm `hello@` and `catering@chaskadallas.com` exist                                        |
-| `contact.address`                     | Street address and postal code. None is invented anywhere, including in the schema.org markup |
+**One item remains:**
+
+| Field in `src/content/site.data.json` | What is needed                                                                                                                       |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `url`                                 | The production domain. Still `chaskadallas.com`, which is a placeholder — and worth reconsidering now that the address is in Frisco. |
+
+Set its `"placeholder"` flag to `false` once the domain is real. Phone, email
+and address are done.
+
+Two more, which do not block a build:
+
+- **A photograph of Ronika Singh.** The About artboard's `about-ronika` slot is
+  genuinely empty, so the page ships a designed empty frame rather than a stock
+  photo of a stranger. See "Adding the owner's portrait" below.
+- **Owned photography.** Every current photograph is Creative Commons and
+  legally requires the `/credits` page and `ATTRIBUTION.md`. Replacing them with
+  the restaurant's own removes that obligation entirely.
+
+### Location wording
+
+The restaurant is in Frisco; the copy says so. "Dallas–Fort Worth" appears only
+as `site.metroArea`, used in the search description and as schema.org
+`areaServed`, because that is the area the catering side actually covers. The
+schema.org `PostalAddress` is the real Frisco address — getting that wrong is
+what breaks Google Maps and local search.
+
+------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `url` | The production domain |
+| `contact.phone` | A real number — `(214) 000 0000` is from the artboard |
+| `contact.email` | Confirm `hello@` and `catering@chaskadallas.com` exist |
+| `contact.address` | Street address and postal code. None is invented anywhere, including in the schema.org markup |
 
 Set that group's `"placeholder"` flag to `false` once it is real.
 

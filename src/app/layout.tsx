@@ -15,7 +15,9 @@ export const metadata: Metadata = {
     default: `${site.name} · ${site.descriptor} in ${site.contact.address.locality}`,
     template: `%s · ${site.name}`,
   },
-  description: `${site.descriptor} in ${site.contact.address.locality}, ${site.contact.address.regionName}. ${site.tagline}.`,
+  description:
+    `${site.descriptor} in ${site.contact.address.locality}, ${site.contact.address.regionName}, ` +
+    `serving the ${site.metroArea} area. ${site.tagline}.`,
   applicationName: site.name,
   authors: [{ name: site.name }],
   creator: site.name,

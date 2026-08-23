@@ -72,6 +72,8 @@ export const siteSchema = z.object({
   topbar: z.tuple([z.string(), z.string(), z.string()]),
   footerMeta: z.string().min(1),
   cuisine: z.string().min(1),
+  /** The wider market the restaurant caters to, for search context. */
+  metroArea: z.string().min(1),
   url: z.object({ value: z.url(), placeholder }),
   contact: z.object({
     phone: z.object({

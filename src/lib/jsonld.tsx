@@ -26,6 +26,7 @@ export function restaurantJsonLd() {
     telephone: phone.e164,
     email: email.general,
     servesCuisine: site.cuisine,
+    areaServed: site.metroArea,
     address: {
       "@type": "PostalAddress",
       ...(address.street ? { streetAddress: address.street } : {}),

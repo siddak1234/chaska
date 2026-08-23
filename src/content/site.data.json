@@ -4,35 +4,36 @@
   "descriptor": "A Punjabi family restaurant",
   "tagline": "The taste you keep coming back for",
   "topbar": [
-    "Dallas, Texas",
+    "Frisco, Texas",
     "A Punjabi family restaurant",
     "Three generations of cooking"
   ],
-  "footerMeta": "Chaska · A Punjabi family restaurant · Dallas, Texas",
+  "footerMeta": "Chaska · A Punjabi family restaurant · Frisco, Texas",
   "cuisine": "Punjabi",
+  "metroArea": "Dallas–Fort Worth",
   "url": {
     "value": "https://chaskadallas.com",
     "placeholder": true
   },
   "contact": {
     "phone": {
-      "e164": "+12140000000",
-      "display": "(214) 000 0000",
-      "placeholder": true
+      "e164": "+12148017809",
+      "display": "(214) 801 7809",
+      "placeholder": false
     },
     "email": {
-      "general": "hello@chaskadallas.com",
-      "catering": "catering@chaskadallas.com",
-      "placeholder": true
+      "general": "ronikajit@gmail.com",
+      "catering": "ronikajit@gmail.com",
+      "placeholder": false
     },
     "address": {
-      "street": null,
-      "locality": "Dallas",
+      "street": "14355 Francis Lane",
+      "locality": "Frisco",
       "region": "TX",
       "regionName": "Texas",
-      "postalCode": null,
+      "postalCode": "75035",
       "country": "US",
-      "placeholder": true
+      "placeholder": false
     }
   },
   "hours": {

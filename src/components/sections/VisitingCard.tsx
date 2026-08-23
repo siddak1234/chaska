@@ -40,7 +40,21 @@ export function VisitingCard({
             {contactLabel}
           </Kicker>
           <p>
-            {contact.address.locality}, {contact.address.regionName}
+            {/* The artboard only had "Dallas, Texas" because no real address
+                existed yet. Both branches are kept so the block still reads
+                correctly if the street line is ever cleared. */}
+            {contact.address.street ? (
+              <>
+                {contact.address.street}
+                <br />
+                {contact.address.locality}, {contact.address.region}
+                {contact.address.postalCode ? ` ${contact.address.postalCode}` : ""}
+              </>
+            ) : (
+              <>
+                {contact.address.locality}, {contact.address.regionName}
+              </>
+            )}
             <br />
             <SmartLink href={telHref(contact.phone.e164)} className="no-underline">
               {contact.phone.display}

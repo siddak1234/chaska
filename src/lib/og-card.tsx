@@ -8,7 +8,7 @@ import {
   gurmukhiFont,
 } from "@/lib/og-fonts";
 
-export const ogAlt = "Chaska — a Punjabi family restaurant in Dallas, Texas";
+export const ogAlt = "Chaska — a Punjabi family restaurant in Frisco, Texas";
 export const ogSize = { width: 1200, height: 630 };
 export const ogContentType = "image/png";
 

@@ -105,11 +105,46 @@ describe("content", () => {
     expect(getAboutPage().owner.figure.emptyLabel).toBe("Photo of Ronika Singh");
   });
 
-  it("still flags the design placeholders", () => {
-    // If this starts failing, real contact details have landed — good.
-    // Update the expectation and the production build will unblock.
+  it("carries real contact details, not the artboard placeholders", () => {
     const { contact } = getSite();
-    expect(contact.phone.placeholder).toBe(true);
-    expect(contact.phone.display).toBe("(214) 000 0000");
+
+    expect(contact.phone.placeholder).toBe(false);
+    expect(contact.email.placeholder).toBe(false);
+    expect(contact.address.placeholder).toBe(false);
+
+    expect(contact.phone.e164).toBe("+12148017809");
+    expect(contact.email.general).not.toContain("chaskadallas.com");
+    expect(contact.address.street).toBe("14355 Francis Lane");
+    expect(contact.address.locality).toBe("Frisco");
+    expect(contact.address.postalCode).toBe("75035");
+  });
+
+  it("dials the number it prints", () => {
+    // A typo here means the page shows one number and `tel:` calls another —
+    // silently, and only for the people who tap it.
+    const { phone } = getSite().contact;
+    const printed = phone.display.replace(/\D/g, "");
+    const dialled = phone.e164.replace(/\D/g, "");
+    expect(dialled).toBe(`1${printed}`);
+  });
+
+  it("still flags the domain, which is the last outstanding placeholder", () => {
+    // Update this once the real domain is in place; the production build
+    // stays blocked until then.
+    expect(getSite().url.placeholder).toBe(true);
+  });
+
+  it("gives the address every field schema.org needs", () => {
+    const { address } = getSite().contact;
+    for (const field of [
+      "street",
+      "locality",
+      "region",
+      "postalCode",
+      "country",
+    ] as const) {
+      expect(address[field], `address.${field} is empty`).toBeTruthy();
+    }
+    expect(address.region).toHaveLength(2);
   });
 });

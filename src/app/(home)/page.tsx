@@ -15,7 +15,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Home",
   description:
-    "Chaska serves Punjabi home cooking in Dallas, from family recipes kept across three generations. Dal simmered overnight, saag stirred through the afternoon, rotis off the tawa.",
+    "Chaska serves Punjabi home cooking in Frisco, Texas, from family recipes kept across three generations. Dal simmered overnight, saag stirred through the afternoon, rotis off the tawa.",
   path: "/",
 });
 

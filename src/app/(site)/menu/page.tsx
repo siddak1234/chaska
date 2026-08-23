@@ -11,7 +11,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Menu",
   description:
-    "Appetizers, mains from the home kitchen, breads from the tandoor, desserts and drinks — plus catering for gatherings from ten guests to a wedding.",
+    "Appetizers, mains from the home kitchen, breads from the tandoor, desserts and drinks — plus catering across Frisco and the Dallas–Fort Worth area, from ten guests to a wedding.",
   path: "/menu",
 });
 

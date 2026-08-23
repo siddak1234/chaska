@@ -38,33 +38,38 @@ test("the skip link is the first stop and reveals itself on focus", async ({
  * Target sizing, by policy:
  *   - navigation, buttons and standalone links: 44px (WCAG 2.5.5 AAA)
  *   - other content links: 24px (WCAG 2.5.8 AA)
- *   - links whose height is constrained by the line-height of surrounding
- *     text — the phone number and address inside the Visiting block — are
- *     exempt under 2.5.8's inline exception, and are listed explicitly so the
- *     exemption is a decision rather than an oversight.
+ *   - links sitting inside a paragraph of other text are exempt under 2.5.8's
+ *     inline exception, since their height is set by that text's line-height.
+ *
+ * The exemption is detected structurally — "is this link inside a `<p>` that
+ * contains more than the link itself" — rather than by matching known phone
+ * numbers or email addresses, which rot the moment the contact details change.
  *
  * The first version of this test only ran on /menu and missed fifteen
  * undersized targets on / and /credits.
  */
-const INLINE_EXEMPT = [/^\(\d{3}\) \d{3} \d{4}$/, /@chaskadallas\.com$/];
-
 for (const route of ROUTES) {
   test(`${route} meets target-size policy`, async ({ page }) => {
     await page.goto(route);
 
     const measured = await page.evaluate(() =>
-      [...document.querySelectorAll("header a, main a, footer a")].map((el) => ({
-        text: (el.textContent ?? "").trim(),
-        height: Math.round(el.getBoundingClientRect().height),
-        chrome: !!el.closest("header, footer"),
-      })),
+      [...document.querySelectorAll("header a, main a, footer a")].map((el) => {
+        const paragraph = el.closest("p");
+        const ownText = (el.textContent ?? "").trim();
+        return {
+          text: ownText,
+          height: Math.round(el.getBoundingClientRect().height),
+          chrome: !!el.closest("header, footer"),
+          inlineInProse:
+            !!paragraph && (paragraph.textContent ?? "").trim().length > ownText.length,
+        };
+      }),
     );
 
     const tooSmall = measured.filter((item) => {
       if (item.height === 0) return false;
-      if (INLINE_EXEMPT.some((re) => re.test(item.text))) return false;
-      const floor = item.chrome ? 44 : 24;
-      return item.height < floor;
+      if (item.inlineInProse) return false;
+      return item.height < (item.chrome ? 44 : 24);
     });
 
     expect(tooSmall).toEqual([]);

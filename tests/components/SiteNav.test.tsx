@@ -4,9 +4,15 @@ import { describe, expect, it, vi } from "vitest";
 
 import { SiteNav } from "@/components/layout/SiteNav";
 import { getSite } from "@/content";
+import { telHref } from "@/lib/format";
 
 const site = getSite();
-const reserve = { label: "Reserve · (214) 000 0000", href: "tel:+12140000000" };
+// Built the way Masthead builds it, so the fixture cannot drift from the
+// real contact details.
+const reserve = {
+  label: `Reserve · ${site.contact.phone.display}`,
+  href: telHref(site.contact.phone.e164),
+};
 
 function renderAt(pathname: string) {
   vi.mocked(usePathname).mockReturnValue(pathname);
@@ -43,7 +49,7 @@ describe("SiteNav", () => {
     renderAt("/");
     expect(screen.getByRole("link", { name: reserve.label })).toHaveAttribute(
       "href",
-      "tel:+12140000000",
+      `tel:${site.contact.phone.e164}`,
     );
   });
 

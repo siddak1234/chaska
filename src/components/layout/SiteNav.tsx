@@ -9,7 +9,7 @@ import { routeOf } from "@/lib/routes";
 
 type SiteNavProps = {
   links: readonly Link[];
-  /** "Reserve · (214) 000 0000" — kept apart because it wraps on its own line. */
+  /** "Reserve · (214) 801 7809" — kept apart because it wraps on its own line. */
   reserve: Link;
 };
 
