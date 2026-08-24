@@ -12,8 +12,8 @@
   "cuisine": "Punjabi",
   "metroArea": "Dallas–Fort Worth",
   "url": {
-    "value": "https://chaskadallas.com",
-    "placeholder": true
+    "value": "https://eatchaska.com",
+    "placeholder": false
   },
   "contact": {
     "phone": {
@@ -37,7 +37,14 @@
     }
   },
   "hours": {
-    "openDays": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "openDays": [
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
     "opens": "11:00",
     "closes": "22:00",
     "displayDays": "Tuesday to Sunday",

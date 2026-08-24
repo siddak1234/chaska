@@ -75,33 +75,52 @@ export function getAllMenuItems(): MenuItem[] {
 }
 
 /**
- * Canonical origin for canonicals, the sitemap, robots and every `og:image`.
+ * Pure resolution of the canonical origin, most explicit first:
  *
- * Resolution order, most explicit first:
+ *  1. an explicit override (`NEXT_PUBLIC_SITE_URL`);
+ *  2. the configured domain, once it is no longer a placeholder — a real
+ *     domain always beats whatever the host reports;
+ *  3. the deployment's own origin, which is what kept a `*.vercel.app` deploy
+ *     self-consistent before the domain existed;
+ *  4. the configured value as a last resort.
  *
- *  1. `NEXT_PUBLIC_SITE_URL` — an explicit override always wins.
- *  2. `site.url.value`, once it is no longer flagged as a placeholder — the
- *     real domain beats anything the host reports.
- *  3. The Vercel deployment's own origin. Before a domain exists this is what
- *     makes a `*.vercel.app` deploy self-consistent: without it every canonical
- *     and social-card URL points at `chaskadallas.com`, which nobody owns, so
- *     link previews resolve to nothing.
- *  4. The placeholder, as a last resort.
+ * Split out from `getSiteUrl` so every branch stays testable no matter what
+ * the content currently holds — branch 3 is unreachable through `getSiteUrl`
+ * now that the domain is real, but it still runs on any host without one.
  */
-export function getSiteUrl(): string {
+export function resolveSiteUrl(input: {
+  explicit?: string | undefined;
+  configured: string;
+  isPlaceholder: boolean;
+  hostUrl?: string | undefined;
+}): string {
   const normalise = (value: string) =>
-    `https://${value.replace(/^https?:\/\//, "").replace(/\/+$/, "")}`;
+    `https://${value
+      .trim()
+      .replace(/^https?:\/\//, "")
+      .replace(/\/+$/, "")}`;
 
-  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  const explicit = input.explicit?.trim();
   if (explicit) return normalise(explicit);
 
-  if (!site.url.placeholder) return normalise(site.url.value);
+  if (!input.isPlaceholder) return normalise(input.configured);
 
-  // `VERCEL_PROJECT_PRODUCTION_URL` is stable across deployments;
-  // `VERCEL_URL` changes every time, so it is only the fallback.
-  const fromHost =
-    process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim() || process.env.VERCEL_URL?.trim();
-  if (fromHost) return normalise(fromHost);
+  const host = input.hostUrl?.trim();
+  if (host) return normalise(host);
 
-  return normalise(site.url.value);
+  return normalise(input.configured);
+}
+
+/**
+ * Canonical origin for canonicals, the sitemap, robots and every `og:image`.
+ */
+export function getSiteUrl(): string {
+  return resolveSiteUrl({
+    explicit: process.env.NEXT_PUBLIC_SITE_URL,
+    configured: site.url.value,
+    isPlaceholder: site.url.placeholder,
+    // `VERCEL_PROJECT_PRODUCTION_URL` is stable across deployments;
+    // `VERCEL_URL` changes every time, so it is only the fallback.
+    hostUrl: process.env.VERCEL_PROJECT_PRODUCTION_URL || process.env.VERCEL_URL,
+  });
 }

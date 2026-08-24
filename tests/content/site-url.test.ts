@@ -1,15 +1,15 @@
 import { afterEach, describe, expect, it } from "vitest";
 
-import { getSite, getSiteUrl } from "@/content";
+import { getSite, getSiteUrl, resolveSiteUrl } from "@/content";
 
 /**
  * `getSiteUrl` decides every canonical, the sitemap, robots and each
- * `og:image`. Getting it wrong is invisible in the browser and only shows up as
+ * `og:image`. Getting it wrong is invisible in the browser and shows up only as
  * dead link previews and mis-indexed pages, so the resolution order is pinned
  * here.
  *
- * These cover the case that matters right now: the domain is still a
- * placeholder, so the deployment's own origin has to win.
+ * The order is tested through the pure `resolveSiteUrl`, so the host-fallback
+ * branch stays covered even though a real domain now short-circuits it.
  */
 const KEYS = [
   "NEXT_PUBLIC_SITE_URL",
@@ -21,43 +21,74 @@ afterEach(() => {
   for (const key of KEYS) delete process.env[key];
 });
 
-describe("getSiteUrl", () => {
-  it("assumes the domain is still a placeholder", () => {
-    // If this fails the domain has landed — good. The last two cases below
-    // then no longer describe reality and should be revisited.
-    expect(getSite().url.placeholder).toBe(true);
+describe("resolveSiteUrl", () => {
+  it("uses the configured domain once it is no longer a placeholder", () => {
+    expect(
+      resolveSiteUrl({
+        configured: "https://eatchaska.com",
+        isPlaceholder: false,
+      }),
+    ).toBe("https://eatchaska.com");
   });
 
-  it("falls back to the configured value when nothing else is set", () => {
-    expect(getSiteUrl()).toBe("https://chaskadallas.com");
+  it("lets a real domain beat the deployment origin", () => {
+    expect(
+      resolveSiteUrl({
+        configured: "https://eatchaska.com",
+        isPlaceholder: false,
+        hostUrl: "chaska.vercel.app",
+      }),
+    ).toBe("https://eatchaska.com");
   });
 
-  it("prefers the deployment origin over an unowned placeholder domain", () => {
-    process.env.VERCEL_URL = "chaska-git-abc.vercel.app";
-    expect(getSiteUrl()).toBe("https://chaska-git-abc.vercel.app");
-  });
-
-  it("prefers the stable production URL over the per-deployment one", () => {
-    process.env.VERCEL_URL = "chaska-xyz.vercel.app";
-    process.env.VERCEL_PROJECT_PRODUCTION_URL = "chaska.vercel.app";
-    expect(getSiteUrl()).toBe("https://chaska.vercel.app");
+  it("falls back to the deployment origin while the domain is a placeholder", () => {
+    // Still exercised on any host without a domain of its own.
+    expect(
+      resolveSiteUrl({
+        configured: "https://placeholder.example",
+        isPlaceholder: true,
+        hostUrl: "chaska-git-abc.vercel.app",
+      }),
+    ).toBe("https://chaska-git-abc.vercel.app");
   });
 
   it("lets an explicit override win over everything", () => {
-    process.env.VERCEL_PROJECT_PRODUCTION_URL = "chaska.vercel.app";
-    process.env.NEXT_PUBLIC_SITE_URL = "https://staging.example.com";
+    expect(
+      resolveSiteUrl({
+        explicit: "https://staging.example.com",
+        configured: "https://eatchaska.com",
+        isPlaceholder: false,
+        hostUrl: "chaska.vercel.app",
+      }),
+    ).toBe("https://staging.example.com");
+  });
+
+  it("normalises scheme and trailing slashes", () => {
+    for (const value of ["https://a.com/", "a.com", "https://a.com///", " a.com "]) {
+      expect(
+        resolveSiteUrl({ explicit: value, configured: "x", isPlaceholder: false }),
+      ).toBe("https://a.com");
+    }
+  });
+});
+
+describe("getSiteUrl", () => {
+  it("returns the live domain", () => {
+    expect(getSiteUrl()).toBe("https://eatchaska.com");
+    expect(getSite().url.placeholder).toBe(false);
+  });
+
+  it("still honours an explicit override, for staging", () => {
+    process.env.NEXT_PUBLIC_SITE_URL = "https://staging.example.com/";
     expect(getSiteUrl()).toBe("https://staging.example.com");
   });
 
-  it("normalises scheme and trailing slash", () => {
-    process.env.NEXT_PUBLIC_SITE_URL = "staging.example.com///";
-    expect(getSiteUrl()).toBe("https://staging.example.com");
+  it("ignores the Vercel origin now that the domain is real", () => {
+    process.env.VERCEL_PROJECT_PRODUCTION_URL = "chaska.vercel.app";
+    expect(getSiteUrl()).toBe("https://eatchaska.com");
   });
 
   it("never returns a trailing slash, so path joins cannot double up", () => {
-    for (const value of ["https://a.com/", "a.com", "https://a.com"]) {
-      process.env.NEXT_PUBLIC_SITE_URL = value;
-      expect(getSiteUrl()).toBe("https://a.com");
-    }
+    expect(getSiteUrl().endsWith("/")).toBe(false);
   });
 });

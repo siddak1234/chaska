@@ -113,7 +113,7 @@ describe("content", () => {
     expect(contact.address.placeholder).toBe(false);
 
     expect(contact.phone.e164).toBe("+12148017809");
-    expect(contact.email.general).not.toContain("chaskadallas.com");
+    expect(contact.email.general).toBe("ronikajit@gmail.com");
     expect(contact.address.street).toBe("14355 Francis Lane");
     expect(contact.address.locality).toBe("Frisco");
     expect(contact.address.postalCode).toBe("75035");
@@ -128,10 +128,14 @@ describe("content", () => {
     expect(dialled).toBe(`1${printed}`);
   });
 
-  it("still flags the domain, which is the last outstanding placeholder", () => {
-    // Update this once the real domain is in place; the production build
-    // stays blocked until then.
-    expect(getSite().url.placeholder).toBe(true);
+  it("has no placeholder content left", () => {
+    // All four groups are real, so `NEXT_PUBLIC_SITE_ENV=production` builds.
+    const site = getSite();
+    expect(site.url.placeholder).toBe(false);
+    expect(site.url.value).toBe("https://eatchaska.com");
+    expect(site.contact.phone.placeholder).toBe(false);
+    expect(site.contact.email.placeholder).toBe(false);
+    expect(site.contact.address.placeholder).toBe(false);
   });
 
   it("gives the address every field schema.org needs", () => {

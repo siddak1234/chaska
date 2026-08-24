@@ -3,6 +3,8 @@
 The website for Chaska — a Punjabi family restaurant at 14355 Francis Lane,
 Frisco, Texas, serving the Dallas–Fort Worth area.
 
+**eatchaska.com**
+
 Built from the Claude Design project **Chaska Restaurant Web Design**
 (`7391c903-8037-4740-b3a3-a1c0a1906a52`). The three source artboards are kept
 verbatim in [`design-source/`](design-source/) as the visual reference. They are
@@ -22,15 +24,33 @@ Node's type stripping). Developed on Node 24.13.
 
 ## Before this goes live
 
-`npm run build` warns about anything outstanding.
-`NEXT_PUBLIC_SITE_ENV=production npm run build` **fails** until it is resolved —
-see `scripts/check-placeholders.ts`.
+All four placeholder groups are cleared — domain, phone, email and address are
+real — so `NEXT_PUBLIC_SITE_ENV=production npm run build` succeeds. The guard in
+`scripts/check-placeholders.mjs` stays armed to catch any future regression.
 
-**One item remains:**
+Two items remain, neither of which blocks a build or a deploy:
 
-| Field in `src/content/site.data.json` | What is needed                                                                                                                       |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `url`                                 | The production domain. Still `chaskadallas.com`, which is a placeholder — and worth reconsidering now that the address is in Frisco. |
+- **A photograph of Ronika Singh.** The About artboard's `about-ronika` slot is
+  genuinely empty, so the page ships a designed empty frame rather than a stock
+  photo of a stranger. See "Adding the owner's portrait" below.
+- **Owned photography.** All six food photographs are Creative Commons and
+  legally require the `/credits` page and `ATTRIBUTION.md`. Replacing them with
+  the restaurant's own removes that obligation entirely.
+
+Worth doing at some point: `ronikajit@gmail.com` is a personal address on a
+public site and in a public repository. A forwarding mailbox on `eatchaska.com`
+would let it be retired by editing one field.
+
+### Location wording
+
+The restaurant is in Frisco; the copy says so. "Dallas–Fort Worth" appears only
+as `site.metroArea`, used in the search description and as schema.org
+`areaServed`, because that is the area the catering side actually covers. The
+schema.org `PostalAddress` is the real Frisco address — getting that wrong is
+what breaks Google Maps and local search.
+
+------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `url` | The production domain. Still `chaskadallas.com`, which is a placeholder — and worth reconsidering now that the address is in Frisco. |
 
 Set its `"placeholder"` flag to `false` once the domain is real. Phone, email
 and address are done.
@@ -305,26 +325,14 @@ entirely; see "Replace a photograph" above.
 Vercel, zero config. Framework, build command and install command are all
 detected; there is no `vercel.json`.
 
-**Before a domain exists**, deploy as-is and change nothing. `getSiteUrl()`
-falls back to the deployment's own origin, so canonicals, the sitemap, robots
-and every `og:image` resolve against the `*.vercel.app` URL instead of pointing
-at a domain nobody owns. Resolution order is
-`NEXT_PUBLIC_SITE_URL` → a non-placeholder `site.url` → `VERCEL_PROJECT_PRODUCTION_URL`
-→ `VERCEL_URL` → the placeholder, pinned by `tests/content/site-url.test.ts`.
+Set **`NEXT_PUBLIC_SITE_ENV=production`** on the Vercel production environment.
+That arms the placeholder guard, so any future deploy that reintroduces
+artboard contact details fails the build instead of shipping.
 
-**Do not set `NEXT_PUBLIC_SITE_ENV=production` yet.** That arms the placeholder
-guard, and the domain is still outstanding, so the build will fail by design.
-
-**Once the domain is bought**, do three things:
-
-1. Set `url.value` in `src/content/site.data.json` to the real origin and its
-   `"placeholder"` to `false`.
-2. Update the expectations in `tests/content/site-url.test.ts` and the
-   domain assertion in `tests/content/content.test.ts` — both deliberately
-   assert the placeholder is still in place, so they fail the moment it is not.
-3. Set `NEXT_PUBLIC_SITE_ENV=production` on the Vercel production environment.
-   The guard is now useful rather than obstructive: it blocks any future deploy
-   that reintroduces placeholder contact details.
+`NEXT_PUBLIC_SITE_URL` is optional and only needed to point a staging
+deployment at its own origin. Resolution order — explicit override, then the
+configured domain, then the deployment origin, then the configured value — is
+pinned by `tests/content/site-url.test.ts`.
 
 Node: `engines` requires ≥ 22.18, the first version where TypeScript type
 stripping is on by default, since `npm run images:fetch` and
