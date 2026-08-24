@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+import { dishCount } from "./content";
+
 const ROUTES = ["/", "/menu", "/about", "/credits"] as const;
 
 /** WCAG 1.4.10 sets the reflow floor at 320px, below the smallest test device. */
@@ -23,7 +25,7 @@ test.describe("without JavaScript", () => {
 
   test("the menu is fully readable", async ({ page }) => {
     await page.goto("/menu");
-    await expect(page.locator("main dl dt")).toHaveCount(18);
+    await expect(page.locator("main dl dt")).toHaveCount(dishCount);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     // Server-rendered from the route, not computed on the client.
     await expect(page.locator('[aria-current="page"]')).toHaveText("Menu");

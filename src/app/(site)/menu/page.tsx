@@ -20,7 +20,15 @@ export default function MenuPage() {
   const catering = getCatering();
   const site = getSite();
 
-  const [shuruaat, mains, breads, sweets] = menu.courses;
+  /**
+   * Courses are grouped by their own layout rather than read off fixed
+   * positions. An earlier version destructured `menu.courses` by index, so
+   * adding a course silently dropped it from the page — three of seven were
+   * missing, and the two narrow courses rendered in the wrong slot.
+   */
+  const wide = menu.courses.filter((course) => course.layout !== "stack");
+  const narrow = menu.courses.filter((course) => course.layout === "stack");
+  const [lead, ...rest] = wide;
 
   return (
     <>
@@ -39,9 +47,9 @@ export default function MenuPage() {
         headingSize="title"
       />
 
-      {shuruaat ? (
+      {lead ? (
         <Section rule="double" pad="sm">
-          <MenuCourse course={shuruaat} />
+          <MenuCourse course={lead} />
         </Section>
       ) : null}
 
@@ -54,26 +62,23 @@ export default function MenuPage() {
         />
       </Section>
 
-      {mains ? (
+      {rest.map((course) => (
+        <Section key={course.id} rule="solid" pad="sm">
+          <MenuCourse course={course} />
+        </Section>
+      ))}
+
+      {narrow.length > 0 ? (
         <Section rule="solid" pad="sm">
-          <MenuCourse course={mains} />
+          <div className="grid auto-grid-280 gap-x-gap-menu gap-y-10">
+            {narrow.map((course) => (
+              <div key={course.id}>
+                <MenuCourse course={course} compact />
+              </div>
+            ))}
+          </div>
         </Section>
       ) : null}
-
-      <Section rule="solid" pad="sm">
-        <div className="grid auto-grid-280 gap-x-gap-menu gap-y-10">
-          {breads ? (
-            <div>
-              <MenuCourse course={breads} compact />
-            </div>
-          ) : null}
-          {sweets ? (
-            <div>
-              <MenuCourse course={sweets} compact />
-            </div>
-          ) : null}
-        </div>
-      </Section>
 
       <Section
         id="catering"

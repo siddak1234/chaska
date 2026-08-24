@@ -159,12 +159,26 @@ so no component re-types a `clamp()`.
 
 ### Change the menu
 
-Edit `src/content/menu.data.json`. Prices are whole dollars
-(`{"amount": 15, "currency": "USD"}`) — the artboards print a bare numeral, and
-the currency is spoken to screen readers from a visually hidden span.
-`npm run verify` will fail if the shape is wrong; note that
-`tests/content/content.test.ts` asserts the dish count, so update it when the
-menu genuinely grows.
+Edit `src/content/menu.data.json`. Seven courses, 86 dishes.
+
+- **Prices are optional** and currently absent everywhere. Adding them is a data
+  edit — `{"price": {"amount": 15, "currency": "USD"}}` — and `MenuRow` brings
+  back the dotted leader and figure with no layout change. The leader is drawn
+  only when there is a price for it to lead to; a dotted rule running to nothing
+  reads as a missing value rather than a design.
+- **`layout`** picks the presentation: `columns` for the long name-only courses,
+  `stack` for the narrow two-up pair, `grid` for rows with descriptions.
+- **`nonVeg: true`** marks a meat or fish dish inside an otherwise vegetarian
+  course; a test enforces that every such dish is flagged.
+- **`origin`** adds a small label for dishes that are not Punjabi — South
+  Indian, Bengali, Mumbai.
+
+The menu page reads courses by `layout`, never by index. An earlier version
+destructured `menu.courses` positionally and silently dropped three of the seven
+courses when the menu grew.
+
+`tests/content/content.test.ts` asserts the course names and the dish count, so
+update it when the menu genuinely changes.
 
 ### Replace a photograph
 

@@ -26,17 +26,46 @@ describe("content", () => {
     }).not.toThrow();
   });
 
-  it("carries the four courses from the Menu artboard", () => {
+  it("carries the restaurant's seven courses", () => {
     expect(getMenu().courses.map((c) => c.name)).toEqual([
       "Shuruaat",
       "Ghar di Rasoi",
+      "Chawal",
+      "Maas te Machhi",
+      "Chinese",
       "Rotiyan",
       "Mitha te Thanda",
     ]);
   });
 
-  it("carries all 18 dishes", () => {
-    expect(getAllMenuItems()).toHaveLength(18);
+  it("carries every dish on the menu", () => {
+    // 78 from the restaurant's own list plus the eight breads and desserts
+    // carried over from the sample menu.
+    expect(getAllMenuItems()).toHaveLength(86);
+  });
+
+  it("lists no dish twice", () => {
+    // The source menu listed capsicum paneer, chilli paneer, chilli chicken and
+    // chicken biryani in two places each; those were resolved to one entry.
+    const names = getAllMenuItems().map((i) => i.name.toLowerCase());
+    expect(new Set(names).size).toBe(names.length);
+  });
+
+  it("marks every meat and fish dish inside an otherwise vegetarian course", () => {
+    const flagged = getMenu()
+      .courses.filter((c) => c.englishName !== "Non-vegetarian")
+      .flatMap((c) => c.items)
+      .filter((i) => /chicken|mutton|fish|keema/i.test(i.name));
+    expect(flagged.length).toBeGreaterThan(0);
+    for (const item of flagged) {
+      expect(item.nonVeg, `${item.name} is not flagged non-veg`).toBe(true);
+    }
+  });
+
+  it("publishes without prices until real ones arrive", () => {
+    // The old prices came from the artboard. Showing sample figures beside a
+    // real menu would be worse than showing none.
+    expect(getAllMenuItems().every((i) => i.price === undefined)).toBe(true);
   });
 
   it("keeps any price it does have as whole dollars, as printed", () => {

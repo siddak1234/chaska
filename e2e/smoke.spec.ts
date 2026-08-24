@@ -1,26 +1,6 @@
-import { readFileSync } from "node:fs";
-import path from "node:path";
-
 import { expect, test } from "@playwright/test";
 
-/**
- * Headings are read from the content files rather than frozen as literals:
- * this test is about the page rendering what the content layer holds. That the
- * content itself matches the artboards is asserted in
- * `tests/content/content.test.ts`.
- *
- * Read with `fs` rather than imported — Playwright's loader will not resolve a
- * JSON module import, and this needs no module graph anyway.
- */
-function content(file: string): Record<string, never> {
-  return JSON.parse(
-    readFileSync(path.join(process.cwd(), "src", "content", file), "utf8"),
-  ) as Record<string, never>;
-}
-
-const home = content("home.data.json") as unknown as { lead: { title: string } };
-const menu = content("menu.data.json") as unknown as { title: string };
-const about = content("about.data.json") as unknown as { title: string };
+import { about, dishCount, home, menu } from "./content";
 
 const ROUTES = [
   { path: "/", heading: home.lead.title },
@@ -65,9 +45,9 @@ test("the home masthead is the tall one, inner pages the compact one", async ({
   expect(home).toBeGreaterThan(inner);
 });
 
-test("the menu lists all eighteen dishes", async ({ page }) => {
+test("the menu lists every dish in the content", async ({ page }) => {
   await page.goto("/menu");
-  await expect(page.locator("main dl dt")).toHaveCount(18);
+  await expect(page.locator("main dl dt")).toHaveCount(dishCount);
 });
 
 test("every photograph on the site is credited", async ({ page }) => {
