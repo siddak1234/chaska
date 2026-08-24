@@ -10,7 +10,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "About",
   description:
-    "Chaska means the taste you keep coming back for. Owner Ronika Singh cooks the recipes she learned by hand in Frisco, Texas — and Snoopy, the house shih tzu, supervises the dining room.",
+    "Chaska means the taste you keep coming back for. Owner Ronika Singh Bhatia cooks the recipes she learned by hand in Frisco, Texas — and Snoopy, the house shih tzu, supervises the dining room.",
   path: "/about",
 });
 

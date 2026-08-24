@@ -14,11 +14,13 @@ import tandooriMurgh from "@/assets/images/tandoori-murgh.jpg";
 import sarsonDaSaag from "@/assets/images/sarson-da-saag.jpg";
 import tableSpread from "@/assets/images/table-spread.jpg";
 import snoopyShihTzu from "@/assets/images/snoopy-shih-tzu.jpg";
+import ronikaPortrait from "@/assets/images/ronika-portrait.jpg";
 
 export type SlotImage = {
   image: StaticImageData;
   alt: string;
-  credit: ImageCredit;
+  /** `null` for photographs the restaurant owns. */
+  credit: ImageCredit | null;
 };
 
 export const images = {
@@ -121,6 +123,12 @@ export const images = {
       fileName: "Shih Tzu portrait show dog.jpg",
     },
   },
+  "about-ronika": {
+    image: ronikaPortrait,
+    alt: "Ronika Singh Bhatia, owner of Chaska",
+    // Owned by the restaurant — no third-party licence to satisfy.
+    credit: null,
+  },
 } as const satisfies Record<string, SlotImage>;
 
 export type ImageId = keyof typeof images;
@@ -129,11 +137,15 @@ export function getImage(id: ImageId): SlotImage {
   return images[id];
 }
 
-/** One entry per distinct photograph, for the credits page. */
+/**
+ * One entry per distinct licensed photograph, for the credits page.
+ * Owned images have no credit and are skipped.
+ */
 export function getUniqueCredits(): ImageCredit[] {
   const seen = new Set<string>();
   const unique: ImageCredit[] = [];
   for (const slot of Object.values(images)) {
+    if (!slot.credit) continue;
     if (seen.has(slot.credit.fileName)) continue;
     seen.add(slot.credit.fileName);
     unique.push(slot.credit);

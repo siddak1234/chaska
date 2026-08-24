@@ -59,11 +59,17 @@ export function menuJsonLd() {
         "@type": "MenuItem",
         name: item.name,
         ...(item.description ? { description: item.description } : {}),
-        offers: {
-          "@type": "Offer",
-          price: priceForSchema(item.price),
-          priceCurrency: item.price.currency,
-        },
+        // schema.org allows a MenuItem with no offer. Emitting an offer with a
+        // zero or invented price would be worse than emitting none.
+        ...(item.price
+          ? {
+              offers: {
+                "@type": "Offer",
+                price: priceForSchema(item.price),
+                priceCurrency: item.price.currency,
+              },
+            }
+          : {}),
       })),
     })),
   };

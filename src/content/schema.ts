@@ -107,8 +107,17 @@ export const siteSchema = z.object({
 export const menuItemSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
-  price: priceSchema,
+  /**
+   * Optional. The current menu is published without prices; when they arrive
+   * this becomes a data edit, and `MenuRow` shows the dotted leader and figure
+   * again with no change to the layout.
+   */
+  price: priceSchema.optional(),
   description: z.string().min(1).optional(),
+  /** Flags a dish that is not vegetarian, within an otherwise vegetarian course. */
+  nonVeg: z.boolean().optional(),
+  /** e.g. "South Indian", "Indo-Chinese" — shown as a small note beside the name. */
+  origin: z.string().min(1).optional(),
 });
 
 export const menuCourseSchema = z.object({
@@ -118,10 +127,14 @@ export const menuCourseSchema = z.object({
   /** English gloss, set as an oxblood kicker beneath it. */
   englishName: z.string().min(1),
   /**
-   * `grid` — two-column auto-fit rows with descriptions (Shuruaat, Ghar di Rasoi).
-   * `stack` — a single narrow column of name/price rows (Rotiyan, Mitha te Thanda).
+   * `grid`    — auto-fit rows with descriptions.
+   * `stack`   — a single narrow column of name/price rows.
+   * `columns` — a dense multi-column list of names, for the long courses that
+   *             carry no prices and no descriptions.
    */
-  layout: z.enum(["grid", "stack"]),
+  layout: z.enum(["grid", "stack", "columns"]),
+  /** Optional line under the course heading, e.g. a vegetarian note. */
+  note: z.string().min(1).optional(),
   items: z.array(menuItemSchema).min(1),
 });
 

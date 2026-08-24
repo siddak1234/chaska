@@ -39,8 +39,11 @@ describe("content", () => {
     expect(getAllMenuItems()).toHaveLength(18);
   });
 
-  it("keeps prices as whole dollars, as printed", () => {
+  it("keeps any price it does have as whole dollars, as printed", () => {
+    // Most of the menu is published without prices; those that exist must
+    // still be whole dollars, because that is how the design prints them.
     for (const item of getAllMenuItems()) {
+      if (!item.price) continue;
       expect(Number.isInteger(item.price.amount)).toBe(true);
       expect(item.price.currency).toBe("USD");
     }
@@ -98,11 +101,21 @@ describe("content", () => {
     }
   });
 
-  it("leaves the owner portrait slot genuinely empty", () => {
-    // The About artboard's `about-ronika` slot has no src. It must not be
-    // quietly filled with a stock photograph of someone else.
-    expect(getAboutPage().owner.figure.imageId).toBeNull();
-    expect(getAboutPage().owner.figure.emptyLabel).toBe("Photo of Ronika Singh");
+  it("fills the owner portrait slot with a real photograph", () => {
+    // Empty on the artboard, and deliberately left empty rather than filled
+    // with a stock photo of a stranger, until the real portrait arrived.
+    const figure = getAboutPage().owner.figure;
+    expect(figure.imageId).toBe("about-ronika");
+    expect(figure.ratio).toBe("4/5");
+    // The empty-state label stays as the fallback if the id is ever cleared.
+    expect(figure.emptyLabel).toBeTruthy();
+  });
+
+  it("names the owner consistently", () => {
+    const about = getAboutPage();
+    expect(about.owner.title).toBe("Ronika Singh Bhatia");
+    expect(about.quote.attribution).toBe("Ronika Singh Bhatia");
+    expect(about.owner.figure.caption).toContain("Ronika Singh Bhatia");
   });
 
   it("carries real contact details, not the artboard placeholders", () => {

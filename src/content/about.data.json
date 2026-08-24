@@ -4,14 +4,14 @@
   "intro": "Chaska means the taste you keep coming back for. The name was chosen because that is what this food has meant to our family for three generations, and what we hope it becomes for yours.",
   "owner": {
     "kicker": "The Owner",
-    "title": "Ronika Singh",
+    "title": "Ronika Singh Bhatia",
     "paragraphs": [
-      "Ronika grew up in a kitchen where recipes were never written down. They were watched, tasted and corrected until you got them right. The dal makhani on our menu is her grandmother’s. The chhole are her mother’s. Her rule for every dish is the same: cook it the way it was taught, or leave it off the menu.",
+      "Ronika Singh Bhatia grew up in a kitchen where recipes were never written down. They were watched, tasted and corrected until you got them right. The dal makhani on our menu is her grandmother’s. The chhole are her mother’s. Her rule for every dish is the same: cook it the way it was taught, or leave it off the menu.",
       "She opened Chaska in Frisco to serve that food the way it is served at home. Dishes arrive at the middle of the table, meant to be shared, with fresh rotis throughout the meal."
     ],
     "figure": {
-      "imageId": null,
-      "caption": "Ronika Singh, owner.",
+      "imageId": "about-ronika",
+      "caption": "Ronika Singh Bhatia, owner.",
       "ratio": "4/5",
       "emptyLabel": "Photo of Ronika Singh"
     }
@@ -31,10 +31,16 @@
   },
   "quote": {
     "text": "“If it doesn’t taste like home, it doesn’t leave my kitchen.”",
-    "attribution": "Ronika Singh",
+    "attribution": "Ronika Singh Bhatia",
     "actions": [
-      { "label": "View the menu", "href": "/menu" },
-      { "label": "Catering", "href": "/menu#catering" }
+      {
+        "label": "View the menu",
+        "href": "/menu"
+      },
+      {
+        "label": "Catering",
+        "href": "/menu#catering"
+      }
     ]
   }
 }

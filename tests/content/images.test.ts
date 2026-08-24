@@ -9,9 +9,10 @@ import { imageCreditSchema } from "@/content/schema";
  * the site is out of licence compliance.
  */
 describe("image manifest", () => {
-  it("covers all nine artboard slots", () => {
+  it("covers all nine artboard slots plus the owner portrait", () => {
     expect(Object.keys(images).sort()).toEqual(
       [
+        "about-ronika",
         "about-snoopy",
         "home-dal",
         "home-hero",
@@ -25,6 +26,18 @@ describe("image manifest", () => {
     );
   });
 
+  it("has a real photograph in the owner slot", () => {
+    // This was an empty frame until the portrait arrived.
+    const slot = images["about-ronika"];
+    expect(slot.image.src).toMatch(/ronika-portrait/);
+    expect(slot.image.width / slot.image.height).toBeCloseTo(4 / 5, 3);
+    expect(slot.alt).toBe("Ronika Singh Bhatia, owner of Chaska");
+  });
+
+  it("carries no third-party credit on owned photographs", () => {
+    expect(images["about-ronika"].credit).toBeNull();
+  });
+
   it("gives every slot non-empty alt text", () => {
     for (const [id, slot] of Object.entries(images)) {
       expect(slot.alt.trim().length, `${id} has no alt text`).toBeGreaterThan(0);
@@ -35,6 +48,7 @@ describe("image manifest", () => {
     // `imageCreditSchema` is the single definition of "complete" — the
     // generated manifest is code, so nothing else validates it at runtime.
     for (const [id, slot] of Object.entries(images)) {
+      if (!slot.credit) continue; // owned, nothing to attribute
       const result = imageCreditSchema.safeParse(slot.credit);
       expect(
         result.success,

@@ -2,6 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import react from "@vitejs/plugin-react";
+import sharp from "sharp";
 import { defineConfig, type Plugin } from "vitest/config";
 
 /**
@@ -14,17 +15,23 @@ function nextStaticImages(): Plugin {
   return {
     name: "chaska:next-static-images",
     enforce: "pre",
-    load(id) {
+    async load(id) {
       const [file] = id.split("?");
       if (!file || !IMAGE.test(file)) return null;
+
+      // Real dimensions, not placeholders. Hardcoding them here made any test
+      // that asserted an aspect ratio a test of this mock rather than of the
+      // actual asset.
+      const { width = 0, height = 0 } = await sharp(file).metadata();
       const src = `/_next/static/media/${path.basename(file)}`;
+
       return `export default ${JSON.stringify({
         src,
-        width: 1600,
-        height: 1067,
-        blurDataURL: `data:image/png;base64,`,
+        width,
+        height,
+        blurDataURL: "data:image/png;base64,",
         blurWidth: 8,
-        blurHeight: 5,
+        blurHeight: Math.max(1, Math.round((8 * height) / (width || 1))),
       })};`;
     },
   };
