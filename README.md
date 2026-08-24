@@ -302,6 +302,31 @@ entirely; see "Replace a photograph" above.
 
 ## Deployment
 
-Vercel, zero config. Set `NEXT_PUBLIC_SITE_URL` per environment so canonicals
-and the sitemap are correct on previews, and `NEXT_PUBLIC_SITE_ENV=production`
-on the production environment so the placeholder guard is armed.
+Vercel, zero config. Framework, build command and install command are all
+detected; there is no `vercel.json`.
+
+**Before a domain exists**, deploy as-is and change nothing. `getSiteUrl()`
+falls back to the deployment's own origin, so canonicals, the sitemap, robots
+and every `og:image` resolve against the `*.vercel.app` URL instead of pointing
+at a domain nobody owns. Resolution order is
+`NEXT_PUBLIC_SITE_URL` → a non-placeholder `site.url` → `VERCEL_PROJECT_PRODUCTION_URL`
+→ `VERCEL_URL` → the placeholder, pinned by `tests/content/site-url.test.ts`.
+
+**Do not set `NEXT_PUBLIC_SITE_ENV=production` yet.** That arms the placeholder
+guard, and the domain is still outstanding, so the build will fail by design.
+
+**Once the domain is bought**, do three things:
+
+1. Set `url.value` in `src/content/site.data.json` to the real origin and its
+   `"placeholder"` to `false`.
+2. Update the expectations in `tests/content/site-url.test.ts` and the
+   domain assertion in `tests/content/content.test.ts` — both deliberately
+   assert the placeholder is still in place, so they fail the moment it is not.
+3. Set `NEXT_PUBLIC_SITE_ENV=production` on the Vercel production environment.
+   The guard is now useful rather than obstructive: it blocks any future deploy
+   that reintroduces placeholder contact details.
+
+Node: `engines` requires ≥ 22.18, the first version where TypeScript type
+stripping is on by default, since `npm run images:fetch` and
+`npm run fonts:fetch` are TypeScript run directly by Node. The `prebuild` guard
+is deliberately plain JavaScript so the build itself never depends on that.

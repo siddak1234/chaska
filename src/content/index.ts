@@ -75,11 +75,33 @@ export function getAllMenuItems(): MenuItem[] {
 }
 
 /**
- * Canonical origin. `NEXT_PUBLIC_SITE_URL` wins so preview deployments get
- * correct canonicals; the JSON value is the (still placeholder) production one.
+ * Canonical origin for canonicals, the sitemap, robots and every `og:image`.
+ *
+ * Resolution order, most explicit first:
+ *
+ *  1. `NEXT_PUBLIC_SITE_URL` — an explicit override always wins.
+ *  2. `site.url.value`, once it is no longer flagged as a placeholder — the
+ *     real domain beats anything the host reports.
+ *  3. The Vercel deployment's own origin. Before a domain exists this is what
+ *     makes a `*.vercel.app` deploy self-consistent: without it every canonical
+ *     and social-card URL points at `chaskadallas.com`, which nobody owns, so
+ *     link previews resolve to nothing.
+ *  4. The placeholder, as a last resort.
  */
 export function getSiteUrl(): string {
-  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  const raw = fromEnv && fromEnv.length > 0 ? fromEnv : site.url.value;
-  return raw.replace(/\/+$/, "");
+  const normalise = (value: string) =>
+    `https://${value.replace(/^https?:\/\//, "").replace(/\/+$/, "")}`;
+
+  const explicit = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (explicit) return normalise(explicit);
+
+  if (!site.url.placeholder) return normalise(site.url.value);
+
+  // `VERCEL_PROJECT_PRODUCTION_URL` is stable across deployments;
+  // `VERCEL_URL` changes every time, so it is only the fallback.
+  const fromHost =
+    process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim() || process.env.VERCEL_URL?.trim();
+  if (fromHost) return normalise(fromHost);
+
+  return normalise(site.url.value);
 }

@@ -5,11 +5,11 @@
   "type": "module",
   "description": "Chaska \u2014 a Punjabi family restaurant in Dallas, Texas.",
   "engines": {
-    "node": ">=22.6.0"
+    "node": ">=22.18.0"
   },
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node scripts/check-placeholders.ts",
+    "prebuild": "node scripts/check-placeholders.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",

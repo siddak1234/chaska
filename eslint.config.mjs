@@ -42,7 +42,7 @@ export default tseslint.config(
 
   {
     // Setup scripts are Node programs, not app code.
-    files: ["scripts/**/*.ts"],
+    files: ["scripts/**/*.{ts,mjs}"],
     rules: {
       "no-console": "off",
     },
