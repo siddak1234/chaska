@@ -37,14 +37,7 @@
     }
   },
   "hours": {
-    "openDays": [
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday"
-    ],
+    "openDays": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
     "opens": "11:00",
     "closes": "22:00",
     "displayDays": "Tuesday to Sunday",
