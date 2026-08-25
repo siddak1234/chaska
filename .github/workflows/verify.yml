@@ -56,8 +56,11 @@ jobs:
 
       - run: npm ci
 
-      - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+      # Chromium for the desktop project; WebKit because the iPad Mini and
+      # iPhone SE profiles are Safari's engine, which is what the phone traffic
+      # a restaurant gets will actually be running.
+      - name: Install browsers
+        run: npx playwright install --with-deps chromium webkit
 
       # The Playwright webServer builds too, but doing it here keeps a build
       # failure reported as a build failure rather than a server timeout.
