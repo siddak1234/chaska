@@ -34,10 +34,14 @@ export default defineConfig({
     ? {}
     : {
         webServer: {
-          command: `npx next start --port ${PORT}`,
+          // Build as well as start: `next start` needs a build, and a clean
+          // checkout has none — which is exactly how this first failed in CI.
+          // Locally `reuseExistingServer` skips the whole command when a server
+          // is already up, so the rebuild only costs anything from cold.
+          command: `npx next build && npx next start --port ${PORT}`,
           url: baseURL,
           reuseExistingServer: !process.env.CI,
-          timeout: 120_000,
+          timeout: 180_000,
         },
       }),
 });

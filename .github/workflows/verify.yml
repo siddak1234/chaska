@@ -59,6 +59,10 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
 
+      # The Playwright webServer builds too, but doing it here keeps a build
+      # failure reported as a build failure rather than a server timeout.
+      - run: npm run build
+
       - run: npx playwright test
 
       - if: failure()
