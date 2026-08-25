@@ -62,6 +62,36 @@ describe("content", () => {
     }
   });
 
+  it("describes every dish whose definition could be verified", () => {
+    // Descriptions are canonical definitions of each dish, researched rather
+    // than invented, for Ronika to adjust to her own kitchen. The four without
+    // one are deliberate: two are salads whose composition nobody stated, and
+    // two are names that could not be verified at all.
+    const undescribed = getAllMenuItems()
+      .filter((item) => !item.description)
+      .map((item) => item.name)
+      .sort();
+
+    expect(undescribed).toEqual([
+      "Coin Veg Tikki",
+      "Corn Salad",
+      "Fried Tandoori Paneer",
+      "Pasta Salad",
+    ]);
+  });
+
+  it("keeps descriptions short enough to sit under a name", () => {
+    for (const item of getAllMenuItems()) {
+      if (!item.description) continue;
+      expect(
+        item.description.length,
+        `${item.name}: ${item.description.length} chars`,
+      ).toBeLessThanOrEqual(90);
+      // A description is a sentence, not a fragment.
+      expect(item.description.endsWith("."), `${item.name}: no full stop`).toBe(true);
+    }
+  });
+
   it("publishes without prices until real ones arrive", () => {
     // The old prices came from the artboard. Showing sample figures beside a
     // real menu would be worse than showing none.

@@ -30,6 +30,7 @@ measurement, not assumed.
 - [x] Performance budget and image-supply assertions in the suite
 - [x] Print stylesheet — the 86-dish menu prints as four clean Letter pages
 - [x] Forced colours and 200% text zoom verified
+- [x] 82 of 86 dishes described, researched not invented
 
 ---
 
@@ -63,9 +64,13 @@ measurement, not assumed.
       `ATTRIBUTION.md` to exist; owned photographs remove the obligation.
 - [ ] **C4 — Menu prices.** 86 dishes, none priced. Adding them is a data edit;
       the dotted leader returns on its own.
-- [ ] **C5 — Pick 8–12 signature dishes** for descriptions. I will not write 86
-      without inventing them, but I will research and write the ones you choose.
-- [ ] **C6 — Confirm two dish names.** "Fried Tandoori Paneer" — tandoori means
+- [x] **C5 — Descriptions.** ~~Pick 8–12 signature dishes.~~ Done differently:
+      82 of the 86 now carry a researched, canonical one-line definition — what
+      the dish _is_, not a claim about how your kitchen makes it. **Please read
+      them and adjust any that do not match your recipes.** Four are
+      deliberately blank: Corn Salad and Pasta Salad (nobody stated what goes
+      in them) and the two unverified names in C6.
+- [ ] **C6 — Confirm two dish names.** _(blocks their descriptions)_ "Fried Tandoori Paneer" — tandoori means
       roasted, so _fried tandoori_ is contradictory; did you mean Tandoori
       Paneer Tikka? And "Coin Veg Tikki" — is "coin" the size?
 - [ ] **C7 — Confirm the hours.** Tue–Sun 11:00–22:00, closed Monday, is

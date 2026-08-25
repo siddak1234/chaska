@@ -20,7 +20,8 @@ const LIST_CLASS: Record<MenuCourseData["layout"], string> = {
 const ROW_SIZE: Record<MenuCourseData["layout"], "lg" | "sm" | "columns"> = {
   grid: "lg",
   stack: "sm",
-  columns: "columns",
+  // Descriptions need the larger name size to sit against.
+  columns: "lg",
 };
 
 type MenuCourseProps = {

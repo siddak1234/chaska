@@ -12,47 +12,57 @@
       "items": [
         {
           "id": "masoor-dal-pakora",
-          "name": "Masoor Dal Pakora"
+          "name": "Masoor Dal Pakora",
+          "description": "Red lentils ground with spices and fried until crisp."
         },
         {
           "id": "palak-pakora",
-          "name": "Palak Pakora"
+          "name": "Palak Pakora",
+          "description": "Spinach leaves in a gram flour batter, fried crisp."
         },
         {
           "id": "mix-pakora",
-          "name": "Mix Pakora"
+          "name": "Mix Pakora",
+          "description": "Mixed vegetables in a spiced gram flour batter, fried."
         },
         {
           "id": "dal-vada",
           "name": "Dal Vada",
+          "description": "Crunchy chana dal fritters with herbs and whole spices.",
           "origin": "South Indian"
         },
         {
           "id": "veg-chop",
           "name": "Veg Chop",
+          "description": "Beetroot, carrot and potato croquette, crumbed and fried.",
           "origin": "Bengali"
         },
         {
           "id": "aloo-chop",
           "name": "Aloo Chop",
+          "description": "Spiced mashed potato croquette in a gram flour coat.",
           "origin": "Bengali"
         },
         {
           "id": "vada-pav",
           "name": "Vada Pav",
+          "description": "A spiced potato fritter in a soft bun, with chutney.",
           "origin": "Mumbai"
         },
         {
           "id": "bread-pakora",
-          "name": "Bread Pakora"
+          "name": "Bread Pakora",
+          "description": "Bread dipped in spiced gram flour batter and fried."
         },
         {
           "id": "stuffed-bread-pakora",
-          "name": "Stuffed Bread Pakora"
+          "name": "Stuffed Bread Pakora",
+          "description": "Bread pakora filled with spiced potato before frying."
         },
         {
           "id": "bread-roll",
-          "name": "Bread Roll"
+          "name": "Bread Roll",
+          "description": "Spiced mashed potato rolled in bread and fried crisp."
         },
         {
           "id": "corn-salad",
@@ -64,7 +74,8 @@
         },
         {
           "id": "paneer-pakora",
-          "name": "Paneer Pakora"
+          "name": "Paneer Pakora",
+          "description": "Paneer in a spiced gram flour batter, fried."
         },
         {
           "id": "fried-tandoori-paneer",
@@ -72,32 +83,39 @@
         },
         {
           "id": "paneer-cutlet",
-          "name": "Paneer Cutlet"
+          "name": "Paneer Cutlet",
+          "description": "Paneer patty, crumbed and shallow fried."
         },
         {
           "id": "dahi-vada",
-          "name": "Dahi Vada"
+          "name": "Dahi Vada",
+          "description": "Soft lentil dumplings in chilled yogurt with chutneys."
         },
         {
           "id": "dahi-ke-kabab",
-          "name": "Dahi ke Kabab"
+          "name": "Dahi ke Kabab",
+          "description": "Soft patties of hung yogurt and paneer, crisp outside."
         },
         {
           "id": "hara-bhara-kabab",
-          "name": "Hara Bhara Kabab"
+          "name": "Hara Bhara Kabab",
+          "description": "Spinach, peas and potato patties, green and mildly spiced."
         },
         {
           "id": "pani-puri",
-          "name": "Pani Puri"
+          "name": "Pani Puri",
+          "description": "Crisp shells filled with potato and spiced tamarind water."
         },
         {
           "id": "fried-idli",
           "name": "Fried Idli",
+          "description": "Steamed rice cakes, fried and tossed with spices.",
           "origin": "South Indian"
         },
         {
           "id": "paddu-with-chutney",
           "name": "Paddu with Chutney",
+          "description": "Fermented rice and lentil batter cooked in rounds, with chutney.",
           "origin": "South Indian"
         },
         {
@@ -106,11 +124,13 @@
         },
         {
           "id": "paneer-kathi-roll",
-          "name": "Paneer Kathi Roll"
+          "name": "Paneer Kathi Roll",
+          "description": "Paneer wrapped in a paratha with onion and chutney."
         },
         {
           "id": "chicken-kathi-roll",
           "name": "Chicken Kathi Roll",
+          "description": "Chicken wrapped in a paratha with onion and chutney.",
           "nonVeg": true
         }
       ]
@@ -123,119 +143,148 @@
       "items": [
         {
           "id": "bhindi-sabzi",
-          "name": "Bhindi Sabzi"
+          "name": "Bhindi Sabzi",
+          "description": "Okra cooked dry with onion and spices."
         },
         {
           "id": "mix-vegetable",
-          "name": "Mix Vegetable"
+          "name": "Mix Vegetable",
+          "description": "Seasonal vegetables in a spiced gravy."
         },
         {
           "id": "baingan-bharta",
-          "name": "Baingan Bharta"
+          "name": "Baingan Bharta",
+          "description": "Aubergine roasted over flame, then mashed with onion and tomato."
         },
         {
           "id": "baingan-aloo",
-          "name": "Baingan Aloo"
+          "name": "Baingan Aloo",
+          "description": "Aubergine and potato cooked together with spices."
         },
         {
           "id": "gobi-aloo",
-          "name": "Gobi Aloo"
+          "name": "Gobi Aloo",
+          "description": "Cauliflower and potato, cooked dry with spices."
         },
         {
           "id": "cabbage-aloo",
-          "name": "Cabbage Aloo"
+          "name": "Cabbage Aloo",
+          "description": "Cabbage and potato, cooked dry with spices."
         },
         {
           "id": "beans-aloo",
-          "name": "Beans Aloo"
+          "name": "Beans Aloo",
+          "description": "Green beans and potato, cooked dry with spices."
         },
         {
           "id": "matar-aloo",
-          "name": "Matar Aloo"
+          "name": "Matar Aloo",
+          "description": "Peas and potato in a light onion and tomato gravy."
         },
         {
           "id": "aloo-sabzi-dry",
-          "name": "Aloo Sabzi (Dry)"
+          "name": "Aloo Sabzi (Dry)",
+          "description": "Potato cooked dry with cumin and turmeric."
         },
         {
           "id": "aloo-sabzi-curry",
-          "name": "Aloo Sabzi (Curry)"
+          "name": "Aloo Sabzi (Curry)",
+          "description": "Potato in a thin spiced gravy."
         },
         {
           "id": "capsicum-aloo",
-          "name": "Capsicum Aloo"
+          "name": "Capsicum Aloo",
+          "description": "Peppers and potato, cooked dry with spices."
         },
         {
           "id": "capsicum-paneer",
-          "name": "Capsicum Paneer"
+          "name": "Capsicum Paneer",
+          "description": "Paneer and peppers in a spiced tomato gravy."
         },
         {
           "id": "paneer-butter-masala",
-          "name": "Paneer Butter Masala"
+          "name": "Paneer Butter Masala",
+          "description": "Paneer in a tomato and cream gravy, finished with butter."
         },
         {
           "id": "kadhai-paneer",
-          "name": "Kadhai Paneer"
+          "name": "Kadhai Paneer",
+          "description": "Paneer and peppers cooked hard with crushed coriander seed."
         },
         {
           "id": "palak-paneer",
-          "name": "Palak Paneer"
+          "name": "Palak Paneer",
+          "description": "Paneer in a spinach gravy with ginger and garlic."
         },
         {
           "id": "paneer-bhurji",
-          "name": "Paneer Bhurji"
+          "name": "Paneer Bhurji",
+          "description": "Paneer scrambled with onion, tomato and spices."
         },
         {
           "id": "malai-kofta",
-          "name": "Malai Kofta"
+          "name": "Malai Kofta",
+          "description": "Paneer and potato dumplings in a cashew and cream gravy."
         },
         {
           "id": "lauki-kofta",
-          "name": "Lauki Kofta"
+          "name": "Lauki Kofta",
+          "description": "Bottle gourd dumplings in an onion and tomato gravy."
         },
         {
           "id": "methi-malai-matar",
-          "name": "Methi Malai Matar"
+          "name": "Methi Malai Matar",
+          "description": "Fenugreek leaves and peas in a cashew and cream gravy."
         },
         {
           "id": "dal-makhani",
-          "name": "Dal Makhani"
+          "name": "Dal Makhani",
+          "description": "Black lentils simmered long, finished with butter and cream."
         },
         {
           "id": "yellow-dal",
-          "name": "Yellow Dal"
+          "name": "Yellow Dal",
+          "description": "Split lentils, simmered and tempered with cumin and garlic."
         },
         {
           "id": "green-moong-dal",
-          "name": "Green Moong Dal"
+          "name": "Green Moong Dal",
+          "description": "Whole green mung beans, simmered and tempered."
         },
         {
           "id": "masoor-dal-black-and-orange",
-          "name": "Masoor Dal (Black and Orange)"
+          "name": "Masoor Dal (Black and Orange)",
+          "description": "Red lentils, whole and split, simmered and tempered."
         },
         {
           "id": "kadhi-pakora",
-          "name": "Kadhi Pakora"
+          "name": "Kadhi Pakora",
+          "description": "Gram flour fritters in a tangy yogurt and gram flour gravy."
         },
         {
           "id": "rajma",
-          "name": "Rajma"
+          "name": "Rajma",
+          "description": "Kidney beans in a slow cooked onion and tomato gravy."
         },
         {
           "id": "punjabi-chole",
-          "name": "Punjabi Chole"
+          "name": "Punjabi Chole",
+          "description": "White chickpeas in a dark, tangy spiced gravy."
         },
         {
           "id": "black-channa",
-          "name": "Black Channa"
+          "name": "Black Channa",
+          "description": "Black chickpeas, firmer and nuttier, cooked with spices."
         },
         {
           "id": "lobia-raungi",
-          "name": "Lobia (Raungi)"
+          "name": "Lobia (Raungi)",
+          "description": "Black eyed peas in an onion and tomato gravy."
         },
         {
           "id": "sarson-ka-saag-seasonal",
-          "name": "Sarson ka Saag (Seasonal)"
+          "name": "Sarson ka Saag (Seasonal)",
+          "description": "Mustard greens cooked slowly with ginger and garlic."
         }
       ]
     },
@@ -247,32 +296,39 @@
       "items": [
         {
           "id": "plain-rice",
-          "name": "Plain Rice"
+          "name": "Plain Rice",
+          "description": "Steamed basmati."
         },
         {
           "id": "jeera-rice",
-          "name": "Jeera Rice"
+          "name": "Jeera Rice",
+          "description": "Basmati tempered with cumin."
         },
         {
           "id": "peas-pulao",
-          "name": "Peas Pulao"
+          "name": "Peas Pulao",
+          "description": "Basmati cooked with peas and whole spices."
         },
         {
           "id": "veg-biryani",
-          "name": "Veg Biryani"
+          "name": "Veg Biryani",
+          "description": "Layered rice with vegetables and whole spices."
         },
         {
           "id": "paneer-spinach-biryani",
-          "name": "Paneer Spinach Biryani"
+          "name": "Paneer Spinach Biryani",
+          "description": "Layered rice with paneer and spinach."
         },
         {
           "id": "chicken-biryani",
           "name": "Chicken Biryani",
+          "description": "Layered rice with marinated chicken and whole spices.",
           "nonVeg": true
         },
         {
           "id": "mutton-biryani",
           "name": "Mutton Biryani",
+          "description": "Layered rice with slow cooked mutton.",
           "nonVeg": true
         }
       ]
@@ -286,35 +342,43 @@
       "items": [
         {
           "id": "dahi-chicken",
-          "name": "Dahi Chicken"
+          "name": "Dahi Chicken",
+          "description": "Chicken cooked in a yogurt gravy, tangy and rich."
         },
         {
           "id": "fish-pakora",
-          "name": "Fish Pakora"
+          "name": "Fish Pakora",
+          "description": "Fish in a spiced gram flour batter, fried crisp."
         },
         {
           "id": "butter-chicken",
-          "name": "Butter Chicken"
+          "name": "Butter Chicken",
+          "description": "Tandoori chicken in a tomato and cream gravy."
         },
         {
           "id": "bhuna-chicken",
-          "name": "Bhuna Chicken"
+          "name": "Bhuna Chicken",
+          "description": "Chicken cooked down hard so the masala clings, not a gravy."
         },
         {
           "id": "chicken-curry",
-          "name": "Chicken Curry"
+          "name": "Chicken Curry",
+          "description": "Chicken in an onion and tomato gravy."
         },
         {
           "id": "keema",
-          "name": "Keema"
+          "name": "Keema",
+          "description": "Minced meat cooked with onion, tomato and spices."
         },
         {
           "id": "mutton-curry",
-          "name": "Mutton Curry"
+          "name": "Mutton Curry",
+          "description": "Mutton slow cooked in a spiced onion gravy."
         },
         {
           "id": "fish-curry",
-          "name": "Fish Curry"
+          "name": "Fish Curry",
+          "description": "Fish simmered in a spiced gravy."
         }
       ]
     },
@@ -326,45 +390,55 @@
       "items": [
         {
           "id": "american-chopsuey",
-          "name": "American Chopsuey"
+          "name": "American Chopsuey",
+          "description": "Crisp fried noodles under vegetables in a sweet and sour sauce."
         },
         {
           "id": "veg-fried-rice",
-          "name": "Veg Fried Rice"
+          "name": "Veg Fried Rice",
+          "description": "Rice stir fried hard with vegetables and soy."
         },
         {
           "id": "hakka-noodles",
-          "name": "Hakka Noodles"
+          "name": "Hakka Noodles",
+          "description": "Wheat noodles stir fried with vegetables and soy."
         },
         {
           "id": "veg-manchurian",
-          "name": "Veg Manchurian"
+          "name": "Veg Manchurian",
+          "description": "Fried vegetable balls in a sweet, hot and tangy sauce."
         },
         {
           "id": "hot-and-sour-vegetables",
-          "name": "Hot and Sour Vegetables"
+          "name": "Hot and Sour Vegetables",
+          "description": "Vegetables in a peppery, vinegared sauce."
         },
         {
           "id": "paneer-chilli-dry",
-          "name": "Paneer Chilli (Dry)"
+          "name": "Paneer Chilli (Dry)",
+          "description": "Paneer tossed with peppers and onion, no gravy."
         },
         {
           "id": "paneer-chilli-gravy",
-          "name": "Paneer Chilli (Gravy)"
+          "name": "Paneer Chilli (Gravy)",
+          "description": "Paneer with peppers and onion in a thickened sauce."
         },
         {
           "id": "hot-and-sour-chicken",
           "name": "Hot and Sour Chicken",
+          "description": "Chicken in a peppery, vinegared sauce.",
           "nonVeg": true
         },
         {
           "id": "chilli-chicken-dry",
           "name": "Chilli Chicken (Dry)",
+          "description": "Chicken tossed with peppers and onion, no gravy.",
           "nonVeg": true
         },
         {
           "id": "chilli-chicken-gravy",
           "name": "Chilli Chicken (Gravy)",
+          "description": "Chicken with peppers and onion in a thickened sauce.",
           "nonVeg": true
         }
       ]
@@ -377,19 +451,23 @@
       "items": [
         {
           "id": "tandoori-roti",
-          "name": "Tandoori Roti"
+          "name": "Tandoori Roti",
+          "description": "Wholewheat bread baked on the wall of the tandoor."
         },
         {
           "id": "lachha-parantha",
-          "name": "Lachha Parantha"
+          "name": "Lachha Parantha",
+          "description": "Layered wholewheat bread, flaky and folded."
         },
         {
           "id": "garlic-naan",
-          "name": "Garlic Naan"
+          "name": "Garlic Naan",
+          "description": "Leavened bread with garlic, baked in the tandoor."
         },
         {
           "id": "amritsari-kulcha",
-          "name": "Amritsari Kulcha"
+          "name": "Amritsari Kulcha",
+          "description": "Stuffed leavened bread, crisp and buttered."
         }
       ]
     },
@@ -401,19 +479,23 @@
       "items": [
         {
           "id": "gajar-da-halwa",
-          "name": "Gajar da Halwa"
+          "name": "Gajar da Halwa",
+          "description": "Carrots cooked down slowly with milk and sugar."
         },
         {
           "id": "phirni",
-          "name": "Phirni"
+          "name": "Phirni",
+          "description": "Ground rice set in sweetened milk, served chilled."
         },
         {
           "id": "sweet-lassi",
-          "name": "Sweet Lassi"
+          "name": "Sweet Lassi",
+          "description": "Yogurt blended with sugar, served cold."
         },
         {
           "id": "masala-chai",
-          "name": "Masala Chai"
+          "name": "Masala Chai",
+          "description": "Black tea brewed with milk and whole spices."
         }
       ]
     }

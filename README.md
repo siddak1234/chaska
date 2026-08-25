@@ -161,6 +161,10 @@ Edit `src/content/menu.data.json`. Seven courses, 86 dishes.
   course; a test enforces that every such dish is flagged.
 - **`origin`** adds a small label for dishes that are not Punjabi — South
   Indian, Bengali, Mumbai.
+- **`description`** is a canonical one-line definition of the dish, researched
+  rather than invented — what it _is_, not a claim about this kitchen. Four
+  dishes have none on purpose; `tests/content/content.test.ts` names them, so
+  adding one to a fifth without updating that list fails the build.
 
 The menu page reads courses by `layout`, never by index. An earlier version
 destructured `menu.courses` positionally and silently dropped three of the seven
