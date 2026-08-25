@@ -255,3 +255,97 @@
     }
   }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   Print
+
+   A restaurant menu gets printed — by the kitchen, by guests, for a folder by
+   the phone. Without these rules the page prints the navigation, the photo
+   strip, the catering cards and the site footer along with the dishes, and the
+   cream ground floods the paper.
+
+   The design is already a newspaper, so it prints well once the furniture is
+   removed: ink on white, courses kept off page breaks, and the contents strip
+   dropped because its anchors mean nothing on paper.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media print {
+  @page {
+    margin: 16mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Screen furniture. */
+  nav,
+  footer,
+  figure,
+  .no-print {
+    display: none !important;
+  }
+
+  /* The masthead stays — it is the letterhead — but not the nav inside it. */
+  header {
+    break-after: avoid;
+  }
+
+  main {
+    /* Reclaim the fluid gutter; @page owns the margin now. */
+    padding: 0 !important;
+  }
+
+  /* Keep a course heading with its dishes, and dishes off a page break. */
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+    break-inside: avoid;
+  }
+  dt,
+  dd {
+    break-inside: avoid;
+  }
+
+  /*
+   * The long courses use CSS multi-column, which Chrome will not fragment
+   * across a page break — it pushed a whole 24-dish list to the next sheet and
+   * left a course heading alone above 400pt of blank paper. On paper the
+   * columns are dropped for a plain two-up grid, which does paginate, and each
+   * dish is kept whole.
+   */
+  main dl {
+    columns: auto !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 24pt;
+    break-inside: auto;
+  }
+  main dl > div {
+    break-inside: avoid;
+    margin-bottom: 6pt;
+  }
+  main section {
+    break-inside: auto;
+  }
+
+  /* Ink economy: the double rules become single hairlines. */
+  .rule-double {
+    border-top: 1px solid #000 !important;
+  }
+
+  /* Spell out what a printed link cannot show. */
+  a[href^="http"]::after,
+  a[href^="mailto:"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    word-break: break-all;
+  }
+  a[href^="#"]::after,
+  a[href^="/"]::after {
+    content: "";
+  }
+}

@@ -1,0 +1,69 @@
+name: verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# One run per branch; a newer push cancels an in-flight one.
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: lint · types · unit · build (node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        # 22.18 is the `engines` floor — the first release where TypeScript type
+        # stripping is on by default, which the setup scripts rely on. 24 is
+        # what development happens on. Both are tested so the floor is real
+        # rather than aspirational.
+        node: ["22.18", "24"]
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      # `npm ci` from the lockfile, so this is the clean-checkout path that
+      # once shipped a broken typecheck to main.
+      - run: npm ci
+
+      - run: npm run verify
+
+      - name: Check formatting
+        if: matrix.node == '24'
+        run: npx prettier --check .
+
+  e2e:
+    name: end to end
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - run: npx playwright test
+
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 7

@@ -24,22 +24,11 @@ Node's type stripping). Developed on Node 24.13.
 
 ## Before this goes live
 
-All four placeholder groups are cleared — domain, phone, email and address are
-real — so `NEXT_PUBLIC_SITE_ENV=production npm run build` succeeds. The guard in
-`scripts/check-placeholders.mjs` stays armed to catch any future regression.
-
-Two items remain, neither of which blocks a build or a deploy:
-
-- **A photograph of Ronika Singh.** The About artboard's `about-ronika` slot is
-  genuinely empty, so the page ships a designed empty frame rather than a stock
-  photo of a stranger. See "Adding the owner's portrait" below.
-- **Owned photography.** All six food photographs are Creative Commons and
-  legally require the `/credits` page and `ATTRIBUTION.md`. Replacing them with
-  the restaurant's own removes that obligation entirely.
-
-Worth doing at some point: `ronikajit@gmail.com` is a personal address on a
-public site and in a public repository. A forwarding mailbox on `eatchaska.com`
-would let it be retired by editing one field.
+Outstanding work is tracked in **[LAUNCH.md](LAUNCH.md)** — what is done, what I
+can still do, and what only you can. The short version: the site is live and
+every placeholder is cleared, but `www.eatchaska.com` still throws a certificate
+error until the hostname is added in Vercel, and the food photographs are
+Creative Commons stand-ins.
 
 ### Location wording
 
@@ -312,7 +301,27 @@ Two constraints, both found the hard way:
     icon and apple-touch-icon resolve, `/credits` is reachable from the footer,
     declared route anchors exist, security headers set, sitemap complete.
   - `resilience` — 320px reflow (WCAG 1.4.10, below the smallest device),
-    no-JS rendering, hover contrast on solid buttons, reduced motion.
+    no-JS rendering, hover contrast on solid buttons, reduced motion, forced
+    colours, and 200% text zoom (1.4.4) — neither of the last two is covered
+    by axe.
+  - `performance` — an LCP/CLS/TTFB budget, and an assertion that no image is
+    served smaller than the box it fills. The `sizes` attributes have drifted
+    twice; this catches the third time.
+
+Continuous integration runs the whole gate on every push and pull request
+(`.github/workflows/verify.yml`), on **both** Node 22.18 — the `engines` floor,
+so the floor is real rather than aspirational — and Node 24. A clean-checkout
+typecheck failure once reached `main` and was caught by hand; this is that
+safety net.
+
+## Printing
+
+The menu prints. `@media print` in `globals.css` drops the navigation, the
+photographs, the footer and the contents strip, moves to ink on white, and
+replaces the multi-column dish lists with a two-up grid — Chrome will not
+fragment a multi-column block across a page break, which left a course heading
+stranded above most of a blank sheet. The full 86-dish menu comes out as four
+Letter pages with the origin and non-vegetarian labels intact.
 
 ## Licensing
 
