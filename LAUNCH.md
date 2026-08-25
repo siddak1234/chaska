@@ -53,10 +53,12 @@ measurement, not assumed.
 
 ## C. Only you can do these
 
-- [ ] **C1 — Add `www.eatchaska.com` in Vercel.** _Currently broken:_ DNS
-      resolves and TLS completes, but the certificate has no `www` name, so a
-      browser shows a full-page security warning. Vercel → project → Domains →
-      Add. No API can do it.
+- [x] **C1 — `www.eatchaska.com`.** Done. The hostname is attached to the
+      project, the certificate is valid (`CN=www.eatchaska.com`, verify ok) and
+      all 134 e2e checks pass against it. It serves 200 rather than redirecting
+      to the apex, which is harmless here — every canonical, `og:url`, the
+      sitemap and `robots.txt` name `eatchaska.com` — but a 308 redirect would
+      be tidier. See "Optional: redirect www" below.
 - [ ] **C2 — Set `NEXT_PUBLIC_SITE_ENV=production`** on the Vercel production
       environment, so the placeholder guard is armed against future regressions.
 - [ ] **C3 — Real food photography.** All six food images are Creative Commons
@@ -84,6 +86,18 @@ measurement, not assumed.
       `https://eatchaska.com/sitemap.xml`; the Restaurant markup is ready.
 
 ---
+
+## Optional: redirect www to the apex
+
+`www.eatchaska.com` currently serves the site rather than redirecting. Search
+engines will consolidate on the apex regardless, because the canonical tags,
+`og:url`, `robots.txt` `Host` and every sitemap entry point there — verified
+byte-identical output on both hostnames. A redirect is still cleaner: one URL
+per page for visitors, unambiguous link sharing, and analytics that do not split
+across two hosts.
+
+Vercel → **chaska** project → Settings → Domains → the `www.eatchaska.com` row →
+set it to redirect to `eatchaska.com` (308).
 
 ## Verification
 
