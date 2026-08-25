@@ -1,5 +1,6 @@
 import { CateringPackages } from "@/components/sections/CateringPackages";
 import { MenuCourse } from "@/components/sections/MenuCourse";
+import { MenuIndex } from "@/components/sections/MenuIndex";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { PhotoStrip } from "@/components/sections/PhotoStrip";
 import { Section } from "@/components/ui/Section";
@@ -46,6 +47,8 @@ export default function MenuPage() {
         measure="menu"
         headingSize="title"
       />
+
+      <MenuIndex courses={menu.courses} />
 
       {lead ? (
         <Section rule="double" pad="sm">

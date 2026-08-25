@@ -29,6 +29,14 @@ type SplitFeatureProps = {
    * different enough to be worth carrying.
    */
   proseTop?: "18" | "20";
+  /**
+   * `even` — equal columns, as the artboards have it.
+   * `portrait` — a narrower media column. A 4:5 portrait in an equal column
+   *   measured 592x740 against 323px of text beside it: two and a half times
+   *   its height. 42/58 brings the picture down and gives the prose a better
+   *   measure, without shrinking the type to do it.
+   */
+  columns?: "even" | "portrait";
 };
 
 /**
@@ -45,6 +53,7 @@ export function SplitFeature({
   action,
   headingSize = "feature",
   proseTop = "20",
+  columns = "even",
 }: SplitFeatureProps) {
   const media = (
     <Figure
@@ -52,7 +61,16 @@ export function SplitFeature({
       caption={figure.caption}
       ratio={figure.ratio}
       emptyLabel={figure.emptyLabel}
-      span="half"
+      span={columns === "portrait" ? "portrait" : "half"}
+      className={
+        columns === "portrait"
+          ? // Once the columns stack, a 4:5 portrait at full column width is
+            // 707x884 on a tablet — larger than it ever is on a desktop. Cap
+            // and centre it. It also keeps the frame inside the narrowest
+            // source asset, which is 665px wide.
+            "mx-auto w-full max-w-[460px] lg:max-w-none"
+          : undefined
+      }
     />
   );
 
@@ -65,14 +83,26 @@ export function SplitFeature({
       <Prose
         paragraphs={paragraphs}
         size="body"
-        className={proseTop === "18" ? "mt-[18px]" : "mt-5"}
+        className={cn("max-w-measure", proseTop === "18" ? "mt-[18px]" : "mt-5")}
       />
       {action ? <div className="mt-6">{action}</div> : null}
     </article>
   );
 
   return (
-    <div className={cn("grid auto-grid-320-min items-start gap-x-gap-split gap-y-8")}>
+    <div
+      className={cn(
+        "grid items-start gap-x-gap-split gap-y-8",
+        // The narrow column has to follow the picture, not the DOM order. When
+        // the copy comes first the ratio flips, or the reversed block hands the
+        // wide column to the image and squeezes the text into the narrow one.
+        columns === "portrait"
+          ? figureFirst
+            ? "grid-cols-1 lg:grid-cols-[minmax(0,38fr)_minmax(0,62fr)]"
+            : "grid-cols-1 lg:grid-cols-[minmax(0,62fr)_minmax(0,38fr)]"
+          : "auto-grid-320-min",
+      )}
+    >
       {figureFirst ? media : copy}
       {figureFirst ? copy : media}
     </div>

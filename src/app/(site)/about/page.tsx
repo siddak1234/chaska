@@ -40,6 +40,7 @@ export default function AboutPage() {
             emptyLabel: about.owner.figure.emptyLabel,
           }}
           figureFirst
+          columns="portrait"
         />
       </Section>
 
@@ -53,6 +54,7 @@ export default function AboutPage() {
             caption: about.family.figure.caption,
             ratio: about.family.figure.ratio,
           }}
+          columns="portrait"
         />
       </Section>
 

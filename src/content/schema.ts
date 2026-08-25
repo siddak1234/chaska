@@ -193,7 +193,7 @@ export const figureSchema = z.object({
   imageId: z.string().min(1),
   caption: z.string().min(1),
   /** Aspect ratio of the frame, exactly as set on the artboard. */
-  ratio: z.enum(["3/2", "4/3", "4/5"]),
+  ratio: z.enum(["16/9", "3/2", "4/3", "4/5"]),
 });
 
 export const dishHighlightSchema = z.object({
@@ -239,7 +239,7 @@ export const aboutPageSchema = z.object({
     figure: z.object({
       imageId: z.string().min(1).nullable(),
       caption: z.string().min(1),
-      ratio: z.enum(["3/2", "4/3", "4/5"]),
+      ratio: z.enum(["16/9", "3/2", "4/3", "4/5"]),
       emptyLabel: z.string().min(1),
     }),
   }),

@@ -26,40 +26,51 @@ export default function HomePage() {
 
   return (
     <>
+      {/*
+        The front page. Previously this was a two-up of prose beside a
+        half-width photograph, which put a paragraph first and left the lead
+        image entirely below the fold on a phone (it began at y=888 in a
+        844px viewport). Headline, then the calls to action, then a
+        full-width photograph — the newspaper order, and the one every
+        well-regarded restaurant site follows: one dominant image, the name,
+        a line of what it is, and a way to act.
+      */}
       <Section pad="lead">
-        <div className="grid auto-grid-320-min items-start gap-x-gap-split gap-y-8">
-          <div>
-            {lead.kicker ? <Kicker className="mb-3.5">{lead.kicker}</Kicker> : null}
-            <Heading level={1} size="lead">
-              {lead.title}
-            </Heading>
-            <Prose
-              paragraphs={lead.paragraphs}
-              size="lede"
-              gap="lede"
-              className="mt-[22px]"
-            />
-            <div className="mt-7 flex flex-wrap gap-3.5">
-              {primaryAction ? (
-                <ButtonLink href={primaryAction.href} variant="ink">
-                  {primaryAction.label}
-                </ButtonLink>
-              ) : null}
-              {secondaryAction ? (
-                <ButtonLink href={secondaryAction.href} variant="outline">
-                  {secondaryAction.label}
-                </ButtonLink>
-              ) : null}
-            </div>
-          </div>
-          <Figure
-            imageId={lead.figure.imageId as ImageId}
-            caption={lead.figure.caption}
-            ratio={lead.figure.ratio}
-            span="half"
-            priority
-          />
+        {lead.kicker ? <Kicker>{lead.kicker}</Kicker> : null}
+        <Heading level={1} size="hero" className="mt-3.5 max-w-[22ch]">
+          {lead.title}
+        </Heading>
+
+        <div className="mt-7 flex flex-wrap gap-3.5">
+          {primaryAction ? (
+            <ButtonLink href={primaryAction.href} variant="ink" size="lg">
+              {primaryAction.label}
+            </ButtonLink>
+          ) : null}
+          {secondaryAction ? (
+            <ButtonLink href={secondaryAction.href} variant="outline" size="lg">
+              {secondaryAction.label}
+            </ButtonLink>
+          ) : null}
         </div>
+
+        <Figure
+          imageId={lead.figure.imageId as ImageId}
+          caption={lead.figure.caption}
+          ratio={lead.figure.ratio}
+          span="full"
+          priority
+          className="mt-sec-md"
+        />
+
+        {/* Body copy sets in two columns beneath the picture, as a lead story
+            does. One column on a phone, where a second would be unreadable. */}
+        <Prose
+          paragraphs={lead.paragraphs}
+          size="lede"
+          gap="lede"
+          className="mt-sec-md md:columns-2 md:gap-x-gap-menu [&>p+p]:md:mt-0"
+        />
       </Section>
 
       <Section rule="double" pad="md">

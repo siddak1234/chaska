@@ -9,16 +9,25 @@
     "figure": {
       "imageId": "home-hero",
       "caption": "Naan on the wall of the clay tandoor, baked to order through service.",
-      "ratio": "3/2"
+      "ratio": "16/9"
     },
     "actions": [
-      { "label": "View the menu", "href": "/menu" },
-      { "label": "Our story", "href": "/about" }
+      {
+        "label": "View the menu",
+        "href": "/menu"
+      },
+      {
+        "label": "Our story",
+        "href": "/about"
+      }
     ]
   },
   "kitchen": {
     "title": "From the Kitchen",
-    "moreLink": { "label": "Full menu →", "href": "/menu" },
+    "moreLink": {
+      "label": "Full menu →",
+      "href": "/menu"
+    },
     "dishes": [
       {
         "id": "dal-makhani",
@@ -52,13 +61,19 @@
       "caption": "The table, mid dinner. Dishes land in the middle and get passed.",
       "ratio": "4/3"
     },
-    "action": { "label": "Read our story", "href": "/about" }
+    "action": {
+      "label": "Read our story",
+      "href": "/about"
+    }
   },
   "cateringNotice": {
     "kicker": "Notice · Catering",
     "title": "The same food, for your gathering",
     "body": "From family dinners to weddings, we cater the menu we serve in the restaurant, prepared for your guests and delivered ready to serve.",
-    "action": { "label": "Catering options", "href": "/menu#catering" }
+    "action": {
+      "label": "Catering options",
+      "href": "/menu#catering"
+    }
   },
   "visiting": {
     "kicker": "Visiting",

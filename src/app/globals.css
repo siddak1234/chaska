@@ -58,6 +58,10 @@
   --text-mark: clamp(20px, 2.4vw, 30px);
   --text-mark--line-height: normal;
 
+  /* The home page's front-page headline, running above a full-width lead
+     photograph. Larger than --text-lead, which sat beside a half-width image. */
+  --text-hero: clamp(36px, 5.2vw, 68px);
+  --text-hero--line-height: 1.08;
   --text-lead: clamp(34px, 4.2vw, 54px);
   --text-lead--line-height: 1.12;
   --text-title: clamp(36px, 5vw, 58px);
@@ -82,22 +86,25 @@
   --text-notice--line-height: 1.2;
   --text-dish: 24px;
   --text-dish--line-height: 1.2;
-  --text-row: 20px;
+  --text-row: 21px;
   --text-row--line-height: normal;
-  --text-row-sm: 18px;
+  --text-row-sm: 19px;
   --text-row-sm--line-height: normal;
 
   /* ── Prose ────────────────────────────────────────────────────────────── */
-  --text-lede: 16px;
-  --text-lede--line-height: 28px;
-  --text-prose: 15.5px;
-  --text-prose--line-height: 27px;
-  --text-intro: 15px;
-  --text-intro--line-height: 26px;
-  --text-card: 14.5px;
-  --text-card--line-height: 25px;
-  --text-note: 14px;
-  --text-note--line-height: 23px;
+  /* One step up from the artboard's sizes. At 15.5px the body ran to ~64
+     characters a line on a 592px measure, which is small for a serif; 17px
+     brings it to ~70 at a comfortable size. Leading keeps the source ratio. */
+  --text-lede: 18px;
+  --text-lede--line-height: 31px;
+  --text-prose: 17px;
+  --text-prose--line-height: 29px;
+  --text-intro: 16.5px;
+  --text-intro--line-height: 28px;
+  --text-card: 15.5px;
+  --text-card--line-height: 26px;
+  --text-note: 15px;
+  --text-note--line-height: 24px;
 
   /* ── UI (Libre Franklin) ──────────────────────────────────────────────── */
   --text-price: 15px;
@@ -125,6 +132,10 @@
   --container-about-intro: 760px;
   --container-catering-intro: 680px;
   --container-quote: 30ch;
+  /* Comfortable measure for 17px Caslon Text: ~70 characters a line. Column
+     width alone is not a measure — a wide column needs this cap or the eye
+     loses the line return. */
+  --container-measure: 600px;
 
   /* ── Rhythm — the artboards' clamp() ladder, named ────────────────────── */
   --spacing-gutter: clamp(16px, 4vw, 48px);

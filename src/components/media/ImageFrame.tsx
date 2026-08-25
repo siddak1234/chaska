@@ -20,17 +20,32 @@ import { RATIO_CLASS_MAP, type FrameRatio } from "./ratios";
  * These were 560/370 while the container was still border-box, which left
  * eight of the ten images upscaled by 17–33px once it was corrected.
  */
-const SIZES: Record<"half" | "third", string> = {
-  half: "(min-width: 1336px) 600px, (min-width: 700px) 50vw, 100vw",
+const SIZES: Record<"full" | "half" | "portrait" | "third", string> = {
+  /** The lead photograph spans the whole 1240px content column. */
+  full: "(min-width: 1336px) 1240px, 100vw",
+  /**
+   * `auto-grid-320-min` needs about 726px before it splits into two columns.
+   * Claiming 50vw from 700px described a column that did not exist yet: at
+   * 720px the frame is still full width and was served less than half of it.
+   */
+  half: "(min-width: 740px) 50vw, 100vw",
+  /** The About portraits, in the 38fr column: (1240 - 56) * 0.38 = 450. */
+  portrait: "(min-width: 1336px) 460px, (min-width: 1024px) 38vw, 100vw",
+  /**
+   * `auto-grid-260` only reaches three columns from about 920px — below that it
+   * is two, and each card is wider, not narrower. A 900px breakpoint here
+   * described three columns that were not there yet and under-served the
+   * images by ~94px.
+   */
   third:
-    "(min-width: 1336px) 400px, (min-width: 900px) 34vw, (min-width: 620px) 50vw, 100vw",
+    "(min-width: 1336px) 400px, (min-width: 920px) 30vw, (min-width: 620px) 50vw, 100vw",
 };
 
 type ImageFrameProps = {
   image: StaticImageData;
   alt: string;
   ratio: FrameRatio;
-  span?: "half" | "third";
+  span?: "full" | "half" | "portrait" | "third";
   /** Set on the home hero only — it is the largest contentful paint. */
   priority?: boolean;
   className?: string;

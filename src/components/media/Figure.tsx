@@ -10,7 +10,7 @@ type FigureProps = {
   imageId: ImageId | null;
   caption: string;
   ratio: FrameRatio;
-  span?: "half" | "third";
+  span?: "full" | "half" | "portrait" | "third";
   priority?: boolean;
   /** Shown instead of a photograph when `imageId` is null. */
   emptyLabel?: string;

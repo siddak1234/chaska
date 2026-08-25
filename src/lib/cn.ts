@@ -17,6 +17,7 @@ const twMerge = extendTailwindMerge({
             "masthead",
             "masthead-sm",
             "mark",
+            "hero",
             "lead",
             "title",
             "title-about",
