@@ -1,6 +1,6 @@
 /**
  * Not present in the artboards. Keyboard users otherwise tab through the whole
- * masthead — three topbar items, the logotype and five nav links — on every
+ * masthead — the Instagram link, the logotype and five nav links — on every
  * page before reaching content.
  */
 export function SkipLink() {

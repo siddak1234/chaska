@@ -3,8 +3,8 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/cn";
 
 /**
- * A stack of body paragraphs at one of the four measures used across the
- * artboards.
+ * A stack of body paragraphs at one of the three sizes the artboards use for
+ * running text. Single card paragraphs set `text-card` directly.
  *
  * Paragraph spacing is not uniform in the source: the home lead sets 16px
  * between paragraphs, every other block sets 14px. `gap` carries that
@@ -19,8 +19,6 @@ const prose = cva("", {
       body: "text-prose",
       /** 15px / 26px — the catering intro. */
       intro: "text-intro",
-      /** 14.5px / 25px — cards and notices. */
-      card: "text-card",
     },
     tone: {
       ink: "text-ink",

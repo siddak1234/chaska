@@ -8,12 +8,17 @@ measurement, not assumed.
 
 ## A. Done and verified
 
-- [x] Three Claude Design artboards ported to Next.js 16; four static routes
-- [x] Computed-style diff against the artboards is zero, apart from two
-      deliberate changes (44px targets, one negative-margin hit area)
-- [x] Real contact details: `(214) 801 7809`, `ronikajit@gmail.com`,
-      14355 Francis Lane, Frisco, TX 75035
-- [x] Restaurant/Menu structured data, complete `PostalAddress`, no fake offers
+- [x] Four Claude Design artboards ported to Next.js 16; four static routes
+      (Home, Menu, Order, About), updated to the design of 24 Sep 2026
+- [x] Order page: cart, sizes, checkout; orders go out as a text to
+      (214) 801 7809, or an email on desktop. No server involved
+- [x] Eleven dish photographs from @tasteofchaska; no Commons photographs,
+      no credits page
+- [x] Real contact details: `(214) 801 7809` in the footer, Instagram
+      everywhere, Frisco, Texas. No street address and no opening hours, by
+      decision (24–25 Sep 2026)
+- [x] FoodEstablishment/Menu structured data, town-level `PostalAddress`,
+      real offers for the eleven priced dishes only
 - [x] Owner portrait cropped to 4:5 and placed; owner named Ronika Singh Bhatia
 - [x] Real menu — 86 dishes, seven courses, four source duplicates resolved
 - [x] Contents strip so a long menu is navigable
@@ -61,11 +66,14 @@ measurement, not assumed.
       be tidier. See "Optional: redirect www" below.
 - [ ] **C2 — Set `NEXT_PUBLIC_SITE_ENV=production`** on the Vercel production
       environment, so the placeholder guard is armed against future regressions.
-- [ ] **C3 — Real food photography.** All six food images are Creative Commons
-      photographs of other people's cooking. They are what force `/credits` and
-      `ATTRIBUTION.md` to exist; owned photographs remove the obligation.
-- [ ] **C4 — Menu prices.** 86 dishes, none priced. Adding them is a data edit;
-      the dotted leader returns on its own.
+- [x] **C3 — Real food photography.** Done: the eleven dishes on the site are
+      the kitchen's own Instagram photographs. Four of those posts carry
+      Instagram's "AI content" label (moong salad, panjiri, masala idli, kadhi
+      pakora); swap in camera photographs of those if that matters to you.
+- [ ] **C4 — Full-menu prices.** The eleven signature dishes are priced. The
+      86-dish full menu is not; adding prices is a data edit.
+- [ ] **C4b — Snoopy's photograph.** The design leaves his frame empty, so the
+      About page shows a "Photo of Snoopy" placeholder until one is added.
 - [x] **C5 — Descriptions.** ~~Pick 8–12 signature dishes.~~ Done differently:
       82 of the 86 now carry a researched, canonical one-line definition — what
       the dish _is_, not a claim about how your kitchen makes it. **Please read
@@ -75,8 +83,8 @@ measurement, not assumed.
 - [ ] **C6 — Confirm two dish names.** _(blocks their descriptions)_ "Fried Tandoori Paneer" — tandoori means
       roasted, so _fried tandoori_ is contradictory; did you mean Tandoori
       Paneer Tikka? And "Coin Veg Tikki" — is "coin" the size?
-- [ ] **C7 — Confirm the hours.** Tue–Sun 11:00–22:00, closed Monday, is
-      transcribed from the artboard and is now in live structured data.
+- [x] **C7 — Hours.** Removed from the site and the structured data, as the
+      design does.
 - [ ] **C8 — `hello@eatchaska.com`.** A personal Gmail is on a public site and
       in a public repo; a forwarding mailbox retires it with one field change.
 - [ ] **C9 — LICENSE.** The repo is public with no licence, so default

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Chaska \u2014 a Punjabi family restaurant in Dallas, Texas.",
+  "description": "Chaska \u2014 a Punjabi family kitchen in Frisco, Texas.",
   "engines": {
     "node": ">=22.18.0"
   },
@@ -19,7 +19,6 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "images:fetch": "node scripts/fetch-images.ts",
     "verify": "npm run lint && npm run typecheck && npm run test && npm run build",
     "fonts:fetch": "node scripts/fetch-og-fonts.ts"
   },

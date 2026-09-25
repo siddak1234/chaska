@@ -11,10 +11,10 @@ type EmptyFrameProps = {
 /**
  * The designed empty state for an image slot with no photograph yet.
  *
- * `about-ronika` on the About artboard has no `src` — it is a genuinely
- * unfilled `<image-slot>` waiting on a portrait. Rather than substitute a
- * stock photo of a stranger, this renders the newspaper convention for a
- * picture that has not arrived: a ruled box with a set caption.
+ * The About artboard's `about-snoopy` slot has no `src` — a genuinely unfilled
+ * `<image-slot>` waiting on a photograph. Rather than substitute a stock photo
+ * of someone else's dog, this renders the newspaper convention for a picture
+ * that has not arrived: a ruled box with a set caption.
  */
 export function EmptyFrame({ label, ratio, className }: EmptyFrameProps) {
   return (

@@ -7,7 +7,7 @@
  * failure, not a 404 discovered in production.
  */
 
-export const ROUTES = ["/", "/menu", "/about", "/credits"] as const;
+export const ROUTES = ["/", "/menu", "/order", "/about"] as const;
 
 export type AppRoute = (typeof ROUTES)[number];
 
@@ -27,9 +27,9 @@ export function isInternalHref(href: string): boolean {
   return /^[a-z][a-z0-9-]*$/.test(hash);
 }
 
-/** `mailto:`, `tel:` and absolute URLs leave the app. */
+/** `mailto:`, `tel:`, `sms:` and absolute URLs leave the app. */
 export function isExternalHref(href: string): boolean {
-  return /^(?:https?:\/\/|mailto:|tel:)/.test(href);
+  return /^(?:https?:\/\/|mailto:|tel:|sms:)/.test(href);
 }
 
 export function isValidHref(href: string): boolean {

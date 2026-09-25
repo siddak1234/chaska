@@ -2,10 +2,10 @@
  * Build guard: refuses to produce a production build while the site still
  * carries design-placeholder values.
  *
- * The artboards shipped a fake phone number, unverified mailboxes and no street
- * address. Those are real enough to look finished and wrong enough to lose a
- * booking, so each is flagged in `src/content/site.data.json` and this script
- * fails the build while any flag is still `true`.
+ * The artboards shipped a fake phone number, unverified mailboxes and the
+ * wrong town. Those are real enough to look finished and wrong enough to lose
+ * a booking, so each is flagged in `src/content/site.data.json` and this
+ * script fails the build while any flag is still `true`.
  *
  * Runs as `prebuild`. Only blocks when NEXT_PUBLIC_SITE_ENV=production, so
  * local development and preview deploys are unaffected.
@@ -43,7 +43,7 @@ const CHECKS = [
   {
     path: "contact.address",
     read: (d) => d.contact?.address,
-    needs: "the street address and postal code",
+    needs: "the town and state the kitchen is in",
   },
 ];
 

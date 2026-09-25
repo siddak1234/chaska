@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-import { ButtonLink } from "@/components/ui/Button";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { Kicker } from "@/components/ui/Kicker";
@@ -42,13 +42,9 @@ export default function Error({
             This page failed to load. Trying again usually sorts it out.
           </p>
           <div className="mt-9 flex flex-wrap justify-center gap-3.5">
-            <button
-              type="button"
-              onClick={reset}
-              className="inline-block cursor-pointer bg-ink px-[22px] py-3 font-ui text-label leading-5 font-bold tracking-ui text-paper uppercase transition-colors duration-150 hover:bg-oxblood"
-            >
+            <Button variant="ink" onClick={reset}>
               Try again
-            </button>
+            </Button>
             <ButtonLink href="/" variant="outline">
               Back to the front page
             </ButtonLink>

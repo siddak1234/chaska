@@ -1,12 +1,12 @@
 import { expect, test } from "@playwright/test";
 
-import { about, dishCount, home, menu } from "./content";
+import { about, dishCount, dishes, home, menu, order } from "./content";
 
 const ROUTES = [
   { path: "/", heading: home.lead.title },
   { path: "/menu", heading: new RegExp(`^${menu.title}`) },
+  { path: "/order", heading: order.title },
   { path: "/about", heading: about.title },
-  { path: "/credits", heading: "Photograph credits" },
 ] as const;
 
 for (const route of ROUTES) {
@@ -50,11 +50,21 @@ test("the menu lists every dish in the content", async ({ page }) => {
   await expect(page.locator("main dl dt")).toHaveCount(dishCount);
 });
 
-test("every photograph on the site is credited", async ({ page }) => {
-  await page.goto("/credits");
-  // Six distinct Commons files back the nine artboard slots.
-  await expect(page.locator("main dl > div")).toHaveCount(6);
-  await expect(
-    page.getByRole("link", { name: /creativecommons|CC BY/ }).first(),
-  ).toBeVisible();
+test("the order page offers every catalogue dish", async ({ page }) => {
+  await page.goto("/order");
+  await expect(page.getByRole("button", { name: "Add to order" })).toHaveCount(
+    dishes.length,
+  );
+  for (const dish of dishes) {
+    await expect(
+      page.getByRole("heading", { level: 2, name: dish.name }),
+    ).toBeVisible();
+  }
+});
+
+test("the credits page is gone, since every photograph is the kitchen's own", async ({
+  page,
+}) => {
+  const response = await page.goto("/credits");
+  expect(response?.status()).toBe(404);
 });

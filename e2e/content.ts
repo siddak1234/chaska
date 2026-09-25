@@ -19,13 +19,20 @@ function read<T>(file: string): T {
 type Menu = {
   title: string;
   courses: Array<{ name: string; items: Array<{ name: string }> }>;
+  signature: { bands: Array<{ courses: Array<{ dishIds: string[] }> }> };
 };
 
 export const menu = read<Menu>("menu.data.json");
 export const home = read<{ lead: { title: string } }>("home.data.json");
 export const about = read<{ title: string }>("about.data.json");
+export const order = read<{ title: string }>("order.data.json");
+export const dishes = read<{ dishes: Array<{ id: string; name: string }> }>(
+  "dishes.data.json",
+).dishes;
 
-export const dishCount = menu.courses.reduce(
-  (total, course) => total + course.items.length,
-  0,
-);
+/** Every row the Menu page renders: the signature dishes, then the full menu. */
+export const dishCount =
+  menu.signature.bands
+    .flatMap((band) => band.courses)
+    .reduce((total, course) => total + course.dishIds.length, 0) +
+  menu.courses.reduce((total, course) => total + course.items.length, 0);

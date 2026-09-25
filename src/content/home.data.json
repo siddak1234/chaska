@@ -1,15 +1,15 @@
 {
   "lead": {
     "kicker": "The Lead",
-    "title": "Three generations at one stove, now cooking in Frisco",
+    "title": "Generations of home cooking, now serving Frisco",
     "paragraphs": [
-      "Chaska serves desi food with a Punjabi tadka, cooked from family recipes that were never written down. They were watched, tasted and corrected across three generations, and they arrive at your table unchanged: dal simmered overnight, saag stirred through the afternoon, rotis off the tawa when you sit down.",
-      "Everything is served family style, in the middle of the table, meant to be passed and shared."
+      "Chaska serves desi food with a Punjabi tadka, cooked from family recipes that were passed down by hand rather than written down. Authentic home flavors, made the way maa used to make them, alongside a few Indo-fusion dishes of our own.",
+      "Everything is served family style, meant for the middle of the table."
     ],
     "figure": {
-      "imageId": "home-hero",
-      "caption": "Naan on the wall of the clay tandoor, baked to order through service.",
-      "ratio": "16/9"
+      "imageId": "masala-idli",
+      "caption": "Masala idli, crisp outside and soft inside, with fresh coconut chutney.",
+      "ratio": "5/4"
     },
     "actions": [
       {
@@ -30,22 +30,16 @@
     },
     "dishes": [
       {
-        "id": "dal-makhani",
-        "name": "Dal Makhani",
-        "description": "Black lentils put on the flame the night before, finished with butter. The recipe is Ronika’s grandmother’s, and it is not negotiable.",
-        "imageId": "home-dal"
+        "dishId": "panjiri",
+        "description": "Slow roasted in desi ghee and loaded with badam and pista, made the way maa used to make it."
       },
       {
-        "id": "tandoori-murgh",
-        "name": "Tandoori Murgh",
-        "description": "Chicken marinated in yogurt and Kashmiri chili, roasted in the clay tandoor that is lit every morning.",
-        "imageId": "home-tandoori"
+        "dishId": "kadhi-pakora",
+        "description": "Yogurt and besan kadhi with soft pakoras, tempered with dried red chilies and cumin."
       },
       {
-        "id": "sarson-da-saag",
-        "name": "Sarson da Saag",
-        "description": "Mustard greens cooked slowly with ginger and garlic, served with makki di roti and white butter, the way winter demands.",
-        "imageId": "home-saag"
+        "dishId": "paneer-kathi",
+        "description": "Street food, plated like fine dining. Paneer rolled in flaky parantha with green chutney and pomegranate."
       }
     ]
   },
@@ -53,12 +47,12 @@
     "kicker": "The Family",
     "title": "Recipes taught by hand, kept by memory",
     "paragraphs": [
-      "Owner Ronika Singh Bhatia learned every dish on this menu in her family’s kitchen, measured in handfuls and pinches. The chhole are her mother’s. The butter chicken is the house recipe her family has argued over and perfected for decades. Her rule is simple: cook it the way it was taught, or leave it off the menu.",
-      "The family is all here, including Snoopy, the house shih tzu and honorary sous chef, who supervises the dining room and greets regulars by the door."
+      "Owner Ronika Singh Bhatia learned this food in her family’s kitchen, where recipes were measured in handfuls and pinches and passed from one generation to the next. Chaska is her way of bringing that table to Frisco.",
+      "The family is all here, including Snoopy, the house shih tzu and honorary sous chef."
     ],
     "figure": {
-      "imageId": "home-table",
-      "caption": "The table, mid dinner. Dishes land in the middle and get passed.",
+      "imageId": "moong-salad",
+      "caption": "Street style sprouted moong dal salad with peanuts, tomato, pomegranate and chaat masala.",
       "ratio": "4/3"
     },
     "action": {
@@ -66,18 +60,18 @@
       "href": "/about"
     }
   },
-  "cateringNotice": {
+  "catering": {
     "kicker": "Notice · Catering",
-    "title": "The same food, for your gathering",
-    "body": "From family dinners to weddings, we cater the menu we serve in the restaurant, prepared for your guests and delivered ready to serve.",
+    "title": "Fresh, homemade trays from our kitchen to your table",
+    "body": "Catering trays and high tea spreads for your gatherings, made to order. Message us on Instagram to plan yours.",
     "action": {
       "label": "Catering options",
       "href": "/menu#catering"
+    },
+    "figure": {
+      "imageId": "dahi-bhalla",
+      "caption": "Dahi bhalla, ready to travel.",
+      "ratio": "3/2"
     }
-  },
-  "visiting": {
-    "kicker": "Visiting",
-    "hoursLabel": "Hours",
-    "contactLabel": "Contact"
   }
 }

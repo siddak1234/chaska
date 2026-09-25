@@ -1,11 +1,11 @@
-import Link from "next/link";
-
 import { SiteShell } from "@/components/layout/SiteShell";
 import { ButtonLink } from "@/components/ui/Button";
 import { Heading } from "@/components/ui/Heading";
 import { Kicker } from "@/components/ui/Kicker";
 import { Section } from "@/components/ui/Section";
+import { SmartLink } from "@/components/ui/SmartLink";
 import { getSite } from "@/content";
+import { telHref } from "@/lib/format";
 
 export default function NotFound() {
   const site = getSite();
@@ -32,9 +32,9 @@ export default function NotFound() {
           </div>
           <p className="mt-8 text-note text-ink-muted">
             Or call us on{" "}
-            <Link href={`tel:${site.contact.phone.e164}`}>
+            <SmartLink href={telHref(site.contact.phone.e164)}>
               {site.contact.phone.display}
-            </Link>
+            </SmartLink>
             .
           </p>
         </div>

@@ -1,7 +1,7 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 
-const ROUTES = ["/", "/menu", "/about", "/credits"] as const;
+import { ROUTES } from "../src/lib/routes";
 
 for (const route of ROUTES) {
   test(`${route} has no WCAG 2.1 A/AA violations`, async ({ page }) => {
@@ -46,7 +46,7 @@ test("the skip link is the first stop and reveals itself on focus", async ({
  * numbers or email addresses, which rot the moment the contact details change.
  *
  * The first version of this test only ran on /menu and missed fifteen
- * undersized targets on / and /credits.
+ * undersized targets on the other routes.
  */
 for (const route of ROUTES) {
   test(`${route} meets target-size policy`, async ({ page }) => {

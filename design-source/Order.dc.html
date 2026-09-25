@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Libre+Franklin:wght@400;500;600;700&family=Noto+Serif+Gurmukhi:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; background: #f7f3ea; color: #1a1712; font-family: 'Libre Caslon Text', serif; text-wrap: pretty; }
+    a { color: #1a1712; }
+    a:hover { color: #8b1e1e; }
+    input, select, textarea { font-family: 'Libre Franklin', sans-serif; }
+  </style>
+</helmet>
+<div style="max-width: 1240px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px);">
+
+  <header>
+    <div style="display: flex; justify-content: space-between; gap: 16px; font-family: 'Libre Franklin', sans-serif; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 0 10px; border-bottom: 1px solid #1a1712;">
+      <span>Frisco, Texas</span>
+      <span style="text-align: center;">A Punjabi family kitchen</span>
+      <a href="https://www.instagram.com/tasteofchaska/" target="_blank" rel="noopener" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="4.5"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>@tasteofchaska</a>
+    </div>
+    <div style="text-align: center; padding: 28px 0 20px;">
+      <a href="Home.dc.html" style="text-decoration: none; color: inherit; display: inline-block;">
+        <span style="display: block; font-family: 'Noto Serif Gurmukhi', serif; font-weight: 600; font-size: 20px; color: #8b1e1e; margin-bottom: 4px;">ਚਸਕਾ</span>
+        <span style="display: block; font-family: 'Libre Caslon Display', serif; font-size: clamp(40px, 6vw, 68px); line-height: 1; letter-spacing: 0.04em;">CHASKA</span>
+      </a>
+    </div>
+    <div style="border-top: 3px double #1a1712; border-bottom: 1px solid #1a1712; display: grid; grid-template-columns: minmax(96px, 1fr) auto minmax(96px, 1fr); align-items: center; gap: 12px;">
+      <span></span>
+      <nav style="display: flex; justify-content: center; align-items: center; gap: clamp(16px, 3vw, 48px); flex-wrap: wrap; padding: 12px 0; font-family: 'Libre Franklin', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;">
+        <a href="Home.dc.html" style="text-decoration: none;">Home</a>
+        <a href="Menu.dc.html" style="text-decoration: none;">Menu</a>
+        <a href="Order.dc.html" aria-current="page" style="text-decoration: none; color: #8b1e1e;">Order</a>
+        <a href="About.dc.html" style="text-decoration: none;">About</a>
+        <a href="Menu.dc.html#catering" style="text-decoration: none;">Catering</a>
+      </nav>
+      <button type="button" onClick="{{ openCart }}" aria-label="Open cart" aria-expanded="{{ cartOpen }}" style="justify-self: end; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border: 0; background: transparent; cursor: pointer; color: inherit; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;" style-hover="color: #8b1e1e;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"></path><path d="M9 7V5a3 3 0 0 1 6 0v2"></path></svg>
+        <span>Cart</span>
+        <span style="min-width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; background: #8b1e1e; color: #f7f3ea; font-size: 11px; padding: 0 6px;">{{ cartCount }}</span>
+      </button>
+    </div>
+  </header>
+
+  <main style="padding-bottom: 64px;">
+    <header style="text-align: center; padding: clamp(32px, 4vw, 48px) 0 clamp(24px, 3vw, 36px); max-width: 720px; margin: 0 auto;">
+      <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 0 0 14px;">Order for pickup · Frisco, Texas</p>
+      <h1 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(36px, 5vw, 58px); line-height: 1.1; margin: 0;">Order</h1>
+      <p style="font-size: 15.5px; line-height: 27px; margin: 20px 0 0; color: #3d382f;">Everything is made to order and packed in sealed containers. Small is a 16 oz pint, Large is a 32 oz quart. Pickup only.</p>
+    </header>
+
+    <sc-if value="{{ showMenu }}" hint-placeholder-val="{{ true }}">
+    <section style="border-top: 3px double #1a1712; padding-top: clamp(28px, 4vw, 40px);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 1fr)); gap: 36px clamp(24px, 3vw, 36px);">
+        <sc-for list="{{ items }}" as="item" hint-placeholder-count="0">
+          <article style="display: flex; flex-direction: column;">
+            <div style="position: relative; width: 100%; aspect-ratio: 4 / 3; overflow: hidden; background: #e9e2d3;">
+              <img src="{{ item.image }}" alt="{{ item.name }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;" />
+            </div>
+            <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 22px; line-height: 1.2; margin: 16px 0 0;">{{ item.name }}</h2>
+            <p style="font-size: 14px; line-height: 23px; color: #5c554a; margin: 8px 0 0; flex: 1;">{{ item.description }}</p>
+
+            <sc-if value="{{ item.isContainer }}" hint-placeholder-val="{{ true }}">
+              <div role="radiogroup" aria-label="Container size" style="display: grid; grid-template-columns: 1fr 1fr; margin-top: 16px; border: 1px solid #1a1712;">
+                <button type="button" role="radio" aria-checked="{{ item.smallChecked }}" onClick="{{ item.pickSmall }}" style="{{ item.smallStyle }}">
+                  <span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">Small</span>
+                  <span style="display: block; font-size: 12px; margin-top: 3px;">16 oz · {{ item.smallPrice }}</span>
+                </button>
+                <button type="button" role="radio" aria-checked="{{ item.largeChecked }}" onClick="{{ item.pickLarge }}" style="{{ item.largeStyle }}">
+                  <span style="display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">Large</span>
+                  <span style="display: block; font-size: 12px; margin-top: 3px;">32 oz · {{ item.largePrice }}</span>
+                </button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ item.isEach }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 16px; padding: 12px 0; border-top: 1px solid #1a1712; border-bottom: 1px solid #1a1712; font-family: 'Libre Franklin', sans-serif;">
+                <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">{{ item.unitLabel }}</span>
+                <span style="font-size: 14px; font-weight: 600;">{{ item.eachPrice }}</span>
+              </div>
+            </sc-if>
+
+            <div style="display: flex; align-items: stretch; gap: 10px; margin-top: 12px;">
+              <div style="display: flex; align-items: center; border: 1px solid #1a1712; font-family: 'Libre Franklin', sans-serif;">
+                <button type="button" aria-label="Decrease quantity" onClick="{{ item.dec }}" style="width: 40px; height: 44px; border: 0; background: transparent; font-size: 18px; cursor: pointer; color: inherit;">−</button>
+                <span style="min-width: 28px; text-align: center; font-size: 14px; font-weight: 600;">{{ item.qty }}</span>
+                <button type="button" aria-label="Increase quantity" onClick="{{ item.inc }}" style="width: 40px; height: 44px; border: 0; background: transparent; font-size: 18px; cursor: pointer; color: inherit;">+</button>
+              </div>
+              <button type="button" onClick="{{ item.add }}" style="flex: 1; min-height: 44px; border: 0; background: #1a1712; color: #f7f3ea; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;" style-hover="background: #8b1e1e;">Add to order</button>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+    </sc-if>
+
+    <sc-if value="{{ showCheckout }}" hint-placeholder-val="{{ false }}">
+    <div style="border-top: 3px double #1a1712; display: grid; grid-template-columns: {{ checkoutCols }}; gap: 40px clamp(28px, 4vw, 48px); padding-top: clamp(28px, 4vw, 40px); align-items: start;">
+      <section>
+        <button type="button" onClick="{{ backToMenu }}" style="border: 0; background: transparent; padding: 0; cursor: pointer; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: inherit;">← Back to dishes</button>
+        <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(26px, 3vw, 36px); margin: 20px 0 0;">Pickup details</h2>
+        <p style="font-size: 14.5px; line-height: 24px; color: #5c554a; margin: 10px 0 0; max-width: 56ch;">Pickup is in Frisco, Texas. We confirm your order, pickup time and the pickup address by text.</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 18px 20px; margin-top: 28px; font-family: 'Libre Franklin', sans-serif;">
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">Name
+            <input type="text" value="{{ form.name }}" onChange="{{ setName }}" autocomplete="name" style="border: 1px solid #1a1712; background: #fffdf8; padding: 12px 14px; font-size: 15px; letter-spacing: 0; text-transform: none; font-weight: 400; color: inherit;" />
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">Mobile phone
+            <input type="tel" value="{{ form.phone }}" onChange="{{ setPhone }}" autocomplete="tel" inputMode="tel" style="border: 1px solid #1a1712; background: #fffdf8; padding: 12px 14px; font-size: 15px; letter-spacing: 0; text-transform: none; font-weight: 400; color: inherit;" />
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">Pickup date
+            <input type="date" value="{{ form.date }}" min="{{ today }}" onChange="{{ setDate }}" style="border: 1px solid #1a1712; background: #fffdf8; padding: 12px 14px; font-size: 15px; letter-spacing: 0; text-transform: none; font-weight: 400; color: inherit;" />
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">Preferred pickup time
+            <input type="time" value="{{ form.time }}" onChange="{{ setTime }}" style="border: 1px solid #1a1712; background: #fffdf8; padding: 12px 14px; font-size: 15px; letter-spacing: 0; text-transform: none; font-weight: 400; color: inherit;" />
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; grid-column: 1 / -1;">Notes for the kitchen (optional)
+            <textarea rows="3" value="{{ form.notes }}" onChange="{{ setNotes }}" placeholder="Spice level, allergies, anything we should know" style="border: 1px solid #1a1712; background: #fffdf8; padding: 12px 14px; font-size: 15px; letter-spacing: 0; text-transform: none; font-weight: 400; color: inherit; resize: vertical;"></textarea>
+          </label>
+        </div>
+        <sc-if value="{{ formError }}" hint-placeholder-val="{{ false }}">
+          <p role="alert" style="font-family: 'Libre Franklin', sans-serif; font-size: 13px; color: #8b1e1e; margin: 16px 0 0;">{{ formError }}</p>
+        </sc-if>
+        <button type="button" onClick="{{ placeOrder }}" style="min-height: 48px; padding: 0 28px; margin-top: 24px; border: 0; background: #8b1e1e; color: #f7f3ea; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;" style-hover="background: #1a1712;">Place pickup order</button>
+      </section>
+
+      <aside style="border: 1px solid #1a1712; padding: 24px;">
+        <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 24px; margin: 0; border-bottom: 1px solid #1a1712; padding-bottom: 12px;">Order summary</h2>
+        <sc-for list="{{ lines }}" as="line" hint-placeholder-count="0">
+          <div style="display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 12px 0; border-bottom: 1px solid #c9c0af;">
+            <p style="font-family: 'Libre Caslon Display', serif; font-size: 16px; margin: 0;">{{ line.name }}</p>
+            <p style="font-family: 'Libre Franklin', sans-serif; font-size: 14px; font-weight: 600; margin: 0; text-align: right;">{{ line.total }}</p>
+            <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; color: #5c554a; margin: 0; grid-column: 1 / -1;">{{ line.sizeLabel }} × {{ line.qty }}</p>
+          </div>
+        </sc-for>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; padding: 16px 0 0; font-family: 'Libre Franklin', sans-serif;">
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">Subtotal</span>
+          <span style="font-size: 18px; font-weight: 700;">{{ subtotal }}</span>
+        </div>
+        <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; line-height: 19px; color: #5c554a; margin: 6px 0 0;">Before sales tax.</p>
+      </aside>
+    </div>
+    </sc-if>
+
+    <sc-if value="{{ showDone }}" hint-placeholder-val="{{ false }}">
+    <section style="border-top: 3px double #1a1712; padding: clamp(40px, 6vw, 72px) 0; text-align: center; max-width: 640px; margin: 0 auto;">
+      <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #8b1e1e; margin: 0 0 14px;">Order received</p>
+      <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.15; margin: 0;">Shukriya, {{ placed.name }}.</h2>
+      <p style="font-size: 15.5px; line-height: 27px; margin: 20px 0 0; color: #3d382f;">We will text {{ placed.phone }} to confirm your order and the pickup address in Frisco. Requested pickup: {{ placed.when }}.</p>
+      <div style="text-align: left; border: 1px solid #1a1712; padding: 20px 24px; margin: 32px 0 0;">
+        <sc-for list="{{ placed.lines }}" as="line" hint-placeholder-count="0">
+          <div style="display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid #c9c0af; font-size: 14.5px;">
+            <span>{{ line.name }} <span style="color: #5c554a;">· {{ line.sizeLabel }} × {{ line.qty }}</span></span>
+            <span style="font-family: 'Libre Franklin', sans-serif; font-weight: 600;">{{ line.total }}</span>
+          </div>
+        </sc-for>
+        <div style="display: flex; justify-content: space-between; padding: 14px 0 0; font-family: 'Libre Franklin', sans-serif;">
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">Subtotal</span>
+          <span style="font-size: 18px; font-weight: 700;">{{ placed.subtotal }}</span>
+        </div>
+      </div>
+      <div style="margin-top: 32px;"><a href="Order.dc.html" style="text-decoration: none; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; border: 1px solid #1a1712; padding: 12px 22px; display: inline-block;">Start a new order</a></div>
+    </section>
+    </sc-if>
+  </main>
+
+  <footer style="border-top: 3px double #1a1712; text-align: center; padding: 28px 0 40px;">
+    <p style="font-family: 'Noto Serif Gurmukhi', serif; font-weight: 600; font-size: 18px; color: #8b1e1e; margin: 0;">ਚਸਕਾ</p>
+    <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #5c554a; margin: 10px 0 0;">Chaska · A Punjabi family kitchen · Frisco, Texas</p>
+    <nav style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 16px; font-family: 'Libre Franklin', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;">
+      <a href="Home.dc.html" style="text-decoration: none;">Home</a>
+      <a href="Menu.dc.html" style="text-decoration: none;">Menu</a>
+      <a href="Order.dc.html" style="text-decoration: none;">Order</a>
+      <a href="About.dc.html" style="text-decoration: none;">About</a>
+      <a href="Menu.dc.html#catering" style="text-decoration: none;">Catering</a>
+      <a href="https://www.instagram.com/tasteofchaska/" target="_blank" rel="noopener" style="text-decoration: none;">Instagram</a>
+    </nav>
+  </footer>
+</div>
+
+<sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeCart }}" aria-hidden="true" style="position: fixed; inset: 0; background: rgba(26, 23, 18, 0.45); z-index: 40;"></div>
+  <aside role="dialog" aria-modal="true" aria-label="Your order" style="position: fixed; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: #f7f3ea; border-left: 1px solid #1a1712; z-index: 50; display: flex; flex-direction: column; box-shadow: -12px 0 40px rgba(26, 23, 18, 0.18);">
+    <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 20px 24px; border-bottom: 1px solid #1a1712;">
+      <div>
+        <h2 style="font-family: 'Libre Caslon Display', serif; font-weight: 400; font-size: 24px; margin: 0;">Your order</h2>
+        <p style="font-family: 'Libre Franklin', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #8b1e1e; margin: 4px 0 0;">Pickup only · Frisco, Texas</p>
+      </div>
+      <button type="button" onClick="{{ closeCart }}" aria-label="Close cart" style="width: 44px; height: 44px; border: 1px solid #1a1712; background: transparent; cursor: pointer; color: inherit; font-size: 20px; line-height: 1;">×</button>
+    </div>
+    <div style="flex: 1; overflow-y: auto; padding: 4px 24px;">
+      <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}">
+        <p style="font-size: 14.5px; line-height: 24px; color: #5c554a; margin: 20px 0 0;">Your order is empty. Choose a size and add a dish.</p>
+      </sc-if>
+      <sc-for list="{{ lines }}" as="line" hint-placeholder-count="0">
+        <div style="display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 16px 0; border-bottom: 1px solid #c9c0af;">
+          <p style="font-family: 'Libre Caslon Display', serif; font-size: 17px; margin: 0;">{{ line.name }}</p>
+          <p style="font-family: 'Libre Franklin', sans-serif; font-size: 14px; font-weight: 600; margin: 0; text-align: right;">{{ line.total }}</p>
+          <p style="font-family: 'Libre Franklin', sans-serif; font-size: 12px; color: #5c554a; margin: 0;">{{ line.sizeLabel }}</p>
+          <div style="display: flex; align-items: center; justify-content: end; gap: 2px; font-family: 'Libre Franklin', sans-serif;">
+            <button type="button" aria-label="Decrease" onClick="{{ line.dec }}" style="width: 32px; height: 32px; border: 1px solid #1a1712; background: transparent; cursor: pointer; color: inherit;">−</button>
+            <span style="min-width: 26px; text-align: center; font-size: 13px; font-weight: 600;">{{ line.qty }}</span>
+            <button type="button" aria-label="Increase" onClick="{{ line.inc }}" style="width: 32px; height: 32px; border: 1px solid #1a1712; background: transparent; cursor: pointer; color: inherit;">+</button>
+            <button type="button" aria-label="Remove" onClick="{{ line.remove }}" style="margin-left: 8px; height: 32px; border: 0; background: transparent; cursor: pointer; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #8b1e1e; padding: 0;">Remove</button>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ cartHasItems }}" hint-placeholder-val="{{ false }}">
+      <div style="padding: 16px 24px 24px; border-top: 1px solid #1a1712; font-family: 'Libre Franklin', sans-serif;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;">Subtotal</span>
+          <span style="font-size: 18px; font-weight: 700;">{{ subtotal }}</span>
+        </div>
+        <p style="font-size: 12px; line-height: 19px; color: #5c554a; margin: 6px 0 0;">Before sales tax.</p>
+        <button type="button" onClick="{{ goCheckout }}" style="width: 100%; min-height: 48px; margin-top: 16px; border: 0; background: #8b1e1e; color: #f7f3ea; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;" style-hover="background: #1a1712;">Checkout</button>
+        <button type="button" onClick="{{ closeCart }}" style="width: 100%; min-height: 44px; margin-top: 10px; border: 1px solid #1a1712; background: transparent; color: inherit; font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer;">Keep ordering</button>
+      </div>
+    </sc-if>
+  </aside>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+// SAMPLE PRICING — placeholders until Chaska confirms real prices. Edit here only.
+const ITEMS = [
+  { id: 'dahi-bhalla', name: 'Dahi Bhalla', description: 'Soft lentil dumplings under chilled dahi, tamarind chutney and roasted spices.', image: 'images/dahi-bhalla.png', kind: 'container', small: 9, large: 16 },
+  { id: 'moong-salad', name: 'Sprouted Moong Dal Salad', description: 'Street style, with crunchy peanuts, juicy tomatoes, pomegranate and chaat masala.', image: 'images/moong-salad.png', kind: 'container', small: 8, large: 14 },
+  { id: 'masala-idli', name: 'Masala Idli', description: 'Crispy outside, soft inside, tossed with peppers and curry leaves. Coconut chutney included.', image: 'images/masala-idli.png', kind: 'container', small: 9, large: 16 },
+  { id: 'bhutta-dip', name: 'Masala Bhutta Dip', description: 'Street style corn in a creamy, chatpata dip. Scoop it up with a chip.', image: 'images/bhutta-dip.png', kind: 'container', small: 8, large: 14 },
+  { id: 'kadhi-pakora', name: 'Punjabi Kadhi Pakora', description: 'Yogurt and besan kadhi with soft pakoras, tempered with dried red chilies and cumin.', image: 'images/kadhi-pakora.png', kind: 'container', small: 10, large: 18 },
+  { id: 'burrata-lababdar', name: 'Burrata Lababdar', description: 'A rich lababdar gravy finished with fresh burrata.', image: 'images/burrata-lababdar.png', kind: 'container', small: 12, large: 22 },
+  { id: 'pesto-eggs', name: 'Garden Pesto Eggs', description: 'Jammy eggs in a Chaska style pesto with cherry tomatoes. Garlic toast included.', image: 'images/pesto-eggs.png', kind: 'container', small: 10, large: 18 },
+  { id: 'panjiri', name: 'Panjiri', description: 'Slow roasted in desi ghee and loaded with badam and pista, made the way maa used to make it.', image: 'images/panjiri.png', kind: 'container', small: 10, large: 18 },
+  { id: 'kutchi-dabeli', name: 'Kutchi Dabeli', description: 'Sweet, spicy, tangy and crunchy, all in one bite, with sev and pomegranate.', image: 'images/kutchi-dabeli.png', kind: 'each', unit: 'Per dabeli', each: 5 },
+  { id: 'butter-chicken-sliders', name: 'Butter Chicken Sliders', description: 'Butter chicken piled into soft slider buns.', image: 'images/butter-chicken-sliders.png', kind: 'each', unit: 'Per slider', each: 6 },
+  { id: 'paneer-kathi', name: 'Royal Paneer Kathi Roll', description: 'Paneer rolled in flaky parantha with green chutney and pomegranate.', image: 'images/paneer-kathi.png', kind: 'each', unit: 'Per roll', each: 9 },
+];
+const STORAGE = 'chaska-order-cart-v1';
+const money = n => '$' + n.toFixed(n % 1 ? 2 : 0);
+const btnBase = "min-height: 52px; border: 0; cursor: pointer; font-family: 'Libre Franklin', sans-serif; padding: 8px 6px; text-align: center; color: inherit;";
+const btnOn = btnBase + ' background: #1a1712; color: #f7f3ea;';
+const btnOff = btnBase + ' background: transparent;';
+
+class Component extends DCLogic {
+  state = { cart: [], sizes: {}, qtys: {}, view: 'menu', cartOpen: false, isMobile: false, form: { name: '', phone: '', date: '', time: '', notes: '' }, formError: '', placed: null };
+
+  componentDidMount() {
+    try { const saved = JSON.parse(localStorage.getItem(STORAGE) || '[]'); if (Array.isArray(saved)) this.setState({ cart: saved }); } catch (e) {}
+    this._onResize = () => this.setState({ isMobile: window.innerWidth < 900 });
+    this._onResize();
+    requestAnimationFrame(this._onResize);
+    window.addEventListener('resize', this._onResize);
+    this._onKey = e => { if (e.key === 'Escape' && this.state.cartOpen) this.setState({ cartOpen: false }); };
+    window.addEventListener('keydown', this._onKey);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); window.removeEventListener('keydown', this._onKey); }
+  saveCart(cart) { this.setState({ cart }); try { localStorage.setItem(STORAGE, JSON.stringify(cart)); } catch (e) {} }
+
+  priceFor(item, size) { return item.kind === 'each' ? item.each : (size === 'large' ? item.large : item.small); }
+  sizeLabel(item, size) { return item.kind === 'each' ? item.unit : (size === 'large' ? 'Large · 32 oz' : 'Small · 16 oz'); }
+
+  addToCart(item) {
+    const size = item.kind === 'each' ? 'each' : (this.state.sizes[item.id] || 'small');
+    const qty = this.state.qtys[item.id] || 1;
+    const cart = this.state.cart.slice();
+    const i = cart.findIndex(l => l.id === item.id && l.size === size);
+    if (i >= 0) cart[i] = { ...cart[i], qty: cart[i].qty + qty }; else cart.push({ id: item.id, size, qty });
+    this.saveCart(cart);
+    this.setState(s => ({ qtys: { ...s.qtys, [item.id]: 1 }, cartOpen: true }));
+  }
+  changeLine(idx, delta) {
+    const cart = this.state.cart.map((l, i) => i === idx ? { ...l, qty: l.qty + delta } : l).filter(l => l.qty > 0);
+    this.saveCart(cart);
+  }
+  removeLine(idx) { this.saveCart(this.state.cart.filter((_, i) => i !== idx)); }
+
+  buildLines(cart) {
+    return cart.map((l, idx) => {
+      const item = ITEMS.find(x => x.id === l.id);
+      if (!item) return null;
+      const unit = this.priceFor(item, l.size);
+      return { key: l.id + l.size, name: item.name, sizeLabel: this.sizeLabel(item, l.size), qty: l.qty, total: money(unit * l.qty), raw: unit * l.qty,
+        inc: () => this.changeLine(idx, 1), dec: () => this.changeLine(idx, -1), remove: () => this.removeLine(idx) };
+    }).filter(Boolean);
+  }
+
+  placeOrder() {
+    const f = this.state.form;
+    if (!f.name.trim()) return this.setState({ formError: 'Please enter your name.' });
+    if (!/\d{10}/.test(f.phone.replace(/\D/g, ''))) return this.setState({ formError: 'Please enter a 10 digit mobile number so we can confirm by text.' });
+    if (!f.date) return this.setState({ formError: 'Please choose a pickup date.' });
+    if (!f.time) return this.setState({ formError: 'Please choose a preferred pickup time.' });
+    const lines = this.buildLines(this.state.cart);
+    const subtotal = money(lines.reduce((a, l) => a + l.raw, 0));
+    const d = new Date(f.date + 'T' + f.time);
+    const when = d.toLocaleString('en-US', { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    this.setState({ placed: { name: f.name.trim(), phone: f.phone.trim(), when, lines, subtotal }, view: 'done', formError: '' });
+    this.saveCart([]);
+    window.scrollTo(0, 0);
+  }
+
+  renderVals() {
+    const s = this.state;
+    const setField = k => e => this.setState(st => ({ form: { ...st.form, [k]: e.target.value }, formError: '' }));
+    const items = ITEMS.map(item => {
+      const size = s.sizes[item.id] || 'small';
+      const isContainer = item.kind === 'container';
+      return {
+        ...item, isContainer, isEach: !isContainer,
+        qty: s.qtys[item.id] || 1,
+        smallPrice: isContainer ? money(item.small) : '', largePrice: isContainer ? money(item.large) : '',
+        eachPrice: isContainer ? '' : money(item.each), unitLabel: item.unit || '',
+        smallChecked: size === 'small', largeChecked: size === 'large',
+        smallStyle: size === 'small' ? btnOn : btnOff, largeStyle: size === 'large' ? btnOn : btnOff,
+        pickSmall: () => this.setState(st => ({ sizes: { ...st.sizes, [item.id]: 'small' } })),
+        pickLarge: () => this.setState(st => ({ sizes: { ...st.sizes, [item.id]: 'large' } })),
+        inc: () => this.setState(st => ({ qtys: { ...st.qtys, [item.id]: (st.qtys[item.id] || 1) + 1 } })),
+        dec: () => this.setState(st => ({ qtys: { ...st.qtys, [item.id]: Math.max(1, (st.qtys[item.id] || 1) - 1) } })),
+        add: () => this.addToCart(item),
+      };
+    });
+    const lines = this.buildLines(s.cart);
+    const cartCount = s.cart.reduce((a, l) => a + l.qty, 0);
+    const subtotal = money(lines.reduce((a, l) => a + l.raw, 0));
+    return {
+      items, lines, cartCount, subtotal,
+      cartEmpty: lines.length === 0, cartHasItems: lines.length > 0,
+      showMenu: s.view === 'menu', showCheckout: s.view === 'checkout', showDone: s.view === 'done',
+      cartOpen: s.cartOpen,
+      openCart: () => this.setState({ cartOpen: true }),
+      closeCart: () => this.setState({ cartOpen: false }),
+      checkoutCols: s.isMobile ? 'minmax(0, 1fr)' : 'minmax(0, 1fr) 340px',
+      goCheckout: () => { this.setState({ view: 'checkout', cartOpen: false }); window.scrollTo(0, 0); },
+      backToMenu: () => this.setState({ view: 'menu' }),
+      form: s.form, formError: s.formError, today: new Date().toISOString().slice(0, 10),
+      setName: setField('name'), setPhone: setField('phone'), setDate: setField('date'), setTime: setField('time'), setNotes: setField('notes'),
+      placeOrder: () => this.placeOrder(),
+      placed: s.placed || { name: '', phone: '', when: '', lines: [], subtotal: '' },
+    };
+  }
+}
+</script>
+</body>
+</html>

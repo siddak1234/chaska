@@ -20,7 +20,9 @@ import { RATIO_CLASS_MAP, type FrameRatio } from "./ratios";
  * These were 560/370 while the container was still border-box, which left
  * eight of the ten images upscaled by 17–33px once it was corrected.
  */
-const SIZES: Record<"full" | "half" | "portrait" | "third", string> = {
+export type FrameSpan = "full" | "half" | "portrait" | "third" | "quarter";
+
+const SIZES: Record<FrameSpan, string> = {
   /** The lead photograph spans the whole 1240px content column. */
   full: "(min-width: 1336px) 1240px, 100vw",
   /**
@@ -39,13 +41,20 @@ const SIZES: Record<"full" | "half" | "portrait" | "third", string> = {
    */
   third:
     "(min-width: 1336px) 400px, (min-width: 920px) 30vw, (min-width: 620px) 50vw, 100vw",
+  /**
+   * The Order page's cards: `auto-fill` at 270px with a 36px gap is four
+   * columns of (1240 - 108) / 4 = 283px at full width, three from about 950px
+   * of viewport and two from about 640px.
+   */
+  quarter:
+    "(min-width: 1336px) 290px, (min-width: 950px) 34vw, (min-width: 640px) 50vw, 100vw",
 };
 
 type ImageFrameProps = {
   image: StaticImageData;
   alt: string;
   ratio: FrameRatio;
-  span?: "full" | "half" | "portrait" | "third";
+  span?: FrameSpan;
   /** Set on the home hero only — it is the largest contentful paint. */
   priority?: boolean;
   className?: string;
@@ -55,9 +64,8 @@ type ImageFrameProps = {
  * A fixed-ratio photographic frame.
  *
  * Mirrors the artboards' `position: relative` wrapper around an absolutely
- * filled `<image-slot>`. The `newsprint` utility carries the design's
- * `sepia(0.14) contrast(1.02)` tone — applied in CSS so the vendored Commons
- * originals stay unmodified.
+ * filled `<image-slot>`, cropped with `object-cover`. The current design shows
+ * the kitchen's own photographs untreated, so no filter is applied.
  */
 export function ImageFrame({
   image,
@@ -82,7 +90,7 @@ export function ImageFrame({
         sizes={SIZES[span]}
         priority={priority}
         placeholder="blur"
-        className="object-cover newsprint"
+        className="object-cover"
       />
     </div>
   );

@@ -12,12 +12,13 @@ import { MenuRow } from "./MenuRow";
  */
 const LIST_CLASS: Record<MenuCourseData["layout"], string> = {
   grid: "grid auto-grid-300 gap-x-gap-menu gap-y-[26px]",
-  stack: "flex flex-col gap-4",
+  /** 22px — the current design's gap between described dishes in a stack. */
+  stack: "flex flex-col gap-[22px]",
   columns:
     "columns-1 gap-x-gap-menu sm:columns-2 lg:columns-3 [&>div]:mb-3.5 [&>div]:break-inside-avoid",
 };
 
-const ROW_SIZE: Record<MenuCourseData["layout"], "lg" | "sm" | "columns"> = {
+const ROW_SIZE: Record<MenuCourseData["layout"], "lg" | "sm"> = {
   grid: "lg",
   stack: "sm",
   // Descriptions need the larger name size to sit against.
@@ -26,21 +27,31 @@ const ROW_SIZE: Record<MenuCourseData["layout"], "lg" | "sm" | "columns"> = {
 
 type MenuCourseProps = {
   course: MenuCourseData;
-  /** The breads and desserts courses sit two-up, so their heading is smaller. */
+  /** Courses set two-up have a smaller heading. */
   compact?: boolean;
+  /** `3` when the course sits under a section heading of its own. */
+  headingLevel?: 2 | 3;
 };
 
 /**
  * A titled course: Punjabi name in Caslon, English gloss as an oxblood kicker,
  * then the dishes as a description list.
  */
-export function MenuCourse({ course, compact = false }: MenuCourseProps) {
+export function MenuCourse({
+  course,
+  compact = false,
+  headingLevel = 2,
+}: MenuCourseProps) {
   const headingId = `course-${course.id}`;
 
   return (
     <>
       <div className={compact ? "mb-7 text-center" : "mb-8 text-center"}>
-        <Heading level={2} size={compact ? "courseSm" : "course"} id={headingId}>
+        <Heading
+          level={headingLevel}
+          size={compact ? "courseSm" : "course"}
+          id={headingId}
+        >
           {course.name}
         </Heading>
         <Kicker size="sm" className="mt-2">

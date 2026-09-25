@@ -4,25 +4,19 @@ import { describe, expect, it, vi } from "vitest";
 
 import { SiteNav } from "@/components/layout/SiteNav";
 import { getSite } from "@/content";
-import { telHref } from "@/lib/format";
 
 const site = getSite();
-// Built the way Masthead builds it, so the fixture cannot drift from the
-// real contact details.
-const reserve = {
-  label: `Reserve · ${site.contact.phone.display}`,
-  href: telHref(site.contact.phone.e164),
-};
 
 function renderAt(pathname: string) {
   vi.mocked(usePathname).mockReturnValue(pathname);
-  return render(<SiteNav links={site.nav} reserve={reserve} />);
+  return render(<SiteNav links={site.nav} />);
 }
 
 describe("SiteNav", () => {
   it.each([
     ["/", "Home"],
     ["/menu", "Menu"],
+    ["/order", "Order"],
     ["/about", "About"],
   ])("marks %s as the current page", (pathname, label) => {
     renderAt(pathname);
@@ -45,12 +39,16 @@ describe("SiteNav", () => {
     );
   });
 
-  it("renders the reserve link as a tel: anchor", () => {
+  it("lists the design's five destinations, in order, with no phone link", () => {
+    // The design moved the phone out of the nav; it lives in the footer now.
     renderAt("/");
-    expect(screen.getByRole("link", { name: reserve.label })).toHaveAttribute(
-      "href",
-      `tel:${site.contact.phone.e164}`,
-    );
+    expect(screen.getAllByRole("link").map((l) => l.textContent)).toEqual([
+      "Home",
+      "Menu",
+      "Order",
+      "About",
+      "Catering",
+    ]);
   });
 
   it("names the navigation landmark", () => {

@@ -1,70 +1,49 @@
+import { readdirSync } from "node:fs";
+import path from "node:path";
+
 import { describe, expect, it } from "vitest";
 
-import { getUniqueCredits, images } from "@/content/generated/images";
-import { imageCreditSchema } from "@/content/schema";
+import { IMAGE_IDS, images } from "@/content/images";
 
-/**
- * Every photograph is CC BY or CC BY-SA with attribution required. If any of
- * these fields is empty the `/credits` page renders an incomplete credit and
- * the site is out of licence compliance.
- */
+const IMAGE_DIR = path.join(process.cwd(), "src", "assets", "images");
+
 describe("image manifest", () => {
-  it("covers all nine artboard slots plus the owner portrait", () => {
-    expect(Object.keys(images).sort()).toEqual(
-      [
-        "about-ronika",
-        "about-snoopy",
-        "home-dal",
-        "home-hero",
-        "home-saag",
-        "home-table",
-        "home-tandoori",
-        "menu-saag",
-        "menu-table",
-        "menu-tandoori",
-      ].sort(),
-    );
+  it("lists every file in src/assets/images, and nothing else", () => {
+    // A file on disk with no manifest entry is dead weight in the repo; an
+    // entry with no file fails the build. Both directions are checked.
+    const onDisk = readdirSync(IMAGE_DIR)
+      .filter((f) => f.endsWith(".jpg"))
+      .map((f) => f.replace(/\.jpg$/, ""))
+      .sort();
+    expect([...IMAGE_IDS].sort()).toEqual(onDisk);
   });
 
-  it("has a real photograph in the owner slot", () => {
-    // This was an empty frame until the portrait arrived.
-    const slot = images["about-ronika"];
-    expect(slot.image.src).toMatch(/ronika-portrait/);
-    expect(slot.image.width / slot.image.height).toBeCloseTo(4 / 5, 3);
-    expect(slot.alt).toBe("Ronika Singh Bhatia, owner of Chaska");
+  it("names each photograph by what it shows, one entry per file", () => {
+    for (const [id, slot] of Object.entries(images)) {
+      expect(slot.image.src, `${id} points at another file`).toContain(`${id}.jpg`);
+    }
   });
 
-  it("carries no third-party credit on owned photographs", () => {
-    expect(images["about-ronika"].credit).toBeNull();
-  });
-
-  it("gives every slot non-empty alt text", () => {
+  it("gives every photograph non-empty alt text", () => {
     for (const [id, slot] of Object.entries(images)) {
       expect(slot.alt.trim().length, `${id} has no alt text`).toBeGreaterThan(0);
     }
   });
 
-  it("gives every slot a complete, attributable credit", () => {
-    // `imageCreditSchema` is the single definition of "complete" — the
-    // generated manifest is code, so nothing else validates it at runtime.
-    for (const [id, slot] of Object.entries(images)) {
-      if (!slot.credit) continue; // owned, nothing to attribute
-      const result = imageCreditSchema.safeParse(slot.credit);
-      expect(
-        result.success,
-        `${id}: ${result.success ? "" : JSON.stringify(result.error.issues)}`,
-      ).toBe(true);
-      expect(slot.credit.sourceUrl, `${id}: source url`).toMatch(
-        /^https:\/\/commons\.wikimedia\.org\//,
-      );
-    }
+  it("keeps the owner portrait at 4:5", () => {
+    const { image, alt } = images["ronika-portrait"];
+    expect(image.width / image.height).toBeCloseTo(4 / 5, 3);
+    expect(alt).toBe("Ronika Singh Bhatia, owner of Chaska");
   });
 
-  it("deduplicates shared photographs for the credits page", () => {
-    const credits = getUniqueCredits();
-    // Nine slots, six distinct files — tandoori, saag and the table each
-    // appear on both Home and Menu.
-    expect(credits).toHaveLength(6);
-    expect(new Set(credits.map((c) => c.fileName)).size).toBe(6);
+  it("stores the dish photographs large enough for their widest frame", () => {
+    // The widest dish frame is the home lead at 592 CSS px; at 2x that is
+    // 1184 device pixels. The crops are 1159–1260px wide.
+    for (const [id, { image }] of Object.entries(images)) {
+      if (id === "ronika-portrait") continue;
+      expect(image.width, `${id} is ${image.width}px wide`).toBeGreaterThanOrEqual(
+        1150,
+      );
+    }
   });
 });

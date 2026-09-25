@@ -9,8 +9,6 @@ import { routeOf } from "@/lib/routes";
 
 type SiteNavProps = {
   links: readonly Link[];
-  /** "Reserve · (214) 801 7809" — kept apart because it wraps on its own line. */
-  reserve: Link;
 };
 
 /**
@@ -24,7 +22,7 @@ type SiteNavProps = {
  * A link to a fragment (`/menu#catering`) is never marked current — matching
  * the artboards, where Catering stays unmarked on the Menu page.
  */
-export function SiteNav({ links, reserve }: SiteNavProps) {
+export function SiteNav({ links }: SiteNavProps) {
   const pathname = usePathname();
 
   return (
@@ -45,12 +43,6 @@ export function SiteNav({ links, reserve }: SiteNavProps) {
           </SmartLink>
         );
       })}
-      <SmartLink
-        href={reserve.href}
-        className="basis-full py-3 text-center no-underline sm:basis-auto sm:text-start"
-      >
-        {reserve.label}
-      </SmartLink>
     </nav>
   );
 }

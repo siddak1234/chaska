@@ -36,21 +36,28 @@ test("the site has an icon and an apple touch icon", async ({ page, request }) =
   }
 });
 
-test("photograph credits are reachable from the site, not just the sitemap", async ({
-  page,
-}) => {
-  // Every photograph is CC BY / CC BY-SA with attribution required, so the
-  // credits page has to be linked from somewhere a visitor can find it.
-  await page.goto("/");
-  const link = page.getByRole("navigation", { name: "Footer" }).getByRole("link", {
-    name: "Credits",
-  });
-  await expect(link).toBeVisible();
-  await link.click();
-  await expect(page).toHaveURL(/\/credits$/);
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "Photograph credits",
-  );
+test("every page links the kitchen's Instagram, in a new tab", async ({ page }) => {
+  for (const route of ROUTES) {
+    await page.goto(route);
+    const href = 'a[href="https://www.instagram.com/tasteofchaska/"]';
+    // The topbar handle and the footer link; the menu adds a third, for catering.
+    for (const region of ["body > div > header", "footer"]) {
+      const link = page.locator(`${region} ${href}`);
+      await expect(link, `${route} ${region}`).toHaveCount(1);
+      await expect(link).toHaveAttribute("target", "_blank");
+    }
+    await expect(page.locator("header").getByText("@tasteofchaska")).toBeVisible();
+  }
+});
+
+test("the phone number stays on every page, in the footer", async ({ page }) => {
+  for (const route of ROUTES) {
+    await page.goto(route);
+    await expect(
+      page.locator("footer a[href='tel:+12148017809']"),
+      `${route} has no phone link`,
+    ).toHaveText("(214) 801 7809");
+  }
 });
 
 test("declared route anchors exist on their pages", async ({ page }) => {

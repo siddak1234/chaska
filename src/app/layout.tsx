@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 
 import { getSite, getSiteUrl } from "@/content";
-import { JsonLd, restaurantJsonLd } from "@/lib/jsonld";
+import { formatPlace } from "@/lib/format";
+import { JsonLd, kitchenJsonLd } from "@/lib/jsonld";
 
 import { fontVariables } from "./fonts";
 import "./globals.css";
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     template: `%s · ${site.name}`,
   },
   description:
-    `${site.descriptor} in ${site.contact.address.locality}, ${site.contact.address.regionName}, ` +
+    `${site.descriptor} in ${formatPlace(site.contact.address)}, ` +
     `serving the ${site.metroArea} area. ${site.tagline}.`,
   applicationName: site.name,
   authors: [{ name: site.name }],
@@ -35,7 +36,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={fontVariables}>
       <body>
         {children}
-        <JsonLd data={restaurantJsonLd()} />
+        <JsonLd data={kitchenJsonLd()} />
       </body>
     </html>
   );

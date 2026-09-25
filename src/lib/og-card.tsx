@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 
 import { getSite } from "@/content";
+import { formatPlace } from "@/lib/format";
 import {
   OG_COLORS,
   caslonDisplayFont,
@@ -8,7 +9,10 @@ import {
   gurmukhiFont,
 } from "@/lib/og-fonts";
 
-export const ogAlt = "Chaska — a Punjabi family restaurant in Frisco, Texas";
+const site = getSite();
+
+/** Same shape as the root layout's default title, plus the state. */
+export const ogAlt = `${site.name} · ${site.descriptor} in ${formatPlace(site.contact.address)}`;
 export const ogSize = { width: 1200, height: 630 };
 export const ogContentType = "image/png";
 
@@ -22,7 +26,6 @@ export const ogContentType = "image/png";
  * convention resolves at the same segment as the metadata that would clobber it.
  */
 export async function renderOgCard() {
-  const site = getSite();
   const [caslon, franklin, gurmukhi] = await Promise.all([
     caslonDisplayFont(),
     franklinFont(),
@@ -56,8 +59,8 @@ export async function renderOgCard() {
           borderBottom: `2px solid ${OG_COLORS.ink}`,
         }}
       >
-        <span>{site.topbar[0]}</span>
-        <span>{site.topbar[2]}</span>
+        <span>{formatPlace(site.contact.address)}</span>
+        <span>@{site.social.instagram}</span>
       </div>
 
       <div

@@ -6,11 +6,8 @@ import { formatPrice, formatPriceForSpeech } from "@/lib/format";
 
 type MenuRowProps = {
   item: MenuItem;
-  /**
-   * `lg` for courses with descriptions, `sm` for the narrow two-up lists,
-   * `columns` for the long unpriced courses set as a dense multi-column list.
-   */
-  size: "lg" | "sm" | "columns";
+  /** `lg` for courses with descriptions, `sm` for the narrow two-up lists. */
+  size: "lg" | "sm";
 };
 
 /**
@@ -29,8 +26,7 @@ type MenuRowProps = {
  *    currency spoken from a visually hidden span.
  */
 export function MenuRow({ item, size }: MenuRowProps) {
-  const nameSize =
-    size === "lg" ? "text-row" : size === "sm" ? "text-row-sm" : "text-row-sm";
+  const nameSize = size === "lg" ? "text-row" : "text-row-sm";
   const hasPrice = item.price !== undefined;
 
   const name = (

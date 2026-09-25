@@ -1,43 +1,9 @@
-import { ImageResponse } from "next/og";
-
-import { getSite } from "@/content";
-import { OG_COLORS, gurmukhiFont } from "@/lib/og-fonts";
+import { markIconContentType, renderMarkIcon } from "@/lib/mark-icon";
 
 export const size = { width: 180, height: 180 };
-export const contentType = "image/png";
+export const contentType = markIconContentType;
 
-/**
- * The browser-tab icon: the first Gurmukhi letter of ਚਸਕਾ, cream on oxblood.
- *
- * Drawn from the vendored font rather than an SVG `<text>` element, which would
- * depend on the viewer's machine having a Gurmukhi face installed.
- */
-export default async function AppleIcon() {
-  const site = getSite();
-
-  return new ImageResponse(
-    <div
-      style={{
-        width: "100%",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: OG_COLORS.oxblood,
-        color: OG_COLORS.paper,
-        fontFamily: "Gurmukhi",
-        fontSize: 128,
-        lineHeight: 1,
-        paddingBottom: 12,
-      }}
-    >
-      {[...site.nameGurmukhi][0]}
-    </div>,
-    {
-      ...size,
-      fonts: [
-        { name: "Gurmukhi", data: await gurmukhiFont(), style: "normal", weight: 400 },
-      ],
-    },
-  );
+/** The home-screen icon. Implementation: src/lib/mark-icon.tsx */
+export default function AppleIcon() {
+  return renderMarkIcon({ size, fontSize: 128, paddingBottom: 12 });
 }

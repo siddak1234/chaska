@@ -1,11 +1,11 @@
 import { Figure } from "@/components/media/Figure";
-import type { ImageId } from "@/content/generated/images";
+import type { StripFigure } from "@/content/schema";
 
 type PhotoStripProps = {
-  figures: ReadonlyArray<{ imageId: ImageId; caption: string }>;
+  figures: readonly StripFigure[];
 };
 
-/** The three-across band of captioned photographs on the Menu page. */
+/** A three-across band of captioned photographs, as on the Menu page. */
 export function PhotoStrip({ figures }: PhotoStripProps) {
   return (
     <div className="grid auto-grid-260-min gap-5">

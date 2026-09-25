@@ -11,12 +11,12 @@ import { cn } from "@/lib/cn";
  * The two uses look alike but are not identical in the artboards, so the
  * measurements are enumerated rather than shared:
  *
- *   notice  (home, "The same food, for your gathering")
+ *   notice  (home, the catering notice)
  *           padding 28 · kicker margin-bottom 12 · body 14.5/25 at margin-top 14
  *           · footer at margin-top 20
- *   package (menu, the three catering tiers)
+ *   package (menu, the three catering cards)
  *           padding 26 · kicker margin-bottom 0, heading margin-top 10
- *           · body 14/24 at margin-top 12 · footer at margin-top 16
+ *           · body 14/24 at margin-top 12
  */
 const card = cva("border border-ink", {
   variants: { variant: { notice: "p-7", package: "p-[26px]" } },
@@ -27,7 +27,7 @@ type NoticeCardProps = VariantProps<typeof card> & {
   kicker: string;
   title: string;
   body: string;
-  /** A button on the home notice; the plain pricing line on a package. */
+  /** The home notice's button. */
   footer?: ReactNode;
 };
 
@@ -45,10 +45,12 @@ export function NoticeCard({
       <Kicker size={isPackage ? "meta" : "md"} className={isPackage ? "" : "mb-3"}>
         {kicker}
       </Kicker>
+      {/* The package heading is 24px with the artboards' default leading,
+          not the 1.2 the `dish` token carries for the home dish cards. */}
       <Heading
         level={isPackage ? 3 : 2}
-        size="dish"
-        className={cn(isPackage ? "mt-2.5 text-dish leading-[normal]" : "text-notice")}
+        size={isPackage ? "dish" : "notice"}
+        className={isPackage ? "mt-2.5 leading-[normal]" : undefined}
       >
         {title}
       </Heading>
@@ -60,7 +62,7 @@ export function NoticeCard({
       >
         {body}
       </p>
-      {footer ? <div className={isPackage ? "mt-4" : "mt-5"}>{footer}</div> : null}
+      {footer ? <div className="mt-5">{footer}</div> : null}
     </div>
   );
 }

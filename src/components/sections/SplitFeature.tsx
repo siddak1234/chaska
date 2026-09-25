@@ -6,7 +6,7 @@ import { cn } from "@/lib/cn";
 
 import type { ReactNode } from "react";
 import type { FrameRatio } from "@/components/media/ratios";
-import type { ImageId } from "@/content/generated/images";
+import type { ImageId } from "@/content/images";
 
 type SplitFeatureProps = {
   kicker?: string;
@@ -22,7 +22,6 @@ type SplitFeatureProps = {
   figureFirst?: boolean;
   /** A call to action beneath the prose. */
   action?: ReactNode;
-  headingSize?: "feature" | "section";
   /**
    * Gap between the heading and the first paragraph. The artboards use 18px on
    * the home page and 20px on About — close enough to look like a mistake,
@@ -51,7 +50,6 @@ export function SplitFeature({
   figure,
   figureFirst = false,
   action,
-  headingSize = "feature",
   proseTop = "20",
   columns = "even",
 }: SplitFeatureProps) {
@@ -77,7 +75,7 @@ export function SplitFeature({
   const copy = (
     <article>
       {kicker ? <Kicker className="mb-3.5">{kicker}</Kicker> : null}
-      <Heading level={2} size={headingSize}>
+      <Heading level={2} size="feature">
         {title}
       </Heading>
       <Prose

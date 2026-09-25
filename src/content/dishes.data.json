@@ -1,0 +1,133 @@
+{
+  "dishes": [
+    {
+      "id": "dahi-bhalla",
+      "name": "Dahi Bhalla",
+      "imageId": "dahi-bhalla",
+      "description": "Soft lentil dumplings under chilled dahi, tamarind chutney and roasted spices.",
+      "pricing": {
+        "kind": "container",
+        "small": 9,
+        "large": 16
+      }
+    },
+    {
+      "id": "moong-salad",
+      "name": "Sprouted Moong Dal Salad",
+      "imageId": "moong-salad",
+      "description": "Street style, with crunchy peanuts, juicy tomatoes, pomegranate and a squeeze of chaat masala.",
+      "orderDescription": "Street style, with crunchy peanuts, juicy tomatoes, pomegranate and chaat masala.",
+      "pricing": {
+        "kind": "container",
+        "small": 8,
+        "large": 14
+      }
+    },
+    {
+      "id": "masala-idli",
+      "name": "Masala Idli",
+      "imageId": "masala-idli",
+      "description": "Crispy outside, soft inside, tossed with peppers and curry leaves. Served with fresh coconut chutney.",
+      "orderDescription": "Crispy outside, soft inside, tossed with peppers and curry leaves. Coconut chutney included.",
+      "pricing": {
+        "kind": "container",
+        "small": 9,
+        "large": 16
+      }
+    },
+    {
+      "id": "bhutta-dip",
+      "name": "Masala Bhutta Dip",
+      "imageId": "bhutta-dip",
+      "description": "Street style corn in a creamy, chatpata dip. Scoop it up with a chip.",
+      "pricing": {
+        "kind": "container",
+        "small": 8,
+        "large": 14
+      }
+    },
+    {
+      "id": "kadhi-pakora",
+      "name": "Punjabi Kadhi Pakora",
+      "imageId": "kadhi-pakora",
+      "description": "Yogurt and besan kadhi with soft pakoras, tempered with dried red chilies and cumin.",
+      "pricing": {
+        "kind": "container",
+        "small": 10,
+        "large": 18
+      }
+    },
+    {
+      "id": "burrata-lababdar",
+      "name": "Burrata Lababdar",
+      "imageId": "burrata-lababdar",
+      "description": "A rich lababdar gravy finished with fresh burrata. An Indian classic with a gourmet twist.",
+      "orderDescription": "A rich lababdar gravy finished with fresh burrata.",
+      "pricing": {
+        "kind": "container",
+        "small": 12,
+        "large": 22
+      }
+    },
+    {
+      "id": "pesto-eggs",
+      "name": "Garden Pesto Eggs",
+      "imageId": "pesto-eggs",
+      "description": "Jammy eggs in a Chaska style pesto with cherry tomatoes, served with garlic toast.",
+      "orderDescription": "Jammy eggs in a Chaska style pesto with cherry tomatoes. Garlic toast included.",
+      "pricing": {
+        "kind": "container",
+        "small": 10,
+        "large": 18
+      }
+    },
+    {
+      "id": "panjiri",
+      "name": "Panjiri",
+      "imageId": "panjiri",
+      "description": "Slow roasted in desi ghee and loaded with badam and pista, made the way maa used to make it. Warm and homely.",
+      "orderDescription": "Slow roasted in desi ghee and loaded with badam and pista, made the way maa used to make it.",
+      "pricing": {
+        "kind": "container",
+        "small": 10,
+        "large": 18
+      }
+    },
+    {
+      "id": "kutchi-dabeli",
+      "name": "Kutchi Dabeli",
+      "imageId": "kutchi-dabeli",
+      "description": "Sweet, spicy, tangy and crunchy, all in one bite, with sev and pomegranate.",
+      "pricing": {
+        "kind": "each",
+        "unit": "Per dabeli",
+        "each": 5
+      }
+    },
+    {
+      "id": "butter-chicken-sliders",
+      "name": "Butter Chicken Sliders",
+      "imageId": "butter-chicken-sliders",
+      "description": "Butter chicken piled into soft slider buns. One hand for gossip, one hand for this.",
+      "orderDescription": "Butter chicken piled into soft slider buns.",
+      "nonVeg": true,
+      "pricing": {
+        "kind": "each",
+        "unit": "Per slider",
+        "each": 6
+      }
+    },
+    {
+      "id": "paneer-kathi",
+      "name": "Royal Paneer Kathi Roll",
+      "imageId": "paneer-kathi",
+      "description": "Paneer rolled in flaky parantha with green chutney and pomegranate. Street food, plated like fine dining.",
+      "orderDescription": "Paneer rolled in flaky parantha with green chutney and pomegranate.",
+      "pricing": {
+        "kind": "each",
+        "unit": "Per roll",
+        "each": 9
+      }
+    }
+  ]
+}

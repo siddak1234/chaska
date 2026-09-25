@@ -35,6 +35,12 @@
   --color-rule: #c9c0af;
   --color-leader: #a89e8c;
 
+  /* Form fields on the Order page: a shade lighter than paper, so an input
+     reads as a place to type. */
+  --color-field: #fffdf8;
+  /* The cart drawer's scrim: ink at 45%. */
+  --color-scrim: rgb(26 23 18 / 0.45);
+
   /* ── Families ─────────────────────────────────────────────────────────── */
   /* The `--font-*-src` variables are injected by next/font in the root layout. */
   --font-display:
@@ -58,10 +64,7 @@
   --text-mark: clamp(20px, 2.4vw, 30px);
   --text-mark--line-height: normal;
 
-  /* The home page's front-page headline, running above a full-width lead
-     photograph. Larger than --text-lead, which sat beside a half-width image. */
-  --text-hero: clamp(36px, 5.2vw, 68px);
-  --text-hero--line-height: 1.08;
+  /* The home lead's headline, beside its photograph. */
   --text-lead: clamp(34px, 4.2vw, 54px);
   --text-lead--line-height: 1.12;
   --text-title: clamp(36px, 5vw, 58px);
@@ -86,6 +89,9 @@
   --text-notice--line-height: 1.2;
   --text-dish: 24px;
   --text-dish--line-height: 1.2;
+  /* Dish names on the Order page's cards. */
+  --text-item: 22px;
+  --text-item--line-height: 1.2;
   --text-row: 21px;
   --text-row--line-height: normal;
   --text-row-sm: 19px;
@@ -150,19 +156,12 @@
   --spacing-gap-split: clamp(28px, 4vw, 56px);
   --spacing-gap-menu: clamp(32px, 4vw, 64px);
   --spacing-gap-nav: clamp(20px, 4vw, 48px);
-  --spacing-dish-rule: clamp(0px, 2vw, 32px);
+  --spacing-gap-order: clamp(24px, 3vw, 36px);
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
    Utilities — the handful of declarations Tailwind has no primitive for.
    ══════════════════════════════════════════════════════════════════════════ */
-
-/* The photographic treatment used on every filled image slot. Applied in CSS,
-   never baked into the file — the vendored Commons originals stay unmodified
-   so no ShareAlike obligation is triggered. */
-@utility newsprint {
-  filter: sepia(0.14) contrast(1.02);
-}
 
 /* Major section break. `border-double` alone cannot express 3px double. */
 @utility rule-double {
@@ -188,6 +187,14 @@
 }
 @utility auto-grid-320-min {
   grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+}
+@utility auto-grid-240-min {
+  grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
+}
+/* `auto-fill`, not `auto-fit`: the Order grid keeps its column width when a
+   row is short, so a lone last card does not stretch across the page. */
+@utility auto-fill-270-min {
+  grid-template-columns: repeat(auto-fill, minmax(min(270px, 100%), 1fr));
 }
 
 /* ══════════════════════════════════════════════════════════════════════════

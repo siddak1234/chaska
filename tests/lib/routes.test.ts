@@ -4,9 +4,13 @@ import { isExternalHref, isInternalHref, isValidHref, routeOf } from "@/lib/rout
 
 describe("route validation", () => {
   it("accepts every known route", () => {
-    for (const route of ["/", "/menu", "/about", "/credits"]) {
+    for (const route of ["/", "/menu", "/order", "/about"]) {
       expect(isInternalHref(route)).toBe(true);
     }
+  });
+
+  it("no longer routes to the credits page, which has nothing left to credit", () => {
+    expect(isInternalHref("/credits")).toBe(false);
   });
 
   it("accepts a route with a fragment", () => {
@@ -31,7 +35,8 @@ describe("route validation", () => {
   it("recognises external targets", () => {
     expect(isExternalHref("mailto:hello@example.com")).toBe(true);
     expect(isExternalHref("tel:+12145550100")).toBe(true);
-    expect(isExternalHref("https://commons.wikimedia.org")).toBe(true);
+    expect(isExternalHref("sms:+12145550100?&body=hi")).toBe(true);
+    expect(isExternalHref("https://www.instagram.com/tasteofchaska/")).toBe(true);
     expect(isExternalHref("/menu")).toBe(false);
   });
 

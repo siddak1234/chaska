@@ -4,11 +4,15 @@ import {
   getAboutPage,
   getAllMenuItems,
   getCatering,
+  getDishes,
+  getHomeDishes,
   getHomePage,
   getMenu,
+  getOrderPage,
+  getSignatureBands,
   getSite,
 } from "@/content";
-import { images } from "@/content/generated/images";
+import { images } from "@/content/images";
 import { isValidHref } from "@/lib/routes";
 
 /**
@@ -23,6 +27,8 @@ describe("content", () => {
       getCatering();
       getHomePage();
       getAboutPage();
+      getDishes();
+      getOrderPage();
     }).not.toThrow();
   });
 
@@ -52,10 +58,15 @@ describe("content", () => {
   });
 
   it("marks every meat and fish dish inside an otherwise vegetarian course", () => {
-    const flagged = getMenu()
-      .courses.filter((c) => c.englishName !== "Non-vegetarian")
-      .flatMap((c) => c.items)
-      .filter((i) => /chicken|mutton|fish|keema/i.test(i.name));
+    const signatureItems = getSignatureBands().flatMap((band) =>
+      band.courses.flatMap((c) => c.items),
+    );
+    const flagged = [
+      ...getMenu()
+        .courses.filter((c) => c.englishName !== "Non-vegetarian")
+        .flatMap((c) => c.items),
+      ...signatureItems,
+    ].filter((i) => /chicken|mutton|fish|keema/i.test(i.name));
     expect(flagged.length).toBeGreaterThan(0);
     for (const item of flagged) {
       expect(item.nonVeg, `${item.name} is not flagged non-veg`).toBe(true);
@@ -113,11 +124,71 @@ describe("content", () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it("carries the three catering tiers", () => {
+  it("carries the design's three catering cards", () => {
     expect(getCatering().packages.map((p) => p.name)).toEqual([
-      "Family Gatherings",
-      "Larger Events",
-      "Weddings & Celebrations",
+      "Catering Trays",
+      "High Tea Spreads",
+      "Get Togethers",
+    ]);
+  });
+
+  it("carries the eleven dishes photographed for the design", () => {
+    expect(getDishes().map((d) => d.id)).toEqual([
+      "dahi-bhalla",
+      "moong-salad",
+      "masala-idli",
+      "bhutta-dip",
+      "kadhi-pakora",
+      "burrata-lababdar",
+      "pesto-eggs",
+      "panjiri",
+      "kutchi-dabeli",
+      "butter-chicken-sliders",
+      "paneer-kathi",
+    ]);
+  });
+
+  it("prices every orderable dish as the design does", () => {
+    // Confirmed by the owner as the real prices, 25 Sep 2026.
+    const prices = Object.fromEntries(
+      getDishes().map((d) => [
+        d.id,
+        d.pricing.kind === "container"
+          ? [d.pricing.small, d.pricing.large]
+          : [d.pricing.unit, d.pricing.each],
+      ]),
+    );
+    expect(prices).toEqual({
+      "dahi-bhalla": [9, 16],
+      "moong-salad": [8, 14],
+      "masala-idli": [9, 16],
+      "bhutta-dip": [8, 14],
+      "kadhi-pakora": [10, 18],
+      "burrata-lababdar": [12, 22],
+      "pesto-eggs": [10, 18],
+      panjiri: [10, 18],
+      "kutchi-dabeli": ["Per dabeli", 5],
+      "butter-chicken-sliders": ["Per slider", 6],
+      "paneer-kathi": ["Per roll", 9],
+    });
+  });
+
+  it("shows every catalogue dish exactly once among the signature dishes", () => {
+    const shown = getSignatureBands()
+      .flatMap((band) => band.courses)
+      .flatMap((course) => course.items.map((item) => item.id));
+    expect([...shown].sort()).toEqual(
+      getDishes()
+        .map((d) => d.id)
+        .sort(),
+    );
+  });
+
+  it("resolves the home page's three dishes from the catalogue", () => {
+    expect(getHomeDishes().map((d) => d.name)).toEqual([
+      "Panjiri",
+      "Punjabi Kadhi Pakora",
+      "Royal Paneer Kathi Roll",
     ]);
   });
 
@@ -132,7 +203,7 @@ describe("content", () => {
       ...home.lead.actions.map((l) => l.href),
       home.kitchen.moreLink.href,
       home.family.action.href,
-      home.cateringNotice.action.href,
+      home.catering.action.href,
       ...about.quote.actions.map((l) => l.href),
     ];
 
@@ -142,29 +213,36 @@ describe("content", () => {
     }
   });
 
-  it("resolves every referenced image id in the generated manifest", () => {
+  it("uses every photograph in the manifest somewhere", () => {
+    // The schema already rejects an unknown id; this catches the reverse — a
+    // file shipped in the bundle that no page shows.
     const home = getHomePage();
     const about = getAboutPage();
-    const menu = getMenu();
-
-    const ids = [
+    const used = new Set([
       home.lead.figure.imageId,
       home.family.figure.imageId,
-      ...home.kitchen.dishes.map((d) => d.imageId),
+      home.catering.figure.imageId,
+      about.owner.figure.imageId,
       about.family.figure.imageId,
-      ...menu.photoStrip.map((f) => f.imageId),
-    ];
-
-    for (const id of ids) {
-      expect(Object.keys(images), `${id} is missing from the manifest`).toContain(id);
+      ...getDishes().map((d) => d.imageId),
+      ...getSignatureBands().flatMap((band) => band.photoStrip.map((f) => f.imageId)),
+    ]);
+    for (const id of Object.keys(images)) {
+      expect(used.has(id as never), `${id} is never shown`).toBe(true);
     }
+  });
+
+  it("leaves Snoopy's frame empty, as the design does, rather than show another dog", () => {
+    const figure = getAboutPage().family.figure;
+    expect(figure.imageId).toBeNull();
+    expect(figure.emptyLabel).toBe("Photo of Snoopy");
   });
 
   it("fills the owner portrait slot with a real photograph", () => {
     // Empty on the artboard, and deliberately left empty rather than filled
     // with a stock photo of a stranger, until the real portrait arrived.
     const figure = getAboutPage().owner.figure;
-    expect(figure.imageId).toBe("about-ronika");
+    expect(figure.imageId).toBe("ronika-portrait");
     expect(figure.ratio).toBe("4/5");
     // The empty-state label stays as the fallback if the id is ever cleared.
     expect(figure.emptyLabel).toBeTruthy();
@@ -186,9 +264,24 @@ describe("content", () => {
 
     expect(contact.phone.e164).toBe("+12148017809");
     expect(contact.email.general).toBe("ronikajit@gmail.com");
-    expect(contact.address.street).toBe("14355 Francis Lane");
     expect(contact.address.locality).toBe("Frisco");
-    expect(contact.address.postalCode).toBe("75035");
+    expect(contact.address.regionName).toBe("Texas");
+  });
+
+  it("publishes no opening hours, as the design removed them", () => {
+    expect(getSite()).not.toHaveProperty("hours");
+  });
+
+  it("links the kitchen's Instagram", () => {
+    expect(getSite().social.instagram).toBe("tasteofchaska");
+  });
+
+  it("publishes no street address, by decision", () => {
+    // The site says "Frisco, Texas" and nothing more precise. The schema has
+    // no field for a street, so one cannot creep back in through the data.
+    const { address } = getSite().contact;
+    expect(address).not.toHaveProperty("street");
+    expect(address).not.toHaveProperty("postalCode");
   });
 
   it("dials the number it prints", () => {
@@ -210,15 +303,9 @@ describe("content", () => {
     expect(site.contact.address.placeholder).toBe(false);
   });
 
-  it("gives the address every field schema.org needs", () => {
+  it("gives the address every field a town-level PostalAddress needs", () => {
     const { address } = getSite().contact;
-    for (const field of [
-      "street",
-      "locality",
-      "region",
-      "postalCode",
-      "country",
-    ] as const) {
+    for (const field of ["locality", "region", "country"] as const) {
       expect(address[field], `address.${field} is empty`).toBeTruthy();
     }
     expect(address.region).toHaveLength(2);

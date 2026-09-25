@@ -1,8 +1,101 @@
 {
-  "kicker": "Full menu · Please ask for prices",
+  "kicker": "Made to order · Pickup in Frisco",
   "title": "The Menu",
   "titleGurmukhi": "ਮੀਨੂ",
-  "intro": "Dishes are served in generous portions meant for the table. Please tell your server how spicy you would like your food prepared.",
+  "intro": "Authentic home flavors with a Punjabi tadka, plus a few Indo-fusion dishes of our own. Everything is made to order. Message us on Instagram to order.",
+  "signature": {
+    "title": "Signature dishes",
+    "bands": [
+      {
+        "courses": [
+          {
+            "id": "small-plates",
+            "name": "Shuruaat",
+            "englishName": "Small plates",
+            "layout": "grid",
+            "dishIds": ["dahi-bhalla", "moong-salad", "masala-idli", "bhutta-dip"]
+          }
+        ],
+        "photoStrip": [
+          {
+            "imageId": "moong-salad",
+            "caption": "Sprouted moong dal salad."
+          },
+          {
+            "imageId": "bhutta-dip",
+            "caption": "Masala bhutta dip."
+          },
+          {
+            "imageId": "masala-idli",
+            "caption": "Masala idli with coconut chutney."
+          }
+        ]
+      },
+      {
+        "courses": [
+          {
+            "id": "home-kitchen",
+            "name": "Ghar di Rasoi",
+            "englishName": "From the home kitchen",
+            "layout": "grid",
+            "dishIds": [
+              "kadhi-pakora",
+              "burrata-lababdar",
+              "paneer-kathi",
+              "pesto-eggs"
+            ]
+          }
+        ],
+        "photoStrip": [
+          {
+            "imageId": "kadhi-pakora",
+            "caption": "Punjabi kadhi pakora."
+          },
+          {
+            "imageId": "burrata-lababdar",
+            "caption": "Burrata lababdar."
+          },
+          {
+            "imageId": "pesto-eggs",
+            "caption": "Garden pesto eggs with garlic toast."
+          }
+        ]
+      },
+      {
+        "courses": [
+          {
+            "id": "street-food",
+            "name": "Chaat te Sliders",
+            "englishName": "Street food & fusion",
+            "layout": "stack",
+            "dishIds": ["kutchi-dabeli", "butter-chicken-sliders"]
+          },
+          {
+            "id": "sweet",
+            "name": "Mitha",
+            "englishName": "Sweet",
+            "layout": "stack",
+            "dishIds": ["panjiri"]
+          }
+        ],
+        "photoStrip": [
+          {
+            "imageId": "kutchi-dabeli",
+            "caption": "Kutchi dabeli."
+          },
+          {
+            "imageId": "butter-chicken-sliders",
+            "caption": "Butter chicken sliders."
+          },
+          {
+            "imageId": "panjiri",
+            "caption": "Panjiri."
+          }
+        ]
+      }
+    ]
+  },
+  "fullMenuTitle": "Full menu",
   "courses": [
     {
       "id": "shuruaat",
@@ -498,20 +591,6 @@
           "description": "Black tea brewed with milk and whole spices."
         }
       ]
-    }
-  ],
-  "photoStrip": [
-    {
-      "imageId": "menu-tandoori",
-      "caption": "Tandoori murgh, from the clay tandoor."
-    },
-    {
-      "imageId": "menu-saag",
-      "caption": "Sarson da saag te makki di roti, with white butter."
-    },
-    {
-      "imageId": "menu-table",
-      "caption": "The table, served family style."
     }
   ]
 }

@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 /**
- * Every photo on the site is vendored into `src/assets/images` by
- * `npm run images:fetch` and imported statically, so there is no remote image
- * host to allowlist and `next build` never touches the network.
+ * Every photo on the site is committed to `src/assets/images` and imported
+ * statically, so there is no remote image host to allowlist and `next build`
+ * never touches the network.
  */
 const nextConfig: NextConfig = {
   reactStrictMode: true,

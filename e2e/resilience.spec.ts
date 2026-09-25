@@ -1,8 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-import { dishCount } from "./content";
+import { ROUTES } from "../src/lib/routes";
 
-const ROUTES = ["/", "/menu", "/about", "/credits"] as const;
+import { dishCount } from "./content";
 
 /** WCAG 1.4.10 sets the reflow floor at 320px, below the smallest test device. */
 test.describe("reflow at 320px", () => {

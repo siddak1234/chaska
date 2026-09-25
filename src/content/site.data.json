@@ -1,19 +1,16 @@
 {
   "name": "Chaska",
   "nameGurmukhi": "ਚਸਕਾ",
-  "descriptor": "A Punjabi family restaurant",
+  "descriptor": "A Punjabi family kitchen",
   "tagline": "The taste you keep coming back for",
-  "topbar": [
-    "Frisco, Texas",
-    "A Punjabi family restaurant",
-    "Three generations of cooking"
-  ],
-  "footerMeta": "Chaska · A Punjabi family restaurant · Frisco, Texas",
   "cuisine": "Punjabi",
   "metroArea": "Dallas–Fort Worth",
   "url": {
     "value": "https://eatchaska.com",
     "placeholder": false
+  },
+  "social": {
+    "instagram": "tasteofchaska"
   },
   "contact": {
     "phone": {
@@ -23,26 +20,15 @@
     },
     "email": {
       "general": "ronikajit@gmail.com",
-      "catering": "ronikajit@gmail.com",
       "placeholder": false
     },
     "address": {
-      "street": "14355 Francis Lane",
       "locality": "Frisco",
       "region": "TX",
       "regionName": "Texas",
-      "postalCode": "75035",
       "country": "US",
       "placeholder": false
     }
-  },
-  "hours": {
-    "openDays": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-    "opens": "11:00",
-    "closes": "22:00",
-    "displayDays": "Tuesday to Sunday",
-    "displayTime": "11:00 am to 10:00 pm",
-    "displayClosed": "Closed Monday"
   },
   "nav": [
     {
@@ -52,6 +38,10 @@
     {
       "label": "Menu",
       "href": "/menu"
+    },
+    {
+      "label": "Order",
+      "href": "/order"
     },
     {
       "label": "About",
@@ -72,16 +62,16 @@
       "href": "/menu"
     },
     {
+      "label": "Order",
+      "href": "/order"
+    },
+    {
       "label": "About",
       "href": "/about"
     },
     {
       "label": "Catering",
       "href": "/menu#catering"
-    },
-    {
-      "label": "Credits",
-      "href": "/credits"
     }
   ]
 }

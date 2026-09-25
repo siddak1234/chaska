@@ -1,12 +1,13 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import type { ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 import { SmartLink } from "@/components/ui/SmartLink";
 import { cn } from "@/lib/cn";
 
 /**
- * The eight calls to action across the three artboards, reduced to three
- * variants and three sizes.
+ * Every call to action across the artboards, reduced to three variants and
+ * three sizes. Links and real `<button>`s share them, so the Order page's
+ * buttons are the same objects as the rest of the site's calls to action.
  *
  * Two deliberate departures from the source markup:
  *
@@ -19,7 +20,7 @@ import { cn } from "@/lib/cn";
  * `leading-5` is explicit because these are inline-block anchors, where the
  * inherited body line-height would otherwise decide the height.
  */
-const buttonVariants = cva(
+export const buttonVariants = cva(
   [
     "inline-block font-ui text-label leading-5 font-bold tracking-ui uppercase",
     "no-underline transition-colors duration-150",
@@ -50,7 +51,7 @@ type ButtonLinkProps = VariantProps<typeof buttonVariants> & {
   className?: string;
 };
 
-/** Every call to action in this design is a link, never a form button. */
+/** A call to action that navigates. */
 export function ButtonLink({
   href,
   children,
@@ -62,5 +63,31 @@ export function ButtonLink({
     <SmartLink href={href} className={cn(buttonVariants({ variant, size }), className)}>
       {children}
     </SmartLink>
+  );
+}
+
+type ButtonProps = VariantProps<typeof buttonVariants> &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className"> & {
+    children: ReactNode;
+    className?: string;
+  };
+
+/** A call to action that acts on the page: add to order, checkout, try again. */
+export function Button({
+  variant,
+  size,
+  className,
+  type = "button",
+  children,
+  ...props
+}: ButtonProps) {
+  return (
+    <button
+      type={type}
+      className={cn(buttonVariants({ variant, size }), "cursor-pointer", className)}
+      {...props}
+    >
+      {children}
+    </button>
   );
 }

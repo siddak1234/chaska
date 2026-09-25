@@ -4,13 +4,12 @@ import { SplitFeature } from "@/components/sections/SplitFeature";
 import { ButtonLink } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { getAboutPage } from "@/content";
-import type { ImageId } from "@/content/generated/images";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "About",
   description:
-    "Chaska means the taste you keep coming back for. Owner Ronika Singh Bhatia cooks the recipes she learned by hand in Frisco, Texas — and Snoopy, the house shih tzu, supervises the dining room.",
+    "Chaska means the taste you keep coming back for. Owner Ronika Singh Bhatia cooks the recipes she learned by hand, in Frisco, Texas — with Snoopy, the house shih tzu, as honorary sous chef.",
   path: "/about",
 });
 
@@ -33,12 +32,7 @@ export default function AboutPage() {
           kicker={about.owner.kicker}
           title={about.owner.title}
           paragraphs={about.owner.paragraphs}
-          figure={{
-            imageId: about.owner.figure.imageId as ImageId | null,
-            caption: about.owner.figure.caption,
-            ratio: about.owner.figure.ratio,
-            emptyLabel: about.owner.figure.emptyLabel,
-          }}
+          figure={about.owner.figure}
           figureFirst
           columns="portrait"
         />
@@ -49,11 +43,7 @@ export default function AboutPage() {
           kicker={about.family.kicker}
           title={about.family.title}
           paragraphs={about.family.paragraphs}
-          figure={{
-            imageId: about.family.figure.imageId as ImageId,
-            caption: about.family.figure.caption,
-            ratio: about.family.figure.ratio,
-          }}
+          figure={about.family.figure}
           columns="portrait"
         />
       </Section>

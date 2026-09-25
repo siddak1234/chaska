@@ -3,33 +3,39 @@ import { MenuCourse } from "@/components/sections/MenuCourse";
 import { MenuIndex } from "@/components/sections/MenuIndex";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { PhotoStrip } from "@/components/sections/PhotoStrip";
+import { Kicker } from "@/components/ui/Kicker";
 import { Section } from "@/components/ui/Section";
-import { getCatering, getMenu, getSite } from "@/content";
-import type { ImageId } from "@/content/generated/images";
+import { getCatering, getMenu, getSignatureBands, getSite } from "@/content";
+import { instagramUrl } from "@/lib/format";
 import { JsonLd, menuJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Menu",
   description:
-    "Appetizers, mains from the home kitchen, breads from the tandoor, desserts and drinks — plus catering across Frisco and the Dallas–Fort Worth area, from ten guests to a wedding.",
+    "Chaska's signature dishes and full menu: Punjabi home cooking with a few Indo-fusion dishes, made to order for pickup in Frisco, Texas, plus catering trays and high tea spreads.",
   path: "/menu",
 });
 
+const SIGNATURE_ID = "signature";
+const FULL_MENU_ID = "full-menu";
+
 export default function MenuPage() {
   const menu = getMenu();
+  const bands = getSignatureBands();
   const catering = getCatering();
   const site = getSite();
 
   /**
    * Courses are grouped by their own layout rather than read off fixed
    * positions. An earlier version destructured `menu.courses` by index, so
-   * adding a course silently dropped it from the page — three of seven were
-   * missing, and the two narrow courses rendered in the wrong slot.
+   * adding a course silently dropped it from the page.
    */
   const wide = menu.courses.filter((course) => course.layout !== "stack");
   const narrow = menu.courses.filter((course) => course.layout === "stack");
-  const [lead, ...rest] = wide;
+  const signatureCount = bands
+    .flatMap((band) => band.courses)
+    .reduce((sum, course) => sum + course.items.length, 0);
 
   return (
     <>
@@ -48,26 +54,79 @@ export default function MenuPage() {
         headingSize="title"
       />
 
-      <MenuIndex courses={menu.courses} />
+      <MenuIndex
+        title="Contents"
+        entries={[
+          { id: SIGNATURE_ID, name: menu.signature.title, count: signatureCount },
+          ...menu.courses.map((course) => ({
+            id: `course-${course.id}`,
+            name: course.name,
+            count: course.items.length,
+          })),
+        ]}
+      />
 
-      {lead ? (
-        <Section rule="double" pad="sm">
-          <MenuCourse course={lead} />
-        </Section>
-      ) : null}
-
-      <Section rule="solid" pad="xs">
-        <PhotoStrip
-          figures={menu.photoStrip.map((figure) => ({
-            imageId: figure.imageId as ImageId,
-            caption: figure.caption,
-          }))}
-        />
+      {/*
+        The design's photographed dishes, band by band: one course, or two
+        set side by side, then a strip of three photographs. They sit under a
+        heading of their own because two of the design's course names —
+        Shuruaat and Ghar di Rasoi — are also courses in the full menu below,
+        which gets a heading of its own for the same reason.
+      */}
+      <Section
+        id={SIGNATURE_ID}
+        rule="double"
+        pad="sm"
+        aria-labelledby="signature-heading"
+        className="pb-0"
+      >
+        <Kicker
+          as="h2"
+          size="sm"
+          id="signature-heading"
+          className="mb-sec-sm text-center"
+        >
+          {menu.signature.title}
+        </Kicker>
+        {bands.map((band, index) => (
+          <div key={band.courses[0]?.id ?? index}>
+            <div
+              className={index === 0 ? "pb-sec-sm" : "border-t border-ink py-sec-sm"}
+            >
+              {band.courses.length > 1 ? (
+                <div className="grid auto-grid-280 gap-x-gap-menu gap-y-10">
+                  {band.courses.map((course) => (
+                    <div key={course.id}>
+                      <MenuCourse course={course} compact headingLevel={3} />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                band.courses.map((course) => (
+                  <MenuCourse key={course.id} course={course} headingLevel={3} />
+                ))
+              )}
+            </div>
+            <div className="border-t border-ink py-sec-xs">
+              <PhotoStrip figures={band.photoStrip} />
+            </div>
+          </div>
+        ))}
       </Section>
 
-      {rest.map((course) => (
-        <Section key={course.id} rule="solid" pad="sm">
-          <MenuCourse course={course} />
+      {wide.map((course, index) => (
+        <Section
+          key={course.id}
+          id={index === 0 ? FULL_MENU_ID : undefined}
+          rule={index === 0 ? "double" : "solid"}
+          pad="sm"
+        >
+          {index === 0 ? (
+            <Kicker as="h2" size="sm" className="mb-sec-sm text-center">
+              {menu.fullMenuTitle}
+            </Kicker>
+          ) : null}
+          <MenuCourse course={course} headingLevel={3} />
         </Section>
       ))}
 
@@ -76,7 +135,7 @@ export default function MenuPage() {
           <div className="grid auto-grid-280 gap-x-gap-menu gap-y-10">
             {narrow.map((course) => (
               <div key={course.id}>
-                <MenuCourse course={course} compact />
+                <MenuCourse course={course} compact headingLevel={3} />
               </div>
             ))}
           </div>
@@ -89,7 +148,10 @@ export default function MenuPage() {
         pad="catering"
         aria-labelledby="catering-heading"
       >
-        <CateringPackages catering={catering} email={site.contact.email.catering} />
+        <CateringPackages
+          catering={catering}
+          cta={{ label: catering.ctaLabel, href: instagramUrl(site.social.instagram) }}
+        />
       </Section>
 
       <JsonLd data={menuJsonLd()} />

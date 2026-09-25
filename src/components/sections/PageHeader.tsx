@@ -15,7 +15,7 @@ type PageHeaderProps = {
   headingSize: "title" | "titleAbout";
 };
 
-/** The centred opening block on the Menu, About and Credits pages. */
+/** The centred opening block on the Menu, Order and About pages. */
 export function PageHeader({
   kicker,
   title,

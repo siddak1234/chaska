@@ -13,14 +13,13 @@ const kicker = cva("font-ui uppercase", {
     tone: {
       accent: "text-oxblood",
       ink: "text-ink",
-      muted: "text-ink-muted",
     },
     size: {
       /** 12px / 0.18em — section kickers. */
       md: "text-label font-bold tracking-kicker",
       /** 11px / 0.18em — course subtitles on the menu. */
       sm: "text-micro font-bold tracking-kicker",
-      /** 11px / 0.14em — the Hours and Contact labels. */
+      /** 11px / 0.14em — the cart drawer's pickup note. */
       label: "text-micro font-bold tracking-ui",
       /** 11px / 0.16em — catering guest counts, footer meta. */
       meta: "text-micro font-bold tracking-meta",
@@ -35,6 +34,7 @@ type KickerProps = VariantProps<typeof kicker> & {
   children: ReactNode;
   className?: string;
   as?: ElementType;
+  id?: string;
 };
 
 export function Kicker({
@@ -43,6 +43,11 @@ export function Kicker({
   tone,
   size,
   as: Tag = "p",
+  id,
 }: KickerProps) {
-  return <Tag className={cn(kicker({ tone, size }), className)}>{children}</Tag>;
+  return (
+    <Tag id={id} className={cn(kicker({ tone, size }), className)}>
+      {children}
+    </Tag>
+  );
 }

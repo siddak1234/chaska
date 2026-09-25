@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-const ROUTES = ["/", "/menu", "/about", "/credits"] as const;
+import { ROUTES } from "../src/lib/routes";
 
 test("no artboard filename survives anywhere in the site", async ({ page }) => {
   for (const route of ROUTES) {
@@ -58,11 +58,17 @@ test("an unknown path renders the styled 404, not a bare error", async ({ page }
   await expect(page.getByRole("navigation", { name: "Primary" })).toBeVisible();
 });
 
-test("the phone and email links are dialable and mailable", async ({ page }) => {
+test("the phone link is dialable", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("a[href^='tel:']").first()).toHaveAttribute(
     "href",
     /^tel:\+\d{7,}$/,
   );
-  await expect(page.locator("a[href^='mailto:']").first()).toBeVisible();
+});
+
+test("catering enquiries go to Instagram, as the design has it", async ({ page }) => {
+  await page.goto("/menu#catering");
+  await expect(
+    page.getByRole("link", { name: "Message us on Instagram" }),
+  ).toHaveAttribute("href", "https://www.instagram.com/tasteofchaska/");
 });

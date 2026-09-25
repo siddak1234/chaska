@@ -1,8 +1,8 @@
-import { getImage, type ImageId } from "@/content/generated/images";
+import { getImage, type ImageId } from "@/content/images";
 import { cn } from "@/lib/cn";
 
 import { EmptyFrame } from "./EmptyFrame";
-import { ImageFrame } from "./ImageFrame";
+import { ImageFrame, type FrameSpan } from "./ImageFrame";
 import type { FrameRatio } from "./ratios";
 
 type FigureProps = {
@@ -10,7 +10,7 @@ type FigureProps = {
   imageId: ImageId | null;
   caption: string;
   ratio: FrameRatio;
-  span?: "full" | "half" | "portrait" | "third";
+  span?: FrameSpan;
   priority?: boolean;
   /** Shown instead of a photograph when `imageId` is null. */
   emptyLabel?: string;
@@ -19,8 +19,8 @@ type FigureProps = {
 
 /**
  * A photograph with the design's ruled caption: Libre Franklin 12/20 in muted
- * ink, closed by a hairline rule. Eight of these are hand-written across the
- * three artboards, all identical apart from the image and the words.
+ * ink, closed by a hairline rule. Every captioned photograph in the artboards
+ * is this block, identical apart from the image and the words.
  */
 export function Figure({
   imageId,

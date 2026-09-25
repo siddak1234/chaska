@@ -7,8 +7,8 @@ import { ROUTES } from "@/lib/routes";
 const PRIORITY: Record<string, number> = {
   "/": 1,
   "/menu": 0.9,
+  "/order": 0.8,
   "/about": 0.7,
-  "/credits": 0.3,
 };
 
 export default function sitemap(): MetadataRoute.Sitemap {

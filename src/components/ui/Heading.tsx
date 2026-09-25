@@ -11,9 +11,7 @@ import { cn } from "@/lib/cn";
 const heading = cva("font-display font-normal", {
   variants: {
     size: {
-      /** clamp(36px, 5.2vw, 68px) — the home page's front-page headline. */
-      hero: "text-hero",
-      /** clamp(34px, 4.2vw, 54px) — the home lead. */
+      /** clamp(34px, 4.2vw, 54px) — the home lead, beside its photograph. */
       lead: "text-lead",
       /** clamp(36px, 5vw, 58px) — the menu page title. */
       title: "text-title",
@@ -33,6 +31,8 @@ const heading = cva("font-display font-normal", {
       notice: "text-notice",
       /** 24px — dish cards and catering packages. */
       dish: "text-dish",
+      /** 22px — dish names on the Order page's cards. */
+      item: "text-item",
     },
   },
   defaultVariants: { size: "section" },
