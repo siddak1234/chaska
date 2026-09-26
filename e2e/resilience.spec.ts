@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./fixtures";
 
 import { ROUTES } from "../src/lib/routes";
 
@@ -23,27 +23,8 @@ test.describe("reflow at 320px", () => {
 test.describe("without JavaScript", () => {
   test.use({ javaScriptEnabled: false });
 
-  test("the menu is fully readable", async ({ page }, testInfo) => {
-    // TEMP diagnostic: report what is still in flight if the load stalls.
-    const pending = new Map<string, number>();
-    const t0 = Date.now();
-    page.on("request", (r) => pending.set(r.url(), Date.now() - t0));
-    page.on("requestfinished", (r) => pending.delete(r.url()));
-    page.on("requestfailed", (r) => {
-      console.log(
-        `[diag ${testInfo.project.name}] FAILED ${r.url()} ${r.failure()?.errorText}`,
-      );
-      pending.delete(r.url());
-    });
-    const timer = setTimeout(
-      () =>
-        console.log(
-          `[diag ${testInfo.project.name}] pending at 20s: ${JSON.stringify([...pending])}`,
-        ),
-      20_000,
-    );
+  test("the menu is fully readable", async ({ page }) => {
     await page.goto("/menu");
-    clearTimeout(timer);
     await expect(page.locator("main dl dt")).toHaveCount(dishCount);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     // Server-rendered from the route, not computed on the client.
