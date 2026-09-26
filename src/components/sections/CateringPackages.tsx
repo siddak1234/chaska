@@ -12,12 +12,16 @@ type CateringPackagesProps = {
   cta: Link;
 };
 
+/**
+ * The Catering page: heading, the Instagram call to action where a phone shows
+ * it without scrolling, then the three packages.
+ */
 export function CateringPackages({ catering, cta }: CateringPackagesProps) {
   return (
     <>
-      <div className="mx-auto mb-9 max-w-catering-intro text-center">
+      <div className="mx-auto mb-8 max-w-catering-intro text-center sm:mb-10">
         <Kicker className="mb-3">{catering.kicker}</Kicker>
-        <Heading level={2} size="catering" id="catering-heading">
+        <Heading level={1} size="catering" id="catering-heading">
           {catering.title}
         </Heading>
         <Prose
@@ -26,24 +30,20 @@ export function CateringPackages({ catering, cta }: CateringPackagesProps) {
           tone="secondary"
           className="mt-4"
         />
+        <ButtonLink href={cta.href} variant="ink" size="lg" className="mt-6">
+          {cta.label}
+        </ButtonLink>
       </div>
 
-      <div className="grid auto-grid-250 gap-6">
+      <div className="grid auto-grid-250 gap-4 sm:gap-6">
         {catering.packages.map((pkg) => (
           <NoticeCard
             key={pkg.id}
             variant="package"
-            kicker={pkg.kicker}
             title={pkg.name}
             body={pkg.description}
           />
         ))}
-      </div>
-
-      <div className="mt-9 text-center">
-        <ButtonLink href={cta.href} variant="ink" size="lg">
-          {cta.label}
-        </ButtonLink>
       </div>
     </>
   );

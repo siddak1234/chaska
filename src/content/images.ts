@@ -19,6 +19,16 @@ export type SlotImage = {
 };
 
 /**
+ * A photograph served from elsewhere — a Shopify product image, for a dish on
+ * today's menu that has no photograph of our own. Allowed hosts are listed in
+ * `images.remotePatterns` in `next.config.ts`.
+ */
+export type RemoteImage = { src: string; width: number; height: number };
+
+/** Anything a photographic frame can show. */
+export type FrameImage = StaticImageData | RemoteImage;
+
+/**
  * Every photograph on the site, keyed by what it shows — one entry per file,
  * however many places it appears.
  *

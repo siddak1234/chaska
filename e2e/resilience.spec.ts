@@ -49,7 +49,7 @@ test("solid buttons keep a readable label on hover", async ({ page }, testInfo) 
   // The artboards let the global `a:hover { color: oxblood }` apply to solid
   // ink buttons — 1.96:1. Each variant must override it.
   await page.goto("/");
-  const button = page.getByRole("link", { name: "View the menu" });
+  const button = page.getByRole("link", { name: "Order for pickup" });
   await button.hover();
 
   const { background, color } = await button.evaluate((el) => {

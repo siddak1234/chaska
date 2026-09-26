@@ -18,6 +18,10 @@ type CartDrawerProps = {
   /** "Pickup only · Frisco, Texas" */
   note: string;
   onCheckout: () => void;
+  /** While Shopify's checkout is being prepared. */
+  busy?: boolean;
+  /** Why checkout could not start, shown above the button. */
+  error?: string | null;
 };
 
 /**
@@ -28,7 +32,13 @@ type CartDrawerProps = {
  * button afterwards — everything the design's `role="dialog"` div would have
  * needed scripting to do. Clicking the scrim closes it, as in the design.
  */
-export function CartDrawer({ lines, note, onCheckout }: CartDrawerProps) {
+export function CartDrawer({
+  lines,
+  note,
+  onCheckout,
+  busy = false,
+  error = null,
+}: CartDrawerProps) {
   const { drawerOpen, setDrawerOpen, change, remove } = useCart();
   const dialog = useRef<HTMLDialogElement>(null);
 
@@ -121,12 +131,18 @@ export function CartDrawer({ lines, note, onCheckout }: CartDrawerProps) {
         {lines.length > 0 ? (
           <div className="border-t border-ink px-6 pt-4 pb-6">
             <SubtotalRow amount={subtotal(lines)} />
+            {error ? (
+              <p role="alert" className="mt-3 font-ui text-[13px] text-oxblood">
+                {error}
+              </p>
+            ) : null}
             <Button
               variant="accent"
-              className="mt-4 min-h-12 w-full"
+              className="mt-4 min-h-12 w-full disabled:cursor-wait disabled:opacity-70"
               onClick={onCheckout}
+              disabled={busy}
             >
-              Checkout
+              {busy ? "Opening checkout…" : "Checkout"}
             </Button>
             <Button
               variant="outline"

@@ -3,11 +3,12 @@ import type { MetadataRoute } from "next";
 import { getSiteUrl } from "@/content";
 import { ROUTES } from "@/lib/routes";
 
-/** Priority ordering: the front page, then the menu, then everything else. */
+/** Priority ordering: the front page, then the menu and ordering, then the rest. */
 const PRIORITY: Record<string, number> = {
   "/": 1,
   "/menu": 0.9,
-  "/order": 0.8,
+  "/order": 0.9,
+  "/catering": 0.8,
   "/about": 0.7,
 };
 

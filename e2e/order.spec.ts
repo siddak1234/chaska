@@ -6,17 +6,24 @@ import { expect, test, type Page } from "@playwright/test";
  * that would be sent rather than a server receiving it.
  */
 
-async function addDahiLarge(page: Page, qty = 1) {
+async function add(page: Page, dish: string, times = 1) {
+  const button = page.getByRole("button", {
+    name: new RegExp(`^Add(ed)? ${dish} to order$`),
+  });
+  for (let i = 0; i < times; i++) await button.click();
+}
+
+async function addDahiLarge(page: Page, times = 1) {
   const card = page.locator("article", {
     has: page.getByRole("heading", { name: "Dahi Bhalla" }),
   });
   await card.getByText("Large").click();
-  for (let i = 1; i < qty; i++) {
-    await card
-      .getByRole("button", { name: "Increase quantity of Dahi Bhalla" })
-      .click();
-  }
-  await card.getByRole("button", { name: "Add to order" }).click();
+  await add(page, "Dahi Bhalla", times);
+}
+
+async function openCart(page: Page) {
+  await page.getByRole("button", { name: /^Cart/ }).click();
+  return page.getByRole("dialog", { name: "Your order" });
 }
 
 test.beforeEach(async ({ page }) => {
@@ -25,10 +32,18 @@ test.beforeEach(async ({ page }) => {
   await page.reload();
 });
 
-test("adding a dish opens the cart with the right line and price", async ({ page }) => {
+test("adding confirms in place and counts, without covering the page", async ({
+  page,
+}) => {
   await addDahiLarge(page, 2);
 
-  const drawer = page.getByRole("dialog", { name: "Your order" });
+  await expect(page.getByRole("dialog", { name: "Your order" })).toBeHidden();
+  await expect(
+    page.getByRole("button", { name: "Added Dahi Bhalla to order" }),
+  ).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Cart/ })).toContainText("2");
+
+  const drawer = await openCart(page);
   await expect(drawer).toBeVisible();
   await expect(drawer).toContainText("Dahi Bhalla");
   await expect(drawer).toContainText("Large · 32 oz");
@@ -38,7 +53,7 @@ test("adding a dish opens the cart with the right line and price", async ({ page
 
 test("the cart adjusts, removes, and closes on Escape", async ({ page }) => {
   await addDahiLarge(page);
-  const drawer = page.getByRole("dialog", { name: "Your order" });
+  const drawer = await openCart(page);
 
   await drawer
     .getByRole("button", { name: "Increase quantity of Dahi Bhalla" })
@@ -55,6 +70,14 @@ test("the cart adjusts, removes, and closes on Escape", async ({ page }) => {
   );
 });
 
+test("the category bar jumps to a category and stays on screen", async ({ page }) => {
+  const bar = page.getByRole("navigation", { name: "Categories" });
+  await bar.getByRole("link", { name: "Sweet" }).click();
+  await expect(page.getByRole("heading", { level: 2, name: "Mitha" })).toBeInViewport();
+  await expect(bar).toBeInViewport();
+  await expect(page.getByRole("button", { name: /^Cart/ })).toBeInViewport();
+});
+
 test("the cart survives a reload", async ({ page }) => {
   await addDahiLarge(page);
   await page.reload();
@@ -65,13 +88,10 @@ test("checkout validates, then writes the order into a text to the kitchen", asy
   page,
 }) => {
   await addDahiLarge(page);
-  const kutchi = page.locator("article", {
-    has: page.getByRole("heading", { name: "Kutchi Dabeli" }),
-  });
-  await page.keyboard.press("Escape");
-  await kutchi.getByRole("button", { name: "Add to order" }).click();
+  await add(page, "Kutchi Dabeli");
 
-  await page.getByRole("dialog").getByRole("button", { name: "Checkout" }).click();
+  const drawer = await openCart(page);
+  await drawer.getByRole("button", { name: "Checkout" }).click();
   await expect(page.getByRole("heading", { name: "Pickup details" })).toBeVisible();
   await expect(page.getByRole("complementary")).toContainText("$21");
 
@@ -112,5 +132,6 @@ test("checkout validates, then writes the order into a text to the kitchen", asy
     /^mailto:ronikajit@gmail\.com\?subject=/,
   );
   // The cart is emptied once the order is written out.
+  await page.getByRole("button", { name: "Start a new order" }).click();
   await expect(page.getByRole("button", { name: /^Cart/ })).toContainText("0");
 });

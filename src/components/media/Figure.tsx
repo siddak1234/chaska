@@ -15,6 +15,7 @@ type FigureProps = {
   /** Shown instead of a photograph when `imageId` is null. */
   emptyLabel?: string;
   className?: string;
+  captionClassName?: string;
 };
 
 /**
@@ -30,6 +31,7 @@ export function Figure({
   priority,
   emptyLabel,
   className,
+  captionClassName,
 }: FigureProps) {
   const slot = imageId ? getImage(imageId) : null;
 
@@ -46,7 +48,12 @@ export function Figure({
       ) : (
         <EmptyFrame label={emptyLabel ?? caption} ratio={ratio} />
       )}
-      <figcaption className="border-b border-rule px-[2px] pt-[10px] pb-3 font-ui text-label leading-5 text-ink-muted">
+      <figcaption
+        className={cn(
+          "border-b border-rule px-[2px] pt-[10px] pb-3 font-ui text-label leading-5 text-ink-muted",
+          captionClassName,
+        )}
+      >
         {caption}
       </figcaption>
     </figure>

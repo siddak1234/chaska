@@ -1,13 +1,13 @@
 {
   "kicker": "About Chaska",
   "title": "A family kitchen, first and always",
-  "intro": "Chaska means the taste you keep coming back for. The name was chosen because that is what this food has meant to our family for generations, and what we hope it becomes for yours.",
+  "intro": "Chaska means the taste you keep coming back for. It is what this food has meant to our family for generations.",
   "owner": {
     "kicker": "The Owner",
     "title": "Ronika Singh Bhatia",
     "paragraphs": [
-      "Ronika grew up in a kitchen where recipes were never written down. They were watched, tasted and corrected until you got them right, and passed from one generation to the next. Her rule for every dish is the same: make it the way maa used to make it, or leave it off the menu.",
-      "She started Chaska in Frisco to serve that food the way it is served at home: family style, in the middle of the table, meant to be shared."
+      "Ronika grew up in a kitchen where recipes were never written down. They were watched, tasted and corrected, and passed from one generation to the next.",
+      "She started Chaska in Frisco to serve that food the way it is served at home: family style, meant to be shared."
     ],
     "figure": {
       "imageId": "ronika-portrait",
@@ -20,7 +20,7 @@
     "kicker": "The Family",
     "title": "Snoopy, our sous chef",
     "paragraphs": [
-      "Chaska is a family kitchen in the plainest sense: the whole family is here, including Snoopy, our shih tzu and honorary sous chef. He is not permitted near the stove, but he takes his supervisory duties seriously."
+      "The whole family is here, including Snoopy, our shih tzu and honorary sous chef."
     ],
     "figure": {
       "imageId": null,
@@ -34,12 +34,12 @@
     "attribution": "Ronika Singh Bhatia",
     "actions": [
       {
-        "label": "View the menu",
-        "href": "/menu"
+        "label": "Order for pickup",
+        "href": "/order"
       },
       {
         "label": "Catering",
-        "href": "/menu#catering"
+        "href": "/catering"
       }
     ]
   }

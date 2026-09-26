@@ -4,7 +4,7 @@ import { isExternalHref, isInternalHref, isValidHref, routeOf } from "@/lib/rout
 
 describe("route validation", () => {
   it("accepts every known route", () => {
-    for (const route of ["/", "/menu", "/order", "/about"]) {
+    for (const route of ["/", "/menu", "/order", "/catering", "/about"]) {
       expect(isInternalHref(route)).toBe(true);
     }
   });
@@ -14,18 +14,18 @@ describe("route validation", () => {
   });
 
   it("accepts a route with a fragment", () => {
-    expect(isInternalHref("/menu#catering")).toBe(true);
+    expect(isInternalHref("/menu#full-menu")).toBe(true);
   });
 
   it("accepts a bare fragment", () => {
-    expect(isInternalHref("#catering")).toBe(true);
+    expect(isInternalHref("#full-menu")).toBe(true);
   });
 
   it("rejects the artboards' filenames", () => {
     // The whole point of the check: no `Menu.dc.html` survives the port.
     expect(isValidHref("Menu.dc.html")).toBe(false);
     expect(isValidHref("Home.dc.html")).toBe(false);
-    expect(isValidHref("Menu.dc.html#catering")).toBe(false);
+    expect(isValidHref("Menu.dc.html#full-menu")).toBe(false);
   });
 
   it("rejects unknown routes", () => {
@@ -41,7 +41,7 @@ describe("route validation", () => {
   });
 
   it("extracts the route from an href with a fragment", () => {
-    expect(routeOf("/menu#catering")).toBe("/menu");
+    expect(routeOf("/menu#full-menu")).toBe("/menu");
     expect(routeOf("mailto:x@y.z")).toBeNull();
   });
 });

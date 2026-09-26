@@ -9,7 +9,7 @@ import { cn } from "@/lib/cn";
 type PageHeaderProps = {
   kicker: string;
   title: ReactNode;
-  intro: string;
+  intro?: string;
   /** The Menu and About artboards use slightly different measures. */
   measure: "menu" | "about";
   headingSize: "title" | "titleAbout";
@@ -36,7 +36,9 @@ export function PageHeader({
       <Heading level={1} size={headingSize}>
         {title}
       </Heading>
-      <Prose paragraphs={[intro]} size="body" tone="secondary" className="mt-5" />
+      {intro ? (
+        <Prose paragraphs={[intro]} size="body" tone="secondary" className="mt-5" />
+      ) : null}
     </Section>
   );
 }

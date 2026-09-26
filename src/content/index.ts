@@ -17,6 +17,7 @@ import {
   siteSchema,
   type AboutPage,
   type Catering,
+  type Category,
   type Dish,
   type HomePage,
   type Menu,
@@ -53,7 +54,7 @@ function parse<T extends z.ZodType>(
 }
 
 const site = parse(siteSchema, siteData, "site.data.json");
-const { dishes } = parse(dishesSchema, dishesData, "dishes.data.json");
+const { categories, dishes } = parse(dishesSchema, dishesData, "dishes.data.json");
 const menu = parse(menuSchema, menuData, "menu.data.json");
 const catering = parse(cateringSchema, cateringData, "catering.data.json");
 const orderPage = parse(orderPageSchema, orderData, "order.data.json");
@@ -61,11 +62,12 @@ const homePage = parse(homePageSchema, homeData, "home.data.json");
 const aboutPage = parse(aboutPageSchema, aboutData, "about.data.json");
 
 /**
- * Pages name catalogue dishes by id. An id with no dish is a content error,
- * so it fails at module load — the same moment a schema error would — rather
- * than rendering a gap.
+ * Pages name catalogue dishes and categories by id. An id with nothing behind
+ * it is a content error, so it fails at module load — the same moment a
+ * schema error would — rather than rendering a gap.
  */
 const dishById = new Map(dishes.map((dish) => [dish.id, dish]));
+const categoryById = new Map(categories.map((category) => [category.id, category]));
 
 function resolveDish(id: string, file: string): Dish {
   const dish = dishById.get(id);
@@ -74,6 +76,18 @@ function resolveDish(id: string, file: string): Dish {
   }
   return dish;
 }
+
+function resolveCategory(id: string, file: string): Category {
+  const category = categoryById.get(id);
+  if (!category) {
+    throw new Error(
+      `Invalid content in src/content/${file}: no category with id "${id}" — see categories in dishes.data.json`,
+    );
+  }
+  return category;
+}
+
+for (const dish of dishes) resolveCategory(dish.category, "dishes.data.json");
 
 /** A catalogue dish as a menu row: the Menu page's description, no price. */
 function toMenuItem(dish: Dish): MenuItem {
@@ -91,21 +105,36 @@ export type SignatureBand = {
 };
 
 const signatureBands: SignatureBand[] = menu.signature.bands.map((band) => ({
-  courses: band.courses.map(({ dishIds, ...course }) => ({
-    ...course,
-    items: dishIds.map((id) => toMenuItem(resolveDish(id, "menu.data.json"))),
-  })),
+  courses: band.courses.map(({ categoryId, layout }) => {
+    const category = resolveCategory(categoryId, "menu.data.json");
+    const items = dishes.filter((dish) => dish.category === category.id);
+    if (items.length === 0) {
+      throw new Error(
+        `Invalid content in src/content/menu.data.json: category "${categoryId}" has no dishes`,
+      );
+    }
+    return {
+      id: category.id,
+      name: category.name,
+      englishName: category.englishName,
+      layout,
+      items: items.map(toMenuItem),
+    };
+  }),
   photoStrip: band.photoStrip,
 }));
 
 export type HomeDish = { id: string; name: string; description: string } & SlotImage;
 
-const homeDishes: HomeDish[] = homePage.kitchen.dishes.map(
-  ({ dishId, description }) => {
-    const dish = resolveDish(dishId, "home.data.json");
-    return { id: dish.id, name: dish.name, description, ...getImage(dish.imageId) };
-  },
-);
+const homeDishes: HomeDish[] = homePage.kitchen.dishIds.map((dishId) => {
+  const dish = resolveDish(dishId, "home.data.json");
+  return {
+    id: dish.id,
+    name: dish.name,
+    description: dish.orderDescription ?? dish.description,
+    ...getImage(dish.imageId),
+  };
+});
 
 export function getSite(): Site {
   return site;
@@ -119,9 +148,14 @@ export function getCatering(): Catering {
   return catering;
 }
 
-/** The orderable catalogue, in the order the Order page lists it. */
+/** The orderable catalogue, grouped by category in `getCategories()` order. */
 export function getDishes(): Dish[] {
   return dishes;
+}
+
+/** Dish categories, in the order both the Order and Menu pages list them. */
+export function getCategories(): Category[] {
+  return categories;
 }
 
 export function getOrderPage(): OrderPage {

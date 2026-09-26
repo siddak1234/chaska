@@ -40,9 +40,9 @@ const actions = {
 };
 
 /**
- * The Order page's cart, shared by the masthead's cart button and the page.
- * Lives in the `(order)` layout so both sit inside it. The lines themselves
- * are kept in `localStorage` under the design's key — see `cartStore`.
+ * The Order page's cart, shared by the order bar's cart button, the dish
+ * cards and the drawer. The lines themselves are kept in `localStorage` under
+ * the design's key — see `cartStore`.
  */
 export function CartProvider({ children }: { children: ReactNode }) {
   const cart = useSyncExternalStore(

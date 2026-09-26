@@ -36,6 +36,17 @@ measurement, not assumed.
 - [x] Print stylesheet — the 86-dish menu prints as four clean Letter pages
 - [x] Forced colours and 200% text zoom verified
 - [x] 82 of 86 dishes described, researched not invented
+- [x] Menu, Order, Catering and About are separate pages; Catering moved off
+      the Menu page to `/catering`
+- [x] Order page grouped by category, with a sticky category bar and cart;
+      ~4 dishes per phone screen (was one)
+- [x] Home page cut to one line, Order + Catering on the first phone screen,
+      three dishes and a line on the family (2.9 phone screens, was 5.3 at
+      the same 390×664 viewport)
+- [x] Filler copy trimmed across Home, Menu, Order, Catering and About; phone
+      type one step smaller, nothing below 12px
+- [x] Shopify daily menu and checkout built and tested (unit + a browser run
+      against a local mock of the Storefront API); switched off until C11
 
 ---
 
@@ -95,6 +106,20 @@ measurement, not assumed.
 
 ---
 
+- [ ] **C11 — Connect Shopify.** The Order page runs on the static catalogue
+      and text/email orders until these three are set on the Vercel project
+      (Production), then redeploy:
+      `SHOPIFY_STORE_DOMAIN` (e.g. `your-store.myshopify.com`),
+      `SHOPIFY_STOREFRONT_ACCESS_TOKEN` (the public Storefront API token) and
+      `SHOPIFY_MENU_COLLECTION` (the handle of the daily menu collection).
+      In Shopify: give each product the **same handle as the dish id** in
+      `src/content/dishes.data.json` (e.g. `dahi-bhalla`) so it keeps its
+      photograph and category; give container dishes `Small` and `Large`
+      variants; set a product type such as `Small plates` on any new dish.
+      Pickup, payment and tax then happen in Shopify's checkout, so they are
+      configured in Shopify. The code has not yet run against a real store, so
+      place one test order once connected.
+
 ## Optional: redirect www to the apex
 
 `www.eatchaska.com` currently serves the site rather than redirecting. Search
@@ -110,7 +135,7 @@ set it to redirect to `eatchaska.com` (308).
 ## Verification
 
 ```bash
-npm run verify                                        # lint, types, 67 unit, build
-npx playwright test                                   # 134 e2e, local build
+npm run verify                                        # lint, types, 129 unit, build
+npx playwright test                                   # 201 e2e (183 run, 18 single-viewport skips), local build
 PLAYWRIGHT_BASE_URL=https://eatchaska.com npx playwright test   # same, against production
 ```

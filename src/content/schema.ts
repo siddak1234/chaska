@@ -128,10 +128,27 @@ export const dishPricingSchema = z.discriminatedUnion("kind", [
   }),
 ]);
 
+/**
+ * A heading dishes are grouped under — on the Order page and in the Menu
+ * page's signature section alike. Categories are a property of the dish, not
+ * of a page, so whichever dishes are on sale today they land under the right
+ * heading, and a category with nothing in it simply does not appear.
+ */
+export const categorySchema = z.object({
+  id: z.string().regex(/^[a-z0-9-]+$/),
+  /** Punjabi name, set in the display face: "Shuruaat". */
+  name: z.string().min(1),
+  /** English gloss, set as a kicker beneath it: "Small plates". */
+  englishName: z.string().min(1),
+});
+
 export const dishSchema = z.object({
+  /** Also the Shopify product handle, which is how a daily-menu product finds this record. */
   id: z.string().regex(/^[a-z0-9-]+$/),
   name: z.string().min(1),
   imageId: imageIdSchema,
+  /** Key into `categories`; an unknown id fails at load. */
+  category: z.string().min(1),
   /** The Menu page's line. */
   description: z.string().min(1),
   /** The Order card's shorter line, where the design gives one. */
@@ -141,6 +158,8 @@ export const dishSchema = z.object({
 });
 
 export const dishesSchema = z.object({
+  /** In the order they are listed on the Order and Menu pages. */
+  categories: z.array(categorySchema).min(1),
   dishes: z.array(dishSchema).min(1),
 });
 
@@ -188,9 +207,9 @@ export const stripFigureSchema = z.object({
 });
 
 /**
- * The design's photographed dishes, set in bands: one or two courses, then a
- * strip of three photographs. Courses name catalogue dishes by id, so a dish's
- * name and description live in `dishes.data.json` alone.
+ * The design's photographed dishes, set in bands: one or two categories, then
+ * a strip of three photographs. A band names categories only; the dishes in
+ * each come from `dishes.data.json`, so a dish is placed in exactly one spot.
  */
 export const signatureSchema = z.object({
   title: z.string().min(1),
@@ -200,11 +219,8 @@ export const signatureSchema = z.object({
         courses: z
           .array(
             z.object({
-              id: z.string().min(1),
-              name: z.string().min(1),
-              englishName: z.string().min(1),
+              categoryId: z.string().min(1),
               layout: courseLayoutSchema,
-              dishIds: z.array(z.string().min(1)).min(1),
             }),
           )
           .min(1)
@@ -230,8 +246,6 @@ export const menuSchema = z.object({
 
 export const cateringPackageSchema = z.object({
   id: z.string().min(1),
-  /** "Trays" */
-  kicker: z.string().min(1),
   name: z.string().min(1),
   description: z.string().min(1),
 });
@@ -250,10 +264,21 @@ export const cateringSchema = z.object({
 
 /* ── Order ──────────────────────────────────────────────────────────────── */
 
+/** A short notice shown in place of the dishes; the kitchen's number follows `body`. */
+const orderNoticeSchema = z.object({
+  title: z.string().min(1),
+  body: z.string().min(1),
+});
+
 export const orderPageSchema = z.object({
   kicker: z.string().min(1),
   title: z.string().min(1),
-  intro: z.string().min(1),
+  /** Optional: the sizes are printed on every card. */
+  intro: z.string().min(1).optional(),
+  /** Today's menu has no dishes in it. */
+  empty: orderNoticeSchema,
+  /** Shopify is configured but today's menu could not be read. */
+  unavailable: orderNoticeSchema,
 });
 
 /* ── Pages ──────────────────────────────────────────────────────────────── */
@@ -266,29 +291,20 @@ export const proseBlockSchema = z.object({
 });
 
 export const homePageSchema = z.object({
-  lead: proseBlockSchema.extend({
-    figure: figureSchema,
+  /** The first screen: what Chaska is, and the two things a visitor came to do. */
+  lead: z.object({
+    title: z.string().min(1),
+    intro: z.string().min(1),
     actions: z.array(linkSchema).length(2),
+    figure: figureSchema,
   }),
   kitchen: z.object({
     title: z.string().min(1),
     moreLink: linkSchema,
-    /** Catalogue dishes, each with the home page's own line about it. */
-    dishes: z
-      .array(z.object({ dishId: z.string().min(1), description: z.string().min(1) }))
-      .min(1),
+    /** Catalogue dishes; name, photograph and line all come from the dish record. */
+    dishIds: z.array(z.string().min(1)).min(1),
   }),
-  family: proseBlockSchema.extend({
-    figure: figureSchema,
-    action: linkSchema,
-  }),
-  catering: z.object({
-    kicker: z.string().min(1),
-    title: z.string().min(1),
-    body: z.string().min(1),
-    action: linkSchema,
-    figure: figureSchema,
-  }),
+  family: proseBlockSchema.extend({ action: linkSchema }),
 });
 
 export const aboutPageSchema = z.object({
@@ -310,6 +326,7 @@ export type Link = z.infer<typeof linkSchema>;
 export type Price = z.infer<typeof priceSchema>;
 export type Site = z.infer<typeof siteSchema>;
 export type Address = Site["contact"]["address"];
+export type Category = z.infer<typeof categorySchema>;
 export type Dish = z.infer<typeof dishSchema>;
 export type DishPricing = z.infer<typeof dishPricingSchema>;
 export type MenuItem = z.infer<typeof menuItemSchema>;

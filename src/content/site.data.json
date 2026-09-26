@@ -32,10 +32,6 @@
   },
   "nav": [
     {
-      "label": "Home",
-      "href": "/"
-    },
-    {
       "label": "Menu",
       "href": "/menu"
     },
@@ -44,12 +40,12 @@
       "href": "/order"
     },
     {
-      "label": "About",
-      "href": "/about"
+      "label": "Catering",
+      "href": "/catering"
     },
     {
-      "label": "Catering",
-      "href": "/menu#catering"
+      "label": "About",
+      "href": "/about"
     }
   ],
   "footerNav": [
@@ -66,12 +62,12 @@
       "href": "/order"
     },
     {
-      "label": "About",
-      "href": "/about"
+      "label": "Catering",
+      "href": "/catering"
     },
     {
-      "label": "Catering",
-      "href": "/menu#catering"
+      "label": "About",
+      "href": "/about"
     }
   ]
 }

@@ -14,9 +14,9 @@ function renderAt(pathname: string) {
 
 describe("SiteNav", () => {
   it.each([
-    ["/", "Home"],
     ["/menu", "Menu"],
     ["/order", "Order"],
+    ["/catering", "Catering"],
     ["/about", "About"],
   ])("marks %s as the current page", (pathname, label) => {
     renderAt(pathname);
@@ -32,22 +32,28 @@ describe("SiteNav", () => {
   });
 
   it("never marks a fragment link as current", () => {
-    // Matches the artboards: Catering stays unmarked while on /menu.
-    renderAt("/menu");
-    expect(screen.getByRole("link", { name: "Catering" })).not.toHaveAttribute(
+    // A fragment points into a page, not at the page itself.
+    vi.mocked(usePathname).mockReturnValue("/menu");
+    render(<SiteNav links={[{ label: "Full menu", href: "/menu#full-menu" }]} />);
+    expect(screen.getByRole("link", { name: "Full menu" })).not.toHaveAttribute(
       "aria-current",
     );
   });
 
-  it("lists the design's five destinations, in order, with no phone link", () => {
-    // The design moved the phone out of the nav; it lives in the footer now.
+  it("marks nothing current on the home page, which the wordmark links to", () => {
+    const { container } = renderAt("/");
+    expect(container.querySelectorAll("[aria-current='page']")).toHaveLength(0);
+  });
+
+  it("lists the four destinations, in order, with no phone link", () => {
+    // Four fit on one line on a phone. Home is the wordmark above the nav and
+    // the first footer link; the phone number lives in the footer.
     renderAt("/");
     expect(screen.getAllByRole("link").map((l) => l.textContent)).toEqual([
-      "Home",
       "Menu",
       "Order",
-      "About",
       "Catering",
+      "About",
     ]);
   });
 

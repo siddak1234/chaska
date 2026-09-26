@@ -1,19 +1,17 @@
-import { CateringPackages } from "@/components/sections/CateringPackages";
 import { MenuCourse } from "@/components/sections/MenuCourse";
 import { MenuIndex } from "@/components/sections/MenuIndex";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { PhotoStrip } from "@/components/sections/PhotoStrip";
 import { Kicker } from "@/components/ui/Kicker";
 import { Section } from "@/components/ui/Section";
-import { getCatering, getMenu, getSignatureBands, getSite } from "@/content";
-import { instagramUrl } from "@/lib/format";
+import { getMenu, getSignatureBands } from "@/content";
 import { JsonLd, menuJsonLd } from "@/lib/jsonld";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Menu",
   description:
-    "Chaska's signature dishes and full menu: Punjabi home cooking with a few Indo-fusion dishes, made to order for pickup in Frisco, Texas, plus catering trays and high tea spreads.",
+    "Chaska's signature dishes and full menu: Punjabi home cooking with a few Indo-fusion dishes, made to order for pickup in Frisco, Texas.",
   path: "/menu",
 });
 
@@ -23,8 +21,6 @@ const FULL_MENU_ID = "full-menu";
 export default function MenuPage() {
   const menu = getMenu();
   const bands = getSignatureBands();
-  const catering = getCatering();
-  const site = getSite();
 
   /**
    * Courses are grouped by their own layout rather than read off fixed
@@ -141,18 +137,6 @@ export default function MenuPage() {
           </div>
         </Section>
       ) : null}
-
-      <Section
-        id="catering"
-        rule="double"
-        pad="catering"
-        aria-labelledby="catering-heading"
-      >
-        <CateringPackages
-          catering={catering}
-          cta={{ label: catering.ctaLabel, href: instagramUrl(site.social.instagram) }}
-        />
-      </Section>
 
       <JsonLd data={menuJsonLd()} />
     </>

@@ -14,7 +14,7 @@ the visual reference. They are never imported by application code.
 npm install
 npm run dev          # http://localhost:3000
 npm run verify       # lint · typecheck · unit tests · build
-npm run test:e2e     # Playwright: 4 routes x 3 viewports, axe, link integrity
+npm run test:e2e     # Playwright: 5 routes x 3 viewports, axe, link integrity
 ```
 
 Requires Node ≥ 22.18 (the setup scripts are TypeScript run directly through
@@ -58,18 +58,17 @@ today; the guard stays armed against a future regression.
 design-source/          Imported artboards. Reference only.
 src/
   app/                  Routes. Group layouts differ only in the masthead.
-    (home)/             /                 — tall masthead + tagline
-    (site)/             /menu /about      — compact masthead
-    (order)/            /order            — compact masthead + cart button
+    (home)/             /                           — tall masthead + tagline
+    (site)/             /menu /order /catering /about — compact masthead
     globals.css         @theme tokens, @utility, base layer
   components/
     ui/                 Primitives: Container, Section, Heading, Kicker, Prose, Button, icons
     layout/             Masthead, Topbar, SiteNav, SiteFooter, InstagramLink, Logotype, SkipLink
     media/              Figure, ImageFrame, EmptyFrame
-    sections/           Composed blocks: DishGrid, MenuCourse, PhotoStrip, NoticeCard, …
-    order/              The Order page: cart store and provider, cards, drawer, checkout
+    sections/           Composed blocks: DishSummary, DishGrid, MenuCourse, CourseHeading, …
+    order/              The Order page: order bar, cart store and provider, cards, drawer, checkout
   content/              JSON data + Zod schemas + typed accessors + image manifest
-  lib/                  cart, cn, format, routes, seo, jsonld
+  lib/                  cart, categories, daily-menu, shopify, checkout, cn, format, routes, seo, jsonld
   assets/images/        The kitchen's photographs, committed
 scripts/                check-placeholders, fetch-og-fonts
 tests/ e2e/
@@ -85,10 +84,19 @@ A malformed file fails the build with a path-precise error, and so does a page
 naming a dish or a photograph that does not exist.
 
 **One dish, one record.** The eleven photographed dishes live once, in
-`dishes.data.json`: name, photograph, the Menu page's line, the Order card's
-shorter line where the design gives one, and the price. The home page, the
-Menu page's signature section, the Order page and the structured data all read
-that record by id.
+`dishes.data.json`: name, photograph, category, the Menu page's line, the Order
+card's shorter line where the design gives one, and the price. The home page,
+the Menu page's signature section, the Order page and the structured data all
+read that record by id.
+
+**Categories belong to the dish.** `dishes.data.json` lists the categories
+(Shuruaat, Ghar di Rasoi, Chaat te Sliders, Mitha) in page order, and each dish
+names one. The Order page groups whatever is on sale today with
+`groupByCategory` in `src/lib/categories.ts`: groups follow the category list,
+an empty category is left out, and a dish with an unknown category is listed
+last under "Hor · More from the kitchen" rather than dropped. The Menu page's
+signature bands name categories, never dishes, so a dish appears in exactly one
+place.
 
 ---
 
@@ -127,11 +135,13 @@ so no component re-types a `clamp()`.
 
 ### Change the signature dishes or their prices
 
-Edit `src/content/dishes.data.json`. Each dish is sold either as a container —
+Edit `src/content/dishes.data.json`. A new dish needs a `category` from the
+`categories` list there. Each dish is sold either as a container —
 `{"kind": "container", "small": 9, "large": 16}`, a 16 oz pint and a 32 oz
 quart — or by the piece — `{"kind": "each", "unit": "Per dabeli", "each": 5}`.
-Prices are whole dollars. `menu.data.json` places dishes in the signature
-section by id, and `home.data.json` picks three for "From the Kitchen".
+Prices are whole dollars. `menu.data.json` sets out the signature section by
+category, and `home.data.json` picks three dishes for "From the Kitchen".
+With Shopify connected, the prices customers pay are Shopify's (see below).
 
 ### Change the full menu
 
@@ -155,7 +165,50 @@ The menu page reads courses by `layout`, never by index. An earlier version
 destructured `menu.courses` positionally and silently dropped three of the seven
 courses when the menu grew.
 
-### How an order reaches the kitchen
+### Today's menu and Shopify checkout
+
+The Order page ("Today's Menu") sells one of two things, decided by three
+environment variables on the Vercel project:
+
+| Variable                          | Example                     |
+| --------------------------------- | --------------------------- |
+| `SHOPIFY_STORE_DOMAIN`            | `your-store.myshopify.com`  |
+| `SHOPIFY_STOREFRONT_ACCESS_TOKEN` | the public Storefront token |
+| `SHOPIFY_MENU_COLLECTION`         | `daily-menu`                |
+
+**All three set:** the page lists the products in that collection, re-read
+from Shopify's Storefront API (version 2026-04) at most once a minute, and
+"Checkout" creates a Shopify cart and opens Shopify's own checkout. Payment,
+pickup details and the receipt are Shopify's. Change the collection each day
+and the page follows.
+
+How a product becomes a dish (`src/lib/daily-menu.ts`):
+
+- **Handle = dish id.** A product with handle `dahi-bhalla` uses our name,
+  line, photograph and category; Shopify supplies only availability and price.
+  So categories hold however the daily menu is shuffled.
+- **Sizes** are variants with an option value of `Small` and `Large` (the
+  option can be called anything, e.g. Size). A product with one variant is sold
+  singly. If one size is sold out, the other is sold on its own as
+  "Large · 32 oz". Any other variant shape, or a non-USD price, leaves the
+  product off with a warning in the logs instead of guessing a price.
+- **A product we have no record of** is still sold, with its Shopify title,
+  description and image, under the category its **product type** names
+  (`Small plates`, `Shuruaat` or `small-plates` all work), else under "More".
+- **If Shopify cannot be read**, or the collection does not exist, the page
+  says today's menu could not load and gives the kitchen's number. It never
+  falls back to the static list, which could sell something not on today's
+  menu. An empty collection says nothing is on the menu yet.
+
+**Any of them missing:** the page sells the catalogue in `dishes.data.json`
+and orders go out by message, as described next. This is how the site runs
+until Shopify is connected.
+
+The token is read only on the server (no `NEXT_PUBLIC_` prefix), and checkout
+runs through a server action, so the Content-Security-Policy is unchanged.
+Product images from `cdn.shopify.com` are allowed in `next.config.ts`.
+
+### How an order reaches the kitchen (without Shopify)
 
 There is no server. "Place pickup order" writes the order out as plain text and
 opens the customer's messaging app with it addressed to the kitchen's number —
@@ -199,14 +252,15 @@ Each was a defect in the source, not a preference:
    the route.
 5. **Skip link and focus rings** did not exist. Both added.
 6. **Topbar on mobile.** `justify-content: space-between` squeezed three
-   letterspaced phrases into thirds on a phone. They now stack as centred lines
-   below `sm`; nothing is hidden.
+   letterspaced phrases into thirds on a phone. Below `sm` it is one line —
+   place and Instagram — and the descriptor, also in the footer, returns
+   from `sm` up.
 7. **Typographic quotes.** Straight `'` and `"` — an HTML-authoring artifact —
    are curled consistently across all prose.
-8. **Home lead on a phone.** The design stacks the whole story above its
-   photograph. Below 740px the photograph moves up to follow the buttons, so it
-   is not the last thing in a long column; on a desktop the layout is the
-   design's two-up. Grid areas do this without duplicating markup.
+8. **Home page.** Cut to what a visitor comes for: one line on what Chaska
+   is, "Order for pickup" and "Catering" on the first screen of a phone, three
+   dishes, and a short line on the family. The design's long lead, family
+   feature and catering notice were removed by the owner's decision.
 9. **Order size picker.** The design's `role="radio"` buttons are real radio
    inputs, styled identically, so arrow keys and screen readers work natively.
 10. **Cart drawer.** A native modal `<dialog>` rather than a positioned `div`:
@@ -222,6 +276,18 @@ Each was a defect in the source, not a preference:
 14. **Owner's name and portrait.** The design still says "Ronika Singh" over an
     empty frame. The site keeps the owner's full name, Ronika Singh Bhatia, and
     her portrait.
+15. **Catering** is its own page, `/catering`, rather than the end of the Menu
+    page: heading, the Instagram button, the three packages.
+16. **Order page.** Dishes are grouped under their categories with a bar of
+    jump links and the cart held at the top of the screen. On a phone each card
+    sets a 104px photograph beside the name, so several dishes fit on a screen.
+    "Add" adds one and confirms on the button instead of opening the cart over
+    the page; quantities are changed in the cart.
+17. **Navigation** is Menu, Order, Catering, About — four fit on one line on a
+    phone. Home is the wordmark above it and the first footer link.
+18. **Type on a phone** is one step smaller than on a desktop: each display
+    size is a `clamp()` whose floor is its phone size, and the smallest text
+    anywhere is 12px.
 
 Everything else follows the design. Body copy is one size step above the
 artboards throughout — 17px rather than 15.5px — a deliberate readability
@@ -259,7 +325,7 @@ Two constraints, both found the hard way:
   deep-merges, a child segment's `openGraph` object; since every page sets one
   through `buildMetadata`, a single root-level `opengraph-image` is dropped from
   the resolved metadata. Each page segment re-exports the shared implementation
-  in `src/lib/og-card.tsx`. An e2e test asserts `og:image` on all four routes.
+  in `src/lib/og-card.tsx`. An e2e test asserts `og:image` on every route.
 
 ## Target sizes
 
@@ -289,16 +355,22 @@ Two constraints, both found the hard way:
   merging, `MenuRow` semantics, `SiteNav` active state, `Figure` empty state,
   button variants and link handling.
 - **E2E** (`e2e/`, Playwright at 1440 / iPad Mini / iPhone SE):
+  - The Shopify path is covered by unit tests whose fixtures follow Shopify's
+    published Storefront API schema (`tests/lib/daily-menu.test.ts`). It was
+    also driven end to end in a browser against a local mock of the API; it
+    has not yet run against a real store.
   - `smoke` — routes render, one `h1` each, site frame present, every dish in
-    the content files appears on `/menu`, every catalogue dish on `/order`.
-  - `order` — add at a size and quantity, adjust and remove in the drawer,
+    the content files appears on `/menu`, every catalogue dish on `/order`
+    under its category, catering on its own page, and the home page's first
+    screen offering Order and Catering.
+  - `order` — add at a size, the category bar's jump links, adjust and remove in the drawer,
     Escape closes it, the cart survives a reload, checkout validation, and the
     exact text message the order produces.
   - `links` — no `.dc.html` survives, every internal link returns 200, the
-    `/menu#catering` anchor lands on screen, a styled 404, dialable `tel:`.
+    `/menu#full-menu` anchor lands on screen, a styled 404, dialable `tel:`.
   - `a11y` — axe WCAG 2.1 A/AA with zero violations per route, skip-link focus
     order, visible focus, and the target-size policy on **every** route.
-  - `production` — `og:image` and `twitter:image` resolve on all four routes,
+  - `production` — `og:image` and `twitter:image` resolve on every route,
     icon and apple-touch-icon resolve, Instagram and the phone number on every
     page, declared route anchors exist, security headers set, sitemap complete.
   - `resilience` — 320px reflow (WCAG 1.4.10, below the smallest device),

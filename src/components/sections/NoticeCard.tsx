@@ -11,20 +11,21 @@ import { cn } from "@/lib/cn";
  * The two uses look alike but are not identical in the artboards, so the
  * measurements are enumerated rather than shared:
  *
- *   notice  (home, the catering notice)
+ *   notice  (the Order page, when today's menu is empty or cannot load)
  *           padding 28 · kicker margin-bottom 12 · body 14.5/25 at margin-top 14
  *           · footer at margin-top 20
- *   package (menu, the three catering cards)
- *           padding 26 · kicker margin-bottom 0, heading margin-top 10
- *           · body 14/24 at margin-top 12
+ *   package (the Catering page's three cards)
+ *           padding 20 on a phone, 26 from sm · heading, then body 14/24 at
+ *           margin-top 12
  */
 const card = cva("border border-ink", {
-  variants: { variant: { notice: "p-7", package: "p-[26px]" } },
+  variants: { variant: { notice: "p-7", package: "p-5 sm:p-[26px]" } },
   defaultVariants: { variant: "notice" },
 });
 
 type NoticeCardProps = VariantProps<typeof card> & {
-  kicker: string;
+  /** Omitted on the catering packages, where it only repeated the name. */
+  kicker?: string;
   title: string;
   body: string;
   /** The home notice's button. */
@@ -42,15 +43,17 @@ export function NoticeCard({
 
   return (
     <div className={card({ variant })}>
-      <Kicker size={isPackage ? "meta" : "md"} className={isPackage ? "" : "mb-3"}>
-        {kicker}
-      </Kicker>
+      {kicker ? (
+        <Kicker size={isPackage ? "meta" : "md"} className={isPackage ? "" : "mb-3"}>
+          {kicker}
+        </Kicker>
+      ) : null}
       {/* The package heading is 24px with the artboards' default leading,
           not the 1.2 the `dish` token carries for the home dish cards. */}
       <Heading
-        level={isPackage ? 3 : 2}
+        level={2}
         size={isPackage ? "dish" : "notice"}
-        className={isPackage ? "mt-2.5 leading-[normal]" : undefined}
+        className={isPackage ? "leading-[normal]" : undefined}
       >
         {title}
       </Heading>

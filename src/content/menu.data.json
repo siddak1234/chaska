@@ -1,19 +1,16 @@
 {
-  "kicker": "Made to order · Pickup in Frisco",
+  "kicker": "Pickup in Frisco, Texas",
   "title": "The Menu",
   "titleGurmukhi": "ਮੀਨੂ",
-  "intro": "Authentic home flavors with a Punjabi tadka, plus a few Indo-fusion dishes of our own. Everything is made to order. Message us on Instagram to order.",
+  "intro": "Punjabi home cooking, plus a few Indo-fusion dishes of our own. Everything is made to order.",
   "signature": {
     "title": "Signature dishes",
     "bands": [
       {
         "courses": [
           {
-            "id": "small-plates",
-            "name": "Shuruaat",
-            "englishName": "Small plates",
-            "layout": "grid",
-            "dishIds": ["dahi-bhalla", "moong-salad", "masala-idli", "bhutta-dip"]
+            "categoryId": "small-plates",
+            "layout": "grid"
           }
         ],
         "photoStrip": [
@@ -34,16 +31,8 @@
       {
         "courses": [
           {
-            "id": "home-kitchen",
-            "name": "Ghar di Rasoi",
-            "englishName": "From the home kitchen",
-            "layout": "grid",
-            "dishIds": [
-              "kadhi-pakora",
-              "burrata-lababdar",
-              "paneer-kathi",
-              "pesto-eggs"
-            ]
+            "categoryId": "home-kitchen",
+            "layout": "grid"
           }
         ],
         "photoStrip": [
@@ -64,18 +53,12 @@
       {
         "courses": [
           {
-            "id": "street-food",
-            "name": "Chaat te Sliders",
-            "englishName": "Street food & fusion",
-            "layout": "stack",
-            "dishIds": ["kutchi-dabeli", "butter-chicken-sliders"]
+            "categoryId": "street-food",
+            "layout": "stack"
           },
           {
-            "id": "sweet",
-            "name": "Mitha",
-            "englishName": "Sweet",
-            "layout": "stack",
-            "dishIds": ["panjiri"]
+            "categoryId": "sweet",
+            "layout": "stack"
           }
         ],
         "photoStrip": [

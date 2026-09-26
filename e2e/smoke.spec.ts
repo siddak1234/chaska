@@ -1,11 +1,21 @@
 import { expect, test } from "@playwright/test";
 
-import { about, dishCount, dishes, home, menu, order } from "./content";
+import {
+  about,
+  catering,
+  categories,
+  dishCount,
+  dishes,
+  home,
+  menu,
+  order,
+} from "./content";
 
 const ROUTES = [
   { path: "/", heading: home.lead.title },
   { path: "/menu", heading: new RegExp(`^${menu.title}`) },
   { path: "/order", heading: order.title },
+  { path: "/catering", heading: catering.title },
   { path: "/about", heading: about.title },
 ] as const;
 
@@ -50,16 +60,46 @@ test("the menu lists every dish in the content", async ({ page }) => {
   await expect(page.locator("main dl dt")).toHaveCount(dishCount);
 });
 
-test("the order page offers every catalogue dish", async ({ page }) => {
+test("the order page offers every catalogue dish, under its category", async ({
+  page,
+}) => {
   await page.goto("/order");
-  await expect(page.getByRole("button", { name: "Add to order" })).toHaveCount(
+  await expect(page.getByRole("button", { name: /^Add .+ to order$/ })).toHaveCount(
     dishes.length,
   );
-  for (const dish of dishes) {
-    await expect(
-      page.getByRole("heading", { level: 2, name: dish.name }),
-    ).toBeVisible();
+  for (const category of categories) {
+    const section = page.getByRole("region", { name: category.name });
+    for (const dish of dishes.filter((d) => d.category === category.id)) {
+      await expect(
+        section.getByRole("heading", { level: 3, name: dish.name }),
+      ).toBeVisible();
+    }
   }
+});
+
+test("catering is a page of its own, and the menu no longer carries it", async ({
+  page,
+}) => {
+  await page.goto("/menu");
+  await expect(page.getByRole("heading", { name: catering.title })).toHaveCount(0);
+  await page
+    .getByRole("navigation", { name: "Primary" })
+    .getByRole("link", { name: "Catering" })
+    .click();
+  await expect(page).toHaveURL(/\/catering$/);
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(catering.title);
+});
+
+test("the home page's first screen offers ordering and catering", async ({ page }) => {
+  await page.goto("/");
+  const orderLink = page
+    .getByRole("main")
+    .getByRole("link", { name: "Order for pickup" });
+  const cateringLink = page.getByRole("main").getByRole("link", { name: "Catering" });
+  await expect(orderLink).toBeInViewport();
+  await expect(cateringLink).toBeInViewport();
+  await orderLink.click();
+  await expect(page).toHaveURL(/\/order$/);
 });
 
 test("the credits page is gone, since every photograph is the kitchen's own", async ({

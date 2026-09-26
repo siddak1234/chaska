@@ -11,27 +11,27 @@ import { cn } from "@/lib/cn";
 const heading = cva("font-display font-normal", {
   variants: {
     size: {
-      /** clamp(34px, 4.2vw, 54px) — the home lead, beside its photograph. */
+      /** clamp(30px, 4.2vw, 54px) — the home page's headline. */
       lead: "text-lead",
-      /** clamp(36px, 5vw, 58px) — the menu page title. */
+      /** clamp(30px, 5vw, 58px) — Menu and Order page titles. */
       title: "text-title",
-      /** clamp(34px, 4.6vw, 54px) — the about page title. */
+      /** clamp(30px, 4.6vw, 54px) — the about page title. */
       titleAbout: "text-title-about",
       /** clamp(24px, 2.6vw, 34px) — "From the Kitchen". */
       section: "text-section",
-      /** clamp(26px, 3vw, 38px) — split-feature headings. */
+      /** clamp(24px, 3vw, 38px) — split-feature headings. */
       feature: "text-feature",
-      /** clamp(28px, 3.4vw, 40px) — the catering heading. */
+      /** clamp(28px, 3.4vw, 40px) — the Catering page title. */
       catering: "text-catering",
-      /** 30px — menu course names. */
+      /** clamp(26px, 2.6vw, 30px) — menu course names. */
       course: "text-course",
-      /** 28px — the narrower breads/desserts course names. */
+      /** clamp(24px, 2.4vw, 28px) — two-up course names, Order page categories. */
       courseSm: "text-course-sm",
-      /** 26px — the home catering notice. */
+      /** 26px — notices, e.g. an empty daily menu. */
       notice: "text-notice",
-      /** 24px — dish cards and catering packages. */
+      /** clamp(21px, 2vw, 24px) — catering packages, the cart drawer. */
       dish: "text-dish",
-      /** 22px — dish names on the Order page's cards. */
+      /** clamp(19px, 1.8vw, 22px) — dish names on the home page and Order cards. */
       item: "text-item",
     },
   },

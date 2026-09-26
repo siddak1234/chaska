@@ -34,19 +34,10 @@ test("every internal link resolves to a real page", async ({ page, request }) =>
   }
 });
 
-test("the catering anchor exists and scrolls into view", async ({ page }) => {
-  await page.goto("/menu#catering");
-  await expect(page.locator("#catering")).toBeVisible();
-
-  // `scroll-behavior: smooth` animates the jump, so allow it to settle. The
-  // catering section is last on the page, so on a short viewport the browser
-  // lands at the document end rather than exactly at scroll-margin-top; what
-  // must be true at every width is that the heading is on screen.
-  const heading = page.getByRole("heading", { name: "Catering" });
-  await expect(heading).toBeInViewport({ timeout: 5000 });
-
-  const scrolled = await page.evaluate(() => window.scrollY);
-  expect(scrolled).toBeGreaterThan(0);
+test("the full-menu anchor exists and scrolls into view", async ({ page }) => {
+  await page.goto("/menu#full-menu");
+  await expect(page.locator("#full-menu")).toBeInViewport({ timeout: 5000 });
+  expect(await page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
 });
 
 test("an unknown path renders the styled 404, not a bare error", async ({ page }) => {
@@ -67,7 +58,7 @@ test("the phone link is dialable", async ({ page }) => {
 });
 
 test("catering enquiries go to Instagram, as the design has it", async ({ page }) => {
-  await page.goto("/menu#catering");
+  await page.goto("/catering");
   await expect(
     page.getByRole("link", { name: "Message us on Instagram" }),
   ).toHaveAttribute("href", "https://www.instagram.com/tasteofchaska/");

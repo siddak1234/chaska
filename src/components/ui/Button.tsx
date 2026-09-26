@@ -32,7 +32,7 @@ export const buttonVariants = cva(
         ink: "bg-ink text-paper hover:bg-oxblood hover:text-paper",
         /** Hairline outline — the secondary action. */
         outline: "border border-ink text-ink hover:border-oxblood hover:text-oxblood",
-        /** Solid oxblood — used once, for catering. */
+        /** Solid oxblood — the Order page's checkout and send buttons. */
         accent: "bg-oxblood text-paper hover:bg-ink hover:text-paper",
       },
       size: {

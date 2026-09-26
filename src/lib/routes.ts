@@ -7,16 +7,16 @@
  * failure, not a 404 discovered in production.
  */
 
-export const ROUTES = ["/", "/menu", "/order", "/about"] as const;
+export const ROUTES = ["/", "/menu", "/order", "/catering", "/about"] as const;
 
 export type AppRoute = (typeof ROUTES)[number];
 
 /** Anchors that pages are expected to expose, keyed by route. */
 export const ROUTE_ANCHORS: Partial<Record<AppRoute, readonly string[]>> = {
-  "/menu": ["catering"],
+  "/menu": ["signature", "full-menu"],
 };
 
-/** `/menu`, `/menu#catering`, `#catering` — but not `/menu.dc.html`. */
+/** `/menu`, `/menu#full-menu`, `#full-menu` — but not `/menu.dc.html`. */
 export function isInternalHref(href: string): boolean {
   if (href.startsWith("#")) return /^#[a-z][a-z0-9-]*$/.test(href);
 

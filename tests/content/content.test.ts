@@ -4,6 +4,7 @@ import {
   getAboutPage,
   getAllMenuItems,
   getCatering,
+  getCategories,
   getDishes,
   getHomeDishes,
   getHomePage,
@@ -133,18 +134,23 @@ describe("content", () => {
   });
 
   it("carries the eleven dishes photographed for the design", () => {
-    expect(getDishes().map((d) => d.id)).toEqual([
-      "dahi-bhalla",
-      "moong-salad",
-      "masala-idli",
+    // Their order within a category is pinned by the category test below.
+    expect(
+      getDishes()
+        .map((d) => d.id)
+        .sort(),
+    ).toEqual([
       "bhutta-dip",
-      "kadhi-pakora",
       "burrata-lababdar",
-      "pesto-eggs",
-      "panjiri",
-      "kutchi-dabeli",
       "butter-chicken-sliders",
+      "dahi-bhalla",
+      "kadhi-pakora",
+      "kutchi-dabeli",
+      "masala-idli",
+      "moong-salad",
       "paneer-kathi",
+      "panjiri",
+      "pesto-eggs",
     ]);
   });
 
@@ -184,6 +190,35 @@ describe("content", () => {
     );
   });
 
+  it("places every catalogue dish in its designed category", () => {
+    const placed = Object.fromEntries(
+      getCategories().map((category) => [
+        category.name,
+        getDishes()
+          .filter((dish) => dish.category === category.id)
+          .map((dish) => dish.id),
+      ]),
+    );
+    expect(placed).toEqual({
+      Shuruaat: ["dahi-bhalla", "moong-salad", "masala-idli", "bhutta-dip"],
+      "Ghar di Rasoi": [
+        "kadhi-pakora",
+        "burrata-lababdar",
+        "paneer-kathi",
+        "pesto-eggs",
+      ],
+      "Chaat te Sliders": ["kutchi-dabeli", "butter-chicken-sliders"],
+      Mitha: ["panjiri"],
+    });
+  });
+
+  it("links the home page's first screen to ordering and catering", () => {
+    expect(getHomePage().lead.actions.map((l) => l.href)).toEqual([
+      "/order",
+      "/catering",
+    ]);
+  });
+
   it("resolves the home page's three dishes from the catalogue", () => {
     expect(getHomeDishes().map((d) => d.name)).toEqual([
       "Panjiri",
@@ -203,7 +238,6 @@ describe("content", () => {
       ...home.lead.actions.map((l) => l.href),
       home.kitchen.moreLink.href,
       home.family.action.href,
-      home.catering.action.href,
       ...about.quote.actions.map((l) => l.href),
     ];
 
@@ -220,8 +254,6 @@ describe("content", () => {
     const about = getAboutPage();
     const used = new Set([
       home.lead.figure.imageId,
-      home.family.figure.imageId,
-      home.catering.figure.imageId,
       about.owner.figure.imageId,
       about.family.figure.imageId,
       ...getDishes().map((d) => d.imageId),

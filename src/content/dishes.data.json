@@ -1,9 +1,32 @@
 {
+  "categories": [
+    {
+      "id": "small-plates",
+      "name": "Shuruaat",
+      "englishName": "Small plates"
+    },
+    {
+      "id": "home-kitchen",
+      "name": "Ghar di Rasoi",
+      "englishName": "From the home kitchen"
+    },
+    {
+      "id": "street-food",
+      "name": "Chaat te Sliders",
+      "englishName": "Street food & fusion"
+    },
+    {
+      "id": "sweet",
+      "name": "Mitha",
+      "englishName": "Sweet"
+    }
+  ],
   "dishes": [
     {
       "id": "dahi-bhalla",
       "name": "Dahi Bhalla",
       "imageId": "dahi-bhalla",
+      "category": "small-plates",
       "description": "Soft lentil dumplings under chilled dahi, tamarind chutney and roasted spices.",
       "pricing": {
         "kind": "container",
@@ -15,6 +38,7 @@
       "id": "moong-salad",
       "name": "Sprouted Moong Dal Salad",
       "imageId": "moong-salad",
+      "category": "small-plates",
       "description": "Street style, with crunchy peanuts, juicy tomatoes, pomegranate and a squeeze of chaat masala.",
       "orderDescription": "Street style, with crunchy peanuts, juicy tomatoes, pomegranate and chaat masala.",
       "pricing": {
@@ -27,6 +51,7 @@
       "id": "masala-idli",
       "name": "Masala Idli",
       "imageId": "masala-idli",
+      "category": "small-plates",
       "description": "Crispy outside, soft inside, tossed with peppers and curry leaves. Served with fresh coconut chutney.",
       "orderDescription": "Crispy outside, soft inside, tossed with peppers and curry leaves. Coconut chutney included.",
       "pricing": {
@@ -39,6 +64,7 @@
       "id": "bhutta-dip",
       "name": "Masala Bhutta Dip",
       "imageId": "bhutta-dip",
+      "category": "small-plates",
       "description": "Street style corn in a creamy, chatpata dip. Scoop it up with a chip.",
       "pricing": {
         "kind": "container",
@@ -50,6 +76,7 @@
       "id": "kadhi-pakora",
       "name": "Punjabi Kadhi Pakora",
       "imageId": "kadhi-pakora",
+      "category": "home-kitchen",
       "description": "Yogurt and besan kadhi with soft pakoras, tempered with dried red chilies and cumin.",
       "pricing": {
         "kind": "container",
@@ -61,6 +88,7 @@
       "id": "burrata-lababdar",
       "name": "Burrata Lababdar",
       "imageId": "burrata-lababdar",
+      "category": "home-kitchen",
       "description": "A rich lababdar gravy finished with fresh burrata. An Indian classic with a gourmet twist.",
       "orderDescription": "A rich lababdar gravy finished with fresh burrata.",
       "pricing": {
@@ -70,23 +98,25 @@
       }
     },
     {
-      "id": "pesto-eggs",
-      "name": "Garden Pesto Eggs",
-      "imageId": "pesto-eggs",
-      "description": "Jammy eggs in a Chaska style pesto with cherry tomatoes, served with garlic toast.",
-      "orderDescription": "Jammy eggs in a Chaska style pesto with cherry tomatoes. Garlic toast included.",
+      "id": "paneer-kathi",
+      "name": "Royal Paneer Kathi Roll",
+      "imageId": "paneer-kathi",
+      "category": "home-kitchen",
+      "description": "Paneer rolled in flaky parantha with green chutney and pomegranate. Street food, plated like fine dining.",
+      "orderDescription": "Paneer rolled in flaky parantha with green chutney and pomegranate.",
       "pricing": {
-        "kind": "container",
-        "small": 10,
-        "large": 18
+        "kind": "each",
+        "unit": "Per roll",
+        "each": 9
       }
     },
     {
-      "id": "panjiri",
-      "name": "Panjiri",
-      "imageId": "panjiri",
-      "description": "Slow roasted in desi ghee and loaded with badam and pista, made the way maa used to make it. Warm and homely.",
-      "orderDescription": "Slow roasted in desi ghee and loaded with badam and pista, made the way maa used to make it.",
+      "id": "pesto-eggs",
+      "name": "Garden Pesto Eggs",
+      "imageId": "pesto-eggs",
+      "category": "home-kitchen",
+      "description": "Jammy eggs in a Chaska style pesto with cherry tomatoes, served with garlic toast.",
+      "orderDescription": "Jammy eggs in a Chaska style pesto with cherry tomatoes. Garlic toast included.",
       "pricing": {
         "kind": "container",
         "small": 10,
@@ -97,6 +127,7 @@
       "id": "kutchi-dabeli",
       "name": "Kutchi Dabeli",
       "imageId": "kutchi-dabeli",
+      "category": "street-food",
       "description": "Sweet, spicy, tangy and crunchy, all in one bite, with sev and pomegranate.",
       "pricing": {
         "kind": "each",
@@ -108,6 +139,7 @@
       "id": "butter-chicken-sliders",
       "name": "Butter Chicken Sliders",
       "imageId": "butter-chicken-sliders",
+      "category": "street-food",
       "description": "Butter chicken piled into soft slider buns. One hand for gossip, one hand for this.",
       "orderDescription": "Butter chicken piled into soft slider buns.",
       "nonVeg": true,
@@ -118,15 +150,16 @@
       }
     },
     {
-      "id": "paneer-kathi",
-      "name": "Royal Paneer Kathi Roll",
-      "imageId": "paneer-kathi",
-      "description": "Paneer rolled in flaky parantha with green chutney and pomegranate. Street food, plated like fine dining.",
-      "orderDescription": "Paneer rolled in flaky parantha with green chutney and pomegranate.",
+      "id": "panjiri",
+      "name": "Panjiri",
+      "imageId": "panjiri",
+      "category": "sweet",
+      "description": "Slow roasted in desi ghee and loaded with badam and pista, made the way maa used to make it. Warm and homely.",
+      "orderDescription": "Slow roasted in desi ghee and loaded with badam and pista, made the way maa used to make it.",
       "pricing": {
-        "kind": "each",
-        "unit": "Per roll",
-        "each": 9
+        "kind": "container",
+        "small": 10,
+        "large": 18
       }
     }
   ]

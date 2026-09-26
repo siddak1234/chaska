@@ -17,11 +17,11 @@ const kicker = cva("font-ui uppercase", {
     size: {
       /** 12px / 0.18em — section kickers. */
       md: "text-label font-bold tracking-kicker",
-      /** 11px / 0.18em — course subtitles on the menu. */
+      /** 12px / 0.18em — course subtitles on the menu. */
       sm: "text-micro font-bold tracking-kicker",
-      /** 11px / 0.14em — the cart drawer's pickup note. */
+      /** 12px / 0.14em — the cart drawer's pickup note. */
       label: "text-micro font-bold tracking-ui",
-      /** 11px / 0.16em — catering guest counts, footer meta. */
+      /** 12px / 0.16em — footer meta. */
       meta: "text-micro font-bold tracking-meta",
       /** 12px / 0.22em, regular — the masthead tagline. */
       tagline: "text-label font-normal tracking-tagline",

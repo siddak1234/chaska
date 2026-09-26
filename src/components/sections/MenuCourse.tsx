@@ -1,7 +1,6 @@
-import { Heading } from "@/components/ui/Heading";
-import { Kicker } from "@/components/ui/Kicker";
 import type { MenuCourse as MenuCourseData } from "@/content/schema";
 
+import { CourseHeading } from "./CourseHeading";
 import { MenuRow } from "./MenuRow";
 
 /**
@@ -46,23 +45,15 @@ export function MenuCourse({
 
   return (
     <>
-      <div className={compact ? "mb-7 text-center" : "mb-8 text-center"}>
-        <Heading
-          level={headingLevel}
-          size={compact ? "courseSm" : "course"}
-          id={headingId}
-        >
-          {course.name}
-        </Heading>
-        <Kicker size="sm" className="mt-2">
-          {course.englishName}
-        </Kicker>
-        {course.note ? (
-          <p className="mx-auto mt-2 max-w-menu-intro text-note text-ink-muted">
-            {course.note}
-          </p>
-        ) : null}
-      </div>
+      <CourseHeading
+        id={headingId}
+        name={course.name}
+        englishName={course.englishName}
+        note={course.note}
+        level={headingLevel}
+        compact={compact}
+        className={compact ? "mb-7" : "mb-8"}
+      />
 
       <dl aria-labelledby={headingId} className={LIST_CLASS[course.layout]}>
         {course.items.map((item) => (

@@ -1,5 +1,3 @@
-import type { ReactNode } from "react";
-
 import { Kicker } from "@/components/ui/Kicker";
 import type { Site } from "@/content/schema";
 import { formatPlace } from "@/lib/format";
@@ -15,16 +13,9 @@ type MastheadProps = {
    * `compact` is what every other artboard uses.
    */
   variant: "hero" | "compact";
-  /**
-   * Something that sits at the right-hand end of the nav rule — the Order
-   * page's cart button. The design centres the nav in a three-column grid
-   * with this in the last column; below `sm` that grid leaves the nav about
-   * 127px, so the action takes its own centred row instead.
-   */
-  navAction?: ReactNode;
 };
 
-export function Masthead({ site, variant, navAction }: MastheadProps) {
+export function Masthead({ site, variant }: MastheadProps) {
   const isHero = variant === "hero";
 
   return (
@@ -35,25 +26,23 @@ export function Masthead({ site, variant, navAction }: MastheadProps) {
         instagram={site.social.instagram}
       />
 
-      <div className={isHero ? "py-9 pb-6 text-center" : "pt-7 pb-5 text-center"}>
+      <div
+        className={
+          isHero
+            ? "pt-6 pb-5 text-center sm:pt-9 sm:pb-6"
+            : "pt-5 pb-4 text-center sm:pt-7 sm:pb-5"
+        }
+      >
         <Logotype name={site.name} nameGurmukhi={site.nameGurmukhi} size={variant} />
         {isHero ? (
-          <Kicker tone="ink" size="tagline" className="mt-[18px]">
+          <Kicker tone="ink" size="tagline" className="mt-3 sm:mt-[18px]">
             {site.tagline}
           </Kicker>
         ) : null}
       </div>
 
       <div className="border-b border-ink rule-double">
-        {navAction ? (
-          <div className="grid grid-cols-1 justify-items-center sm:grid-cols-[minmax(96px,1fr)_auto_minmax(96px,1fr)] sm:items-center sm:gap-3">
-            <span aria-hidden="true" className="hidden sm:block" />
-            <SiteNav links={site.nav} />
-            <div className="sm:justify-self-end">{navAction}</div>
-          </div>
-        ) : (
-          <SiteNav links={site.nav} />
-        )}
+        <SiteNav links={site.nav} />
       </div>
     </header>
   );

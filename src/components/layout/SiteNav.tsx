@@ -19,8 +19,8 @@ type SiteNavProps = {
  * link carries its own vertical padding, giving a 44px touch target where the
  * source relied on bare 13px text.
  *
- * A link to a fragment (`/menu#catering`) is never marked current — matching
- * the artboards, where Catering stays unmarked on the Menu page.
+ * A link to a fragment is never marked current: it points into a page, not at
+ * the page itself.
  */
 export function SiteNav({ links }: SiteNavProps) {
   const pathname = usePathname();

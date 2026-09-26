@@ -31,7 +31,7 @@ const section = cva("", {
       xl: "py-sec-xl",
       /** Page headers: taller above than below. */
       header: "pt-sec-lg pb-sec-head",
-      /** The catering section closes the menu page, so it sits deeper. */
+      /** The Catering page: sits deeper below than above. */
       catering: "pt-sec-md pb-sec-lg",
     },
   },

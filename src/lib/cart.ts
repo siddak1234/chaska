@@ -61,9 +61,15 @@ export function itemCount(cart: CartLine[]): number {
   return cart.reduce((sum, l) => sum + l.qty, 0);
 }
 
+/** Whether a dish is sold at this size today: pieces as `each`, containers as small or large. */
+export function offersSize(pricing: DishPricing, size: Size): boolean {
+  return pricing.kind === "each" ? size === "each" : size !== "each";
+}
+
 /**
- * Lines with their prices. A stored line naming a dish that has since left the
- * catalogue is dropped, so a stale cart cannot bill for something unlisted.
+ * Lines with their prices. A stored line naming a dish that is not on today's
+ * menu, or a size it is no longer sold at, is dropped — so a cart kept from
+ * yesterday cannot bill for something unlisted or at the wrong price.
  */
 export function priceLines(
   cart: CartLine[],
@@ -71,7 +77,7 @@ export function priceLines(
 ): PricedLine[] {
   return cart.flatMap((line) => {
     const dish = dishes.find((d) => d.id === line.dishId);
-    if (!dish) return [];
+    if (!dish || !offersSize(dish.pricing, line.size)) return [];
     const unit = unitPrice(dish.pricing, line.size);
     return [
       {

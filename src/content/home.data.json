@@ -1,26 +1,22 @@
 {
   "lead": {
-    "kicker": "The Lead",
-    "title": "Generations of home cooking, now serving Frisco",
-    "paragraphs": [
-      "Chaska serves desi food with a Punjabi tadka, cooked from family recipes that were passed down by hand rather than written down. Authentic home flavors, made the way maa used to make them, alongside a few Indo-fusion dishes of our own.",
-      "Everything is served family style, meant for the middle of the table."
+    "title": "Punjabi home cooking in Frisco",
+    "intro": "Order today’s menu for pickup, or have us cater your next gathering.",
+    "actions": [
+      {
+        "label": "Order for pickup",
+        "href": "/order"
+      },
+      {
+        "label": "Catering",
+        "href": "/catering"
+      }
     ],
     "figure": {
       "imageId": "masala-idli",
-      "caption": "Masala idli, crisp outside and soft inside, with fresh coconut chutney.",
+      "caption": "Masala idli with fresh coconut chutney.",
       "ratio": "5/4"
-    },
-    "actions": [
-      {
-        "label": "View the menu",
-        "href": "/menu"
-      },
-      {
-        "label": "Our story",
-        "href": "/about"
-      }
-    ]
+    }
   },
   "kitchen": {
     "title": "From the Kitchen",
@@ -28,50 +24,17 @@
       "label": "Full menu →",
       "href": "/menu"
     },
-    "dishes": [
-      {
-        "dishId": "panjiri",
-        "description": "Slow roasted in desi ghee and loaded with badam and pista, made the way maa used to make it."
-      },
-      {
-        "dishId": "kadhi-pakora",
-        "description": "Yogurt and besan kadhi with soft pakoras, tempered with dried red chilies and cumin."
-      },
-      {
-        "dishId": "paneer-kathi",
-        "description": "Street food, plated like fine dining. Paneer rolled in flaky parantha with green chutney and pomegranate."
-      }
-    ]
+    "dishIds": ["panjiri", "kadhi-pakora", "paneer-kathi"]
   },
   "family": {
     "kicker": "The Family",
-    "title": "Recipes taught by hand, kept by memory",
+    "title": "Recipes taught by hand",
     "paragraphs": [
-      "Owner Ronika Singh Bhatia learned this food in her family’s kitchen, where recipes were measured in handfuls and pinches and passed from one generation to the next. Chaska is her way of bringing that table to Frisco.",
-      "The family is all here, including Snoopy, the house shih tzu and honorary sous chef."
+      "Ronika Singh Bhatia cooks the food she learned in her family’s kitchen, measured in handfuls and pinches."
     ],
-    "figure": {
-      "imageId": "moong-salad",
-      "caption": "Street style sprouted moong dal salad with peanuts, tomato, pomegranate and chaat masala.",
-      "ratio": "4/3"
-    },
     "action": {
-      "label": "Read our story",
+      "label": "Our story",
       "href": "/about"
-    }
-  },
-  "catering": {
-    "kicker": "Notice · Catering",
-    "title": "Fresh, homemade trays from our kitchen to your table",
-    "body": "Catering trays and high tea spreads for your gatherings, made to order. Message us on Instagram to plan yours.",
-    "action": {
-      "label": "Catering options",
-      "href": "/menu#catering"
-    },
-    "figure": {
-      "imageId": "dahi-bhalla",
-      "caption": "Dahi bhalla, ready to travel.",
-      "ratio": "3/2"
     }
   }
 }

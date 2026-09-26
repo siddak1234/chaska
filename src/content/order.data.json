@@ -1,5 +1,12 @@
 {
-  "kicker": "Order for pickup · Frisco, Texas",
-  "title": "Order",
-  "intro": "Everything is made to order and packed in sealed containers. Small is a 16 oz pint, Large is a 32 oz quart. Pickup only."
+  "kicker": "Pickup in Frisco, Texas",
+  "title": "Today’s Menu",
+  "empty": {
+    "title": "Nothing on the menu yet today",
+    "body": "Check back soon, or call or text us at"
+  },
+  "unavailable": {
+    "title": "Today’s menu could not load",
+    "body": "Please try again in a few minutes, or call or text your order to"
+  }
 }

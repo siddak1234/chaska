@@ -1,9 +1,10 @@
 import type { NextConfig } from "next";
 
 /**
- * Every photo on the site is committed to `src/assets/images` and imported
- * statically, so there is no remote image host to allowlist and `next build`
- * never touches the network.
+ * The site's own photographs are committed to `src/assets/images` and imported
+ * statically. The one remote host is Shopify's CDN, for a product on the daily
+ * menu that has no photograph of ours; the optimiser fetches it server-side,
+ * so the Content-Security-Policy's `img-src 'self'` still holds.
  */
 const nextConfig: NextConfig = {
   reactStrictMode: true,
@@ -12,6 +13,7 @@ const nextConfig: NextConfig = {
     // AVIF first, WebP fallback. Photographs only — no SVG is ever optimised.
     formats: ["image/avif", "image/webp"],
     dangerouslyAllowSVG: false,
+    remotePatterns: [{ protocol: "https", hostname: "cdn.shopify.com" }],
   },
   /**
    * Off deliberately: every link on this site comes out of JSON content, so a

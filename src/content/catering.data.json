@@ -1,25 +1,22 @@
 {
-  "kicker": "Notices · Catering",
+  "kicker": "Catering",
   "title": "Satisfy your chaska",
-  "intro": "Fresh, homemade catering straight from our kitchen to your table. Every order is made for your gathering. Message us on Instagram to plan yours.",
+  "intro": "Trays, high tea spreads and party bites, made to order for your gathering.",
   "packages": [
     {
       "id": "trays",
-      "kicker": "Trays",
       "name": "Catering Trays",
-      "description": "Family sized trays of our home kitchen dishes, ready to serve at your table."
+      "description": "Family-size trays of our home kitchen dishes, ready to serve."
     },
     {
       "id": "high-tea",
-      "kicker": "High Tea",
       "name": "High Tea Spreads",
-      "description": "Chai, chit chat and a table full of little bites. Indian classics with a gourmet twist, made for your coziest gatherings."
+      "description": "Chai and a table of little bites: Indian classics with a gourmet twist."
     },
     {
       "id": "gatherings",
-      "kicker": "Gatherings",
       "name": "Get Togethers",
-      "description": "Dips, chaat and sliders for your next get together, in whatever quantity you need."
+      "description": "Dips, chaat and sliders, in whatever quantity you need."
     }
   ],
   "ctaLabel": "Message us on Instagram"

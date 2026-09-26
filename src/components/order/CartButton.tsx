@@ -6,7 +6,7 @@ import { useCart } from "./CartProvider";
 
 export const CART_DRAWER_ID = "cart-drawer";
 
-/** The masthead's cart button on the Order page, with the item count. */
+/** The Order page's cart button, in the order bar, with the item count. */
 export function CartButton() {
   const { count, drawerOpen, setDrawerOpen } = useCart();
 

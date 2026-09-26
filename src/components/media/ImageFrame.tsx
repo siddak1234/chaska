@@ -1,4 +1,6 @@
-import Image, { type StaticImageData } from "next/image";
+import Image from "next/image";
+
+import type { FrameImage } from "@/content/images";
 
 import { cn } from "@/lib/cn";
 
@@ -20,7 +22,7 @@ import { RATIO_CLASS_MAP, type FrameRatio } from "./ratios";
  * These were 560/370 while the container was still border-box, which left
  * eight of the ten images upscaled by 17–33px once it was corrected.
  */
-export type FrameSpan = "full" | "half" | "portrait" | "third" | "quarter";
+export type FrameSpan = "full" | "half" | "portrait" | "third" | "dish" | "quarter";
 
 const SIZES: Record<FrameSpan, string> = {
   /** The lead photograph spans the whole 1240px content column. */
@@ -33,25 +35,27 @@ const SIZES: Record<FrameSpan, string> = {
   half: "(min-width: 740px) 50vw, 100vw",
   /** The About portraits, in the 38fr column: (1240 - 56) * 0.38 = 450. */
   portrait: "(min-width: 1336px) 460px, (min-width: 1024px) 38vw, 100vw",
+  /** The Menu page's photo strip: three across at every width. */
+  third: "(min-width: 1336px) 400px, 32vw",
   /**
-   * `auto-grid-260` only reaches three columns from about 920px — below that it
-   * is two, and each card is wider, not narrower. A 900px breakpoint here
-   * described three columns that were not there yet and under-served the
-   * images by ~94px.
+   * The home page's dishes (`DishSummary`) in `auto-grid-260-min`: three
+   * columns from about 920px, two from `sm`, and below that a 104px square
+   * beside the dish name. A 900px breakpoint once described three columns that
+   * were not there yet and under-served the images by ~94px.
    */
-  third:
-    "(min-width: 1336px) 400px, (min-width: 920px) 30vw, (min-width: 620px) 50vw, 100vw",
+  dish: "(min-width: 1336px) 400px, (min-width: 920px) 30vw, (min-width: 640px) 50vw, 104px",
   /**
    * The Order page's cards: `auto-fill` at 270px with a 36px gap is four
    * columns of (1240 - 108) / 4 = 283px at full width, three from about 950px
-   * of viewport and two from about 640px.
+   * of viewport and two from about 640px. Below `sm` the photograph is a
+   * 104px square beside the dish name.
    */
   quarter:
-    "(min-width: 1336px) 290px, (min-width: 950px) 34vw, (min-width: 640px) 50vw, 100vw",
+    "(min-width: 1336px) 290px, (min-width: 950px) 34vw, (min-width: 640px) 50vw, 104px",
 };
 
 type ImageFrameProps = {
-  image: StaticImageData;
+  image: FrameImage;
   alt: string;
   ratio: FrameRatio;
   span?: FrameSpan;
@@ -89,7 +93,8 @@ export function ImageFrame({
         fill
         sizes={SIZES[span]}
         priority={priority}
-        placeholder="blur"
+        // Committed photographs carry a blur preview; remote ones do not.
+        placeholder={"blurDataURL" in image && image.blurDataURL ? "blur" : "empty"}
         className="object-cover"
       />
     </div>
