@@ -66,7 +66,19 @@ jobs:
       # failure reported as a build failure rather than a server timeout.
       - run: npm run build
 
-      - run: npx playwright test e2e/zz-diagnose.spec.ts --project=mobile --project=tablet --reporter=list --retries=0
+      - name: Start server with logs (TEMP diagnostic)
+        run: |
+          (npx next start --port 3100 > server.log 2>&1 &)
+          for i in $(seq 1 60); do curl -sf http://127.0.0.1:3100 > /dev/null && break; sleep 1; done
+
+      - run: npx playwright test --reporter=list
+        env:
+          PLAYWRIGHT_BASE_URL: http://127.0.0.1:3100
+          DIAG: "1"
+
+      - if: always()
+        name: Server log (TEMP diagnostic)
+        run: tail -n 200 server.log
 
       - if: failure()
         uses: actions/upload-artifact@v4
