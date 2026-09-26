@@ -381,6 +381,17 @@ Two constraints, both found the hard way:
     served smaller than the box it fills. The `sizes` attributes have drifted
     twice; this catches the third time.
 
+**Specs import `test` from `e2e/fixtures.ts`, not `@playwright/test`.** Its
+one automatic step waits, before each page closes, for any `/_next/image`
+request still loading. Next.js 16.3's built-in image optimizer, which
+`next start` uses, never settles an image whose first request is cut off within
+a few milliseconds: that image, at that width, then hangs for every later
+request until the server restarts. Closing a page mid-load is exactly that cut,
+and in CI it once wedged a Menu photograph and timed out the no-JavaScript
+Menu test. Production is not affected: on Vercel, `/_next/image` is answered by
+Vercel's image service (`x-vercel-cache`, sandboxed CSP), not by Next.js.
+Upgrading to 16.3.6 does not change this code path.
+
 Continuous integration runs the whole gate on every push and pull request
 (`.github/workflows/verify.yml`), on **both** Node 22.18 — the `engines` floor,
 so the floor is real rather than aspirational — and Node 24. A clean-checkout

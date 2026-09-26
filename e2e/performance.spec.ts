@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./fixtures";
 
 /**
  * A budget, not a benchmark.
@@ -11,7 +11,7 @@ import { expect, test } from "@playwright/test";
  *
  * Only meaningful on a real browser with a warm server, so it is desktop-only.
  */
-const ROUTES = ["/", "/menu", "/order", "/about"] as const;
+const ROUTES = ["/", "/menu", "/order", "/catering", "/about"] as const;
 
 const BUDGET = {
   /** Google's "good" threshold is 2500ms. */
